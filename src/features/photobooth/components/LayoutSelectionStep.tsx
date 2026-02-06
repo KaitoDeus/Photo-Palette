@@ -1,62 +1,111 @@
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronRight, Palette } from 'lucide-react';
 import Button from '../../../components/common/Button';
-import { LAYOUTS, THEMES } from '../constants';
-import { LayoutType, FrameTheme } from '../types';
+import { LAYOUTS } from '../constants';
+import { LayoutType, CountdownDuration, Frame } from '../types';
+import FrameSelectionModal from './FrameSelectionModal';
 
 interface LayoutSelectionStepProps {
   selectedLayout: LayoutType;
-  selectedTheme: FrameTheme;
+  selectedFrame: Frame;
+  countDownDuration: CountdownDuration;
   onSelectLayout: (layout: LayoutType) => void;
-  onSelectTheme: (theme: FrameTheme) => void;
+  onSelectFrame: (frame: Frame) => void;
+  onSelectCountDown: (duration: CountdownDuration) => void;
   onConfirm: () => void;
 }
 
 const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
   selectedLayout,
-  selectedTheme,
+  selectedFrame,
+  countDownDuration,
   onSelectLayout,
-  onSelectTheme,
+  onSelectFrame,
+  onSelectCountDown,
   onConfirm,
 }) => {
+  const [isFrameModalOpen, setIsFrameModalOpen] = useState(false);
+
   return (
-    <div className="p-6 md:p-10">
-      <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Bước 1: Chọn Kiểu Ảnh</h3>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        {LAYOUTS.map((layout) => (
-          <button
-            key={layout.id}
-            onClick={() => onSelectLayout(layout.id)}
-            className={`p-4 rounded-xl border-2 flex flex-col items-center gap-3 transition-all ${
-              selectedLayout === layout.id 
-                ? 'border-brand-500 bg-brand-50 text-brand-600' 
-                : 'border-slate-200 hover:border-brand-200 text-slate-500'
-            }`}
-          >
-            {layout.icon}
-            <span className="font-semibold">{layout.name}</span>
-            <span className="text-xs">{layout.description}</span>
-          </button>
-        ))}
+    <div className="p-6 md:p-10">      
+      {/* Layout Selection */}
+      <div className="mb-8">
+        <h3 className="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wider text-center">Chọn Kiểu Layout</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {LAYOUTS.map((layout) => (
+            <button
+              key={layout.id}
+              onClick={() => onSelectLayout(layout.id)}
+              className={`p-4 rounded-xl border-2 flex flex-col items-center gap-3 transition-all ${
+                selectedLayout === layout.id 
+                  ? 'border-brand-500 bg-brand-50 text-brand-600' 
+                  : 'border-slate-200 hover:border-brand-200 text-slate-500'
+              }`}
+            >
+              <div className={selectedLayout === layout.id ? 'text-brand-500' : 'text-slate-400'}>
+                  {layout.icon}
+              </div>
+              <span className="font-semibold text-sm">{layout.name}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      <h4 className="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wider">Chọn Màu Viền</h4>
-      <div className="flex gap-4 justify-center mb-10">
-        {(Object.keys(THEMES) as FrameTheme[]).map((theme) => (
-          <button
-            key={theme}
-            onClick={() => onSelectTheme(theme)}
-            className={`w-10 h-10 rounded-full border-2 shadow-sm transition-transform ${
-              selectedTheme === theme ? 'scale-125 ring-2 ring-offset-2 ring-brand-300' : 'hover:scale-110'
-            } ${theme === 'MINIMAL' ? 'bg-white' : theme === 'CUTE' ? 'bg-pink-300' : theme === 'PASTEL' ? 'bg-blue-200' : 'bg-slate-800'}`}
-          />
-        ))}
+      {/* Countdown Selection */}
+      <div className="mb-8">
+        <h3 className="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wider text-center">Thời Gian Đếm Ngược</h3>
+        <div className="flex justify-center gap-4">
+          {[3, 5, 10].map((num) => (
+            <button
+              key={num}
+              onClick={() => onSelectCountDown(num as CountdownDuration)}
+              className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg border-2 transition-all ${
+                countDownDuration === num
+                  ? 'border-brand-500 bg-brand-500 text-white shadow-lg scale-110'
+                  : 'border-slate-200 text-slate-500 hover:border-brand-200 bg-white'
+              }`}
+            >
+              {num}s
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Frame Selection Button */}
+      <div className="mb-10 text-center">
+        <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wider">Chọn Khung Hình</h3>
+        
+        <div className="flex flex-col items-center gap-4">
+            {/* Selected Frame Preview Card */}
+            <div className={`w-32 aspect-[2/3] rounded-lg shadow-md border-4 border-white ring-1 ring-slate-200 ${selectedFrame.color} relative overflow-hidden transition-all`}>
+                <div className={`absolute inset-2 border-2 opacity-50 ${selectedFrame.borderColor}`}></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <span className={`text-[10px] uppercase font-bold ${selectedFrame.textColor}`}>{selectedFrame.name}</span>
+                </div>
+            </div>
+
+            <Button 
+                onClick={() => setIsFrameModalOpen(true)} 
+                variant="outline"
+                className="flex items-center gap-2"
+            >
+                <Palette size={18} />
+                Đổi Khung Hình
+            </Button>
+        </div>
       </div>
 
       <div className="text-center">
         <Button onClick={onConfirm} fullWidth>Tiếp Tục <ChevronRight size={18} /></Button>
       </div>
+
+      {/* Frame Selection Modal */}
+      <FrameSelectionModal 
+        isOpen={isFrameModalOpen}
+        onClose={() => setIsFrameModalOpen(false)}
+        selectedFrameId={selectedFrame.id}
+        onSelect={onSelectFrame}
+      />
     </div>
   );
 };

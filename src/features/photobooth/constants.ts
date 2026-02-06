@@ -1,16 +1,10 @@
 import React from 'react';
-import { Grid, Users, User } from 'lucide-react';
-import { PhotoLayout, FrameTheme } from './types';
+import { Columns, Grid, Layout, RectangleVertical } from 'lucide-react';
+import { PhotoLayout } from './types';
 
 export const LAYOUTS: PhotoLayout[] = [
-  { id: 'CLASSIC_4', name: 'Classic 4', count: 4, icon: React.createElement(Grid, { size: 24 }), description: '4 ảnh lưới 2x2' },
-  { id: 'FUN_6', name: 'Fun 6', count: 6, icon: React.createElement(Users, { size: 24 }), description: '6 ảnh vui nhộn' },
-  { id: 'COUPLE_2', name: 'Couple 2', count: 2, icon: React.createElement(User, { size: 24 }), description: '2 ảnh dọc lớn' },
+  { id: 'STRIP_1X4', name: '1x4 Strips', count: 4, icon: React.createElement(Columns, { size: 24 }), description: '4 ảnh dọc' },
+  { id: 'PORTRAIT_2X2', name: '2x2 Portrait', count: 4, icon: React.createElement(Grid, { size: 24 }), description: '4 ảnh lưới' },
+  { id: 'GRID_2X3', name: '2x3 Grid', count: 6, icon: React.createElement(Layout, { size: 24 }), description: '6 ảnh lớn' },
+  { id: 'PORTRAIT_1X1', name: '1x1 Portrait', count: 1, icon: React.createElement(RectangleVertical, { size: 24 }), description: '1 ảnh lớn' },
 ];
-
-export const THEMES: Record<FrameTheme, string> = {
-  MINIMAL: 'bg-white border-slate-200',
-  CUTE: 'bg-pink-100 border-pink-300',
-  PASTEL: 'bg-blue-50 border-blue-200',
-  EVENT: 'bg-slate-900 border-slate-700 text-white',
-};
