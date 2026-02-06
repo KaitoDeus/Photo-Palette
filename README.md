@@ -6,7 +6,9 @@
 2.  [Công nghệ Sử Dụng](#2-công-nghệ-sử-dụng)
 3.  [Kiến Trúc Hệ Thống](#3-kiến-trúc-hệ-thống)
 4.  [Giao Diện](#4-giao-diện)
-5.  [Tác Giả & Liên Hệ](#5-tác-giả--liên-hệ)
+5.  [Hướng Dẫn Cài Đặt (Local)](#5-hướng-dẫn-cài-đặt-và-chạy-local)
+6.  [Hướng Dẫn Sử Dụng](#6-hướng-dẫn-sử-dụng)
+7.  [Tác Giả & Liên Hệ](#7-tác-giả--liên-hệ)
 
 ---
 
@@ -111,7 +113,54 @@ _Giao diện trang chủ hiện đại, tập trung vào trải nghiệm ngườ
 
 ---
 
-## 5. Tác Giả & Liên Hệ
+## 5. Hướng Dẫn Cài Đặt và Chạy (Local)
+
+Để chạy dự án này trên máy tính cá nhân, bạn cần cài đặt **Node.js** (phiên bản 16 trở lên).
+
+### Bước 1: Clone dự án
+
+Mở terminal và chạy lệnh sau để tải mã nguồn về:
+
+```bash
+git clone https://github.com/KaitoDeus/photobooth-palette.git
+cd photobooth-palette
+```
+
+### Bước 2: Cài đặt thư viện
+
+Chạy lệnh sau để cài đặt các node modules cần thiết:
+
+```bash
+npm install
+```
+
+### Bước 3: Chạy ứng dụng
+
+Khởi động môi trường phát triển (Localholst):
+
+```bash
+npm run dev
+```
+
+Truy cập địa chỉ `http://localhost:5173` trên trình duyệt để sử dụng.
+
+---
+
+## 6. Hướng Dẫn Sử Dụng
+
+1.  **Chọn Layout**: Tại màn hình bắt đầu, chọn bố cục ảnh mong muốn (Strip 1x4, Grid 2x2, v.v.).
+2.  **Chọn Khung Hình**: Lựa chọn các mẫu khung hình có sẵn theo chủ đề (Cool, Cute, Basic...).
+3.  **Chụp Ảnh**:
+    - Cấp quyền truy cập Camera.
+    - Tạo dáng theo nhịp đếm ngược (3 giây/tấm).
+    - Có thể bật tính năng **Recap** (góc trái) để quay lại quá trình chụp.
+4.  **Nhận Kết Quả**:
+    - Xem ảnh đã được ghép vào khung.
+    - Tải ảnh về máy hoặc xem Video Recap nếu đã bật tính năng này.
+
+---
+
+## 7. Tác Giả & Liên Hệ
 
 | Thông Tin     | Chi Tiết                                                |
 | :------------ | :------------------------------------------------------ |
