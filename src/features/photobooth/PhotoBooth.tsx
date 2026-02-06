@@ -23,9 +23,11 @@ const PhotoBooth: React.FC = () => {
         return (
           <LayoutSelectionStep
             selectedLayout={state.selectedLayout}
-            selectedTheme={state.selectedTheme}
+            selectedFrame={state.selectedFrame}
+            countDownDuration={state.countDownDuration}
             onSelectLayout={actions.setSelectedLayout}
-            onSelectTheme={actions.setSelectedTheme}
+            onSelectFrame={actions.setSelectedFrame}
+            onSelectCountDown={actions.setCountDownDuration}
             onConfirm={actions.handleConfirmSelection}
           />
         );
@@ -34,8 +36,15 @@ const PhotoBooth: React.FC = () => {
           <InstructionStep
             permissionDenied={state.permissionDenied}
             videoRef={refs.videoRef}
+            countDownDuration={state.countDownDuration}
+            selectedLayout={state.selectedLayout}
+            isMirrored={state.isMirrored}
+            isRecapEnabled={state.isRecapEnabled}
             onRetryPermission={actions.startCamera}
             onStartCapture={actions.startCaptureSequence}
+            onBack={actions.handleBackToSelect}
+            onToggleMirror={actions.toggleMirrored}
+            onToggleRecap={actions.toggleRecap}
           />
         );
       case 'CAPTURE':
@@ -46,6 +55,8 @@ const PhotoBooth: React.FC = () => {
             countDown={state.countDown}
             selectedLayout={state.selectedLayout}
             photos={state.photos}
+            lastPhoto={state.lastPhoto}
+            isMirrored={state.isMirrored}
           />
         );
       case 'PROCESSING':
@@ -55,9 +66,10 @@ const PhotoBooth: React.FC = () => {
           <ResultStep
             photos={state.photos}
             selectedLayout={state.selectedLayout}
-            selectedTheme={state.selectedTheme}
+            selectedFrame={state.selectedFrame}
+            recapVideoUrl={state.recapVideoUrl}
             onRetake={actions.handleRetake}
-            onBooking={handleBookingScroll}
+            onBooking={() => alert('Chức năng đặt lịch đang phát triển!')}
           />
         );
       default:
