@@ -12,7 +12,7 @@ import img5 from '../../assets/5.webp';
 const Hero: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
             </div>
           </Reveal>
 
-          <Reveal delay={0.2} className="relative lg:h-[600px] flex justify-center items-center">
+          <Reveal delay={0.2} className="relative lg:h-[700px] flex justify-center items-center">
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
               <img 
                 src={img5} 
@@ -81,26 +81,26 @@ const Hero: React.FC = () => {
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-brand-100 to-orange-50 rounded-full opacity-60 blur-3xl -z-10 animate-pulse" />
             
-            <div className="grid grid-cols-2 gap-4 w-full max-w-md mx-auto relative z-10">
+            <div className="grid grid-cols-2 gap-6 w-full max-w-xl mx-auto relative z-10">
               <img 
                 src={img1} 
                 alt="Couple having fun" 
-                className="w-full h-64 object-cover rounded-3xl shadow-lg mt-12 hover:scale-105 transition-transform duration-500"
+                className="w-full h-80 object-cover rounded-3xl shadow-lg mt-12 hover:scale-105 transition-transform duration-500"
               />
               <img 
                 src={img2} 
                 alt="Friends laughing" 
-                className="w-full h-64 object-cover rounded-3xl shadow-lg hover:scale-105 transition-transform duration-500"
+                className="w-full h-80 object-cover rounded-3xl shadow-lg hover:scale-105 transition-transform duration-500"
               />
               <img 
                 src={img3} 
                 alt="Solo portrait" 
-                className="w-full h-64 object-cover rounded-3xl shadow-lg hover:scale-105 transition-transform duration-500"
+                className="w-full h-80 object-cover rounded-3xl shadow-lg hover:scale-105 transition-transform duration-500"
               />
               <img 
                 src={img4} 
                 alt="Pet photography" 
-                className="w-full h-64 object-cover rounded-3xl shadow-lg -mt-12 hover:scale-105 transition-transform duration-500"
+                className="w-full h-80 object-cover rounded-3xl shadow-lg -mt-12 hover:scale-105 transition-transform duration-500"
               />
             </div>
           </Reveal>
