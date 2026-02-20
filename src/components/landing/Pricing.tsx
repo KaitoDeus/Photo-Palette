@@ -6,42 +6,22 @@ import Reveal from "../common/Reveal";
 const Pricing: React.FC = () => {
   const packages = [
     {
-      name: "Cơ Bản",
-      price: "150k",
+      name: "Size Nhỏ",
+      price: "70.000",
       unit: "VND",
-      desc: "Phù hợp cho chụp đơn hoặc đôi nhanh gọn.",
+      desc: "Bao gồm 2 kiểu khung cho bạn lựa chọn",
       features: [
-        "15 Phút Chụp",
-        "2 Ảnh In (Photo Strip)",
-        "Bao Gồm File Ảnh Gốc",
-        "Phụ Kiện Cơ Bản",
+        "2 ảnh in giống nhau",
       ],
       highlight: false,
     },
     {
-      name: "Cao Cấp",
-      price: "250k",
+      name: "Size Lớn",
+      price: "100.000",
       unit: "VND",
-      desc: "Lựa chọn phổ biến nhất cho nhóm bạn.",
+      desc: "Bao gồm 5 kiểu khung cho bạn lựa chọn",
       features: [
-        "30 Phút Chụp",
-        "4 Ảnh In Lớn",
-        "File Gốc Chất Lượng Cao",
-        "Tất Cả Phụ Kiện",
-        "Video Timelapse",
-      ],
-      highlight: true,
-    },
-    {
-      name: "Sự Kiện",
-      price: "Liên Hệ",
-      unit: "",
-      desc: "Dành cho sinh nhật, tiệc công ty.",
-      features: [
-        "In Ảnh Không Giới Hạn",
-        "Thiết Kế Frame Riêng",
-        "Hỗ Trợ Tại Chỗ",
-        "Thuê Nguyên Studio",
+        "2 ảnh in giống nhau",
       ],
       highlight: false,
     },
@@ -54,9 +34,12 @@ const Pricing: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Bảng Giá Dịch Vụ
           </h2>
+          <p className="text-lg text-brand-600 font-bold max-w-2xl mx-auto">
+            Tất cả đều được sử dụng miễn phí các phụ kiện và máy làm tóc, sticker
+          </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
           {packages.map((pkg, index) => (
             <Reveal
               key={pkg.name}
