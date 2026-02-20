@@ -1,6 +1,6 @@
-import React from 'react';
-import Reveal from '../common/Reveal';
-import { Users, Camera, MapPin, Sparkles } from 'lucide-react';
+import React from "react";
+import Reveal from "../common/Reveal";
+import { Users, Camera, MapPin, Sparkles } from "lucide-react";
 
 const Stats: React.FC = () => {
   const stats = [
@@ -8,26 +8,26 @@ const Stats: React.FC = () => {
       icon: <Users className="w-6 h-6 text-brand-500" />,
       value: "50,000+",
       label: "Khách hàng hài lòng",
-      suffix: "Smile"
+      suffix: "Smile",
     },
     {
       icon: <Camera className="w-6 h-6 text-brand-500" />,
       value: "100,000+",
       label: "Bức ảnh được tạo ra",
-      suffix: "Moments"
+      suffix: "Moments",
     },
     {
       icon: <MapPin className="w-6 h-6 text-brand-500" />,
       value: "15+",
       label: "Chi nhánh toàn quốc",
-      suffix: "Stores"
+      suffix: "Stores",
     },
     {
       icon: <Sparkles className="w-6 h-6 text-brand-500" />,
       value: "200+",
       label: "Phụ kiện độc đáo",
-      suffix: "Props"
-    }
+      suffix: "Props",
+    },
   ];
 
   return (
@@ -56,7 +56,7 @@ const Stats: React.FC = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Decorative Line */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
     </section>

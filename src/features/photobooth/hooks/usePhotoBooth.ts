@@ -1,20 +1,21 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { BoothStep, LayoutType, CountdownDuration, Frame } from '../types';
-import { LAYOUTS } from '../constants';
-import { FRAMES } from '../data/frames';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { BoothStep, LayoutType, CountdownDuration, Frame } from "../types";
+import { LAYOUTS } from "../constants";
+import { FRAMES } from "../data/frames";
 
 export const usePhotoBooth = () => {
-  const [step, setStep] = useState<BoothStep>('INTRO');
-  const [selectedLayout, setSelectedLayout] = useState<LayoutType>('STRIP_1X4');
+  const [step, setStep] = useState<BoothStep>("INTRO");
+  const [selectedLayout, setSelectedLayout] = useState<LayoutType>("STRIP_1X4");
   const [selectedFrame, setSelectedFrame] = useState<Frame>(FRAMES[0]);
   const [photos, setPhotos] = useState<string[]>([]);
-  const [countDownDuration, setCountDownDuration] = useState<CountdownDuration>(3);
+  const [countDownDuration, setCountDownDuration] =
+    useState<CountdownDuration>(3);
   const [countDown, setCountDown] = useState<number | null>(null);
   const [flash, setFlash] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false);
-  
+
   const [lastPhoto, setLastPhoto] = useState<string | null>(null);
-  
+
   const [isMirrored, setIsMirrored] = useState(true);
   const [isRecapEnabled, setIsRecapEnabled] = useState(false);
   const [recapVideoUrl, setRecapVideoUrl] = useState<string | null>(null);
@@ -30,7 +31,7 @@ export const usePhotoBooth = () => {
   useEffect(() => {
     return () => {
       if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -47,9 +48,13 @@ export const usePhotoBooth = () => {
 
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
-        audio: false 
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "user",
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
+        audio: false,
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -64,38 +69,42 @@ export const usePhotoBooth = () => {
 
   const stopCamera = () => {
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
   };
 
-  const toggleMirrored = () => setIsMirrored(prev => !prev);
-  const toggleRecap = () => setIsRecapEnabled(prev => !prev);
+  const toggleMirrored = () => setIsMirrored((prev) => !prev);
+  const toggleRecap = () => setIsRecapEnabled((prev) => !prev);
 
   const capturePhoto = useCallback(() => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
       const canvas = canvasRef.current;
-      
-      if (video.readyState < 2 || video.videoWidth === 0 || video.videoHeight === 0) {
+
+      if (
+        video.readyState < 2 ||
+        video.videoWidth === 0 ||
+        video.videoHeight === 0
+      ) {
         return null;
       }
 
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (ctx) {
         ctx.save();
         if (isMirrored) {
           ctx.translate(canvas.width, 0);
-          ctx.scale(-1, 1); 
+          ctx.scale(-1, 1);
         }
-        ctx.filter = 'contrast(1.1) brightness(1.05) saturate(1.1)';
+        ctx.filter = "contrast(1.1) brightness(1.05) saturate(1.1)";
         ctx.drawImage(video, 0, 0);
         ctx.restore();
-        
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-        setPhotos(prev => [...prev, dataUrl]);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+        setPhotos((prev) => [...prev, dataUrl]);
         return dataUrl;
       }
     }
@@ -105,11 +114,11 @@ export const usePhotoBooth = () => {
   const startRecorder = () => {
     if (isRecapEnabled) {
       try {
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         // Preset dimensions to avoid 0x0 issues if video isn't ready immediately
         canvas.width = 1280;
         canvas.height = 720;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) return;
 
@@ -117,39 +126,42 @@ export const usePhotoBooth = () => {
         const draw = () => {
           const video = videoRef.current;
           if (video && video.readyState >= 2) {
-             // Update canvas size to match video if needed (once or dynamic)
-             if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-             }
+            // Update canvas size to match video if needed (once or dynamic)
+            if (
+              canvas.width !== video.videoWidth ||
+              canvas.height !== video.videoHeight
+            ) {
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+            }
 
-             ctx.save();
-             // Apply mirror transform if needed
-             if (isMirrored) {
-                ctx.translate(canvas.width, 0);
-                ctx.scale(-1, 1);
-             }
-             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-             ctx.restore();
+            ctx.save();
+            // Apply mirror transform if needed
+            if (isMirrored) {
+              ctx.translate(canvas.width, 0);
+              ctx.scale(-1, 1);
+            }
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            ctx.restore();
           }
           animationFrameRef.current = requestAnimationFrame(draw);
         };
-        
+
         draw(); // Start the loop
 
         // Capture stream from canvas (30 FPS)
         const stream = canvas.captureStream(30);
 
         recordedChunksRef.current = [];
-        const options = { mimeType: 'video/webm;codecs=vp9' };
-        
+        const options = { mimeType: "video/webm;codecs=vp9" };
+
         // Check if MIME type is supported, fallback if necessary
-        const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') 
-          ? 'video/webm;codecs=vp9' 
-          : 'video/webm';
+        const mimeType = MediaRecorder.isTypeSupported("video/webm;codecs=vp9")
+          ? "video/webm;codecs=vp9"
+          : "video/webm";
 
         const recorder = new MediaRecorder(stream, { mimeType });
-        
+
         recorder.ondataavailable = (event) => {
           if (event.data && event.data.size > 0) {
             recordedChunksRef.current.push(event.data);
@@ -157,10 +169,12 @@ export const usePhotoBooth = () => {
         };
 
         recorder.onstop = () => {
-          const blob = new Blob(recordedChunksRef.current, { type: 'video/webm' });
+          const blob = new Blob(recordedChunksRef.current, {
+            type: "video/webm",
+          });
           const url = URL.createObjectURL(blob);
           setRecapVideoUrl(url);
-          
+
           // Cleanup
           if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
@@ -177,7 +191,10 @@ export const usePhotoBooth = () => {
   };
 
   const stopRecorder = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state !== "inactive"
+    ) {
       mediaRecorderRef.current.stop();
     }
     // Also ensure animation frame is cancelled if it wasn't already
@@ -188,23 +205,24 @@ export const usePhotoBooth = () => {
   };
 
   const startCaptureSequence = async () => {
-    setStep('CAPTURE');
+    setStep("CAPTURE");
     setPhotos([]);
     setLastPhoto(null);
     setRecapVideoUrl(null);
-    
+
     // Wait for the CaptureStep to mount and video to be ready
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 500));
 
     // Start recording if enabled
     startRecorder();
 
-    const targetCount = LAYOUTS.find(l => l.id === selectedLayout)?.count || 4;
+    const targetCount =
+      LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4;
 
     for (let i = 0; i < targetCount; i++) {
       for (let c = countDownDuration; c > 0; c--) {
         setCountDown(c);
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise((r) => setTimeout(r, 1000));
       }
       setCountDown(null);
 
@@ -213,13 +231,13 @@ export const usePhotoBooth = () => {
       if (capturedUrl) {
         setLastPhoto(capturedUrl);
       }
-      
-      await new Promise(r => setTimeout(r, 150));
+
+      await new Promise((r) => setTimeout(r, 150));
       setFlash(false);
 
       if (i < targetCount - 1) {
         // Preview time (reduced delay)
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise((r) => setTimeout(r, 1500));
         setLastPhoto(null);
       }
     }
@@ -228,26 +246,26 @@ export const usePhotoBooth = () => {
     stopRecorder();
 
     stopCamera();
-    setStep('PROCESSING');
-    await new Promise(r => setTimeout(r, 2000));
-    setStep('RESULT');
+    setStep("PROCESSING");
+    await new Promise((r) => setTimeout(r, 2000));
+    setStep("RESULT");
   };
 
-  const handleStart = () => setStep('SELECT_FRAME');
+  const handleStart = () => setStep("SELECT_FRAME");
 
   const handleConfirmSelection = () => {
     startCamera();
-    setStep('INSTRUCTION');
+    setStep("INSTRUCTION");
   };
 
   const handleRetake = () => {
     setPhotos([]);
     startCamera();
-    setStep('INSTRUCTION');
+    setStep("INSTRUCTION");
   };
-  
+
   const goToStart = () => {
-    setStep('INTRO');
+    setStep("INTRO");
     setPhotos([]);
   };
 
@@ -257,33 +275,33 @@ export const usePhotoBooth = () => {
       selectedLayout,
       selectedFrame,
       photos,
-      lastPhoto, 
+      lastPhoto,
       countDownDuration,
       countDown,
       flash,
       permissionDenied,
       isMirrored,
       isRecapEnabled,
-      recapVideoUrl
+      recapVideoUrl,
     },
     refs: {
       videoRef,
-      canvasRef
+      canvasRef,
     },
     actions: {
-        setStep,
-        setSelectedLayout,
-        setSelectedFrame,
-        setCountDownDuration,
-        startCamera,
-        startCaptureSequence,
-        handleStart,
-        handleConfirmSelection,
-        handleRetake,
-        handleBackToSelect: () => setStep('SELECT_FRAME'),
-        toggleMirrored,
-        toggleRecap,
-        goToStart
-    }
+      setStep,
+      setSelectedLayout,
+      setSelectedFrame,
+      setCountDownDuration,
+      startCamera,
+      startCaptureSequence,
+      handleStart,
+      handleConfirmSelection,
+      handleRetake,
+      handleBackToSelect: () => setStep("SELECT_FRAME"),
+      toggleMirrored,
+      toggleRecap,
+      goToStart,
+    },
   };
 };

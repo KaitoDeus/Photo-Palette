@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Menu, X, Home, Info, Image, Grid, Phone, Camera } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Button from '../common/Button';
+import React, { useState } from "react";
+import { Menu, X, Home, Info, Image, Grid, Phone, Camera } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import Button from "../common/Button";
 
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -9,25 +9,50 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   const navLinks = [
-    { name: 'Trang chủ', path: '/', type: 'page', icon: <Home size={24} /> },
-    { name: 'Giới thiệu', path: '/about', type: 'page', icon: <Info size={24} /> },
-    { name: 'Bộ sưu tập', path: '/gallery', type: 'page', icon: <Image size={24} /> },
-    { name: 'Kho Frame', path: '/frames', type: 'page', icon: <Grid size={24} /> },
-    { name: 'Liên hệ', path: '/contact', type: 'page', icon: <Phone size={24} /> },
+    { name: "Trang chủ", path: "/", type: "page", icon: <Home size={24} /> },
+    {
+      name: "Giới thiệu",
+      path: "/about",
+      type: "page",
+      icon: <Info size={24} />,
+    },
+    {
+      name: "Bộ sưu tập",
+      path: "/gallery",
+      type: "page",
+      icon: <Image size={24} />,
+    },
+    {
+      name: "Kho Frame",
+      path: "/frames",
+      type: "page",
+      icon: <Grid size={24} />,
+    },
+    {
+      name: "Liên hệ",
+      path: "/contact",
+      type: "page",
+      icon: <Phone size={24} />,
+    },
   ];
 
-  const handleNavigation = (link: { name: string; path: string; type: string; id?: string }) => {
+  const handleNavigation = (link: {
+    name: string;
+    path: string;
+    type: string;
+    id?: string;
+  }) => {
     if (window.innerWidth < 768) {
       setSidebarOpen(false);
     }
-    if (link.type === 'page') {
+    if (link.type === "page") {
       navigate(link.path);
       window.scrollTo(0, 0);
-    } else if (link.type === 'scroll' && link.id) {
-      if (location.pathname === '/') {
+    } else if (link.type === "scroll" && link.id) {
+      if (location.pathname === "/") {
         const element = document.getElementById(link.id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       } else {
         navigate(`/#${link.id}`);
@@ -36,22 +61,22 @@ const Navbar: React.FC = () => {
   };
 
   const handleLogoClick = () => {
-    if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
   const handleBooking = () => {
     if (window.innerWidth < 768) setSidebarOpen(false);
-    if (location.pathname === '/') {
-      const element = document.getElementById('photobooth');
+    if (location.pathname === "/") {
+      const element = document.getElementById("photobooth");
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      navigate('/#photobooth');
+      navigate("/#photobooth");
     }
   };
 
@@ -60,8 +85,8 @@ const Navbar: React.FC = () => {
       <nav
         className={`fixed top-0 left-0 h-screen bg-brand-50 shadow-2xl z-50 transition-all duration-300 ease-in-out border-r border-brand-100 flex flex-col group/nav overflow-x-hidden ${
           isSidebarOpen
-            ? 'translate-x-0 w-80 shadow-2xl'
-            : '-translate-x-full md:translate-x-0 md:w-20 md:shadow-none hover:md:w-72 hover:md:shadow-2xl'
+            ? "translate-x-0 w-80 shadow-2xl"
+            : "-translate-x-full md:translate-x-0 md:w-20 md:shadow-none hover:md:w-72 hover:md:shadow-2xl"
         }`}
       >
         {/* Logo Header */}
@@ -71,13 +96,17 @@ const Navbar: React.FC = () => {
             onClick={handleLogoClick}
           >
             <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md shrink-0">
-              <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
+              <img
+                src="/logo.jpeg"
+                alt="Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span
               className={`font-bold text-xl text-slate-800 tracking-tight transition-all duration-300 whitespace-nowrap overflow-hidden ${
                 isSidebarOpen
-                  ? 'w-auto opacity-100'
-                  : 'w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-1'
+                  ? "w-auto opacity-100"
+                  : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-1"
               }`}
             >
               Palette
@@ -87,7 +116,7 @@ const Navbar: React.FC = () => {
           <button
             onClick={() => setSidebarOpen(false)}
             className={`p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-red-500 transition-colors ${
-              !isSidebarOpen ? 'md:hidden' : ''
+              !isSidebarOpen ? "md:hidden" : ""
             }`}
           >
             <X size={24} />
@@ -102,17 +131,17 @@ const Navbar: React.FC = () => {
               onClick={() => handleNavigation(link)}
               className={`flex items-center p-3 rounded-xl transition-all duration-200 group text-left ${
                 location.pathname === link.path
-                  ? 'bg-brand-50 text-brand-600 shadow-sm'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-brand-500'
+                  ? "bg-brand-50 text-brand-600 shadow-sm"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-brand-500"
               }`}
               title={!isSidebarOpen ? link.name : undefined}
             >
               <div
                 className={`shrink-0 transition-colors duration-200 ${
                   location.pathname === link.path
-                    ? 'text-brand-600'
-                    : 'text-slate-400 group-hover:text-brand-500'
-                } ${!isSidebarOpen ? 'md:mx-auto md:group-hover/nav:mx-0' : ''}`}
+                    ? "text-brand-600"
+                    : "text-slate-400 group-hover:text-brand-500"
+                } ${!isSidebarOpen ? "md:mx-auto md:group-hover/nav:mx-0" : ""}`}
               >
                 {link.icon}
               </div>
@@ -120,8 +149,8 @@ const Navbar: React.FC = () => {
               <span
                 className={`font-medium text-lg transition-all duration-300 whitespace-nowrap overflow-hidden ${
                   isSidebarOpen
-                    ? 'w-auto opacity-100 ml-4'
-                    : 'w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-4'
+                    ? "w-auto opacity-100 ml-4"
+                    : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-4"
                 }`}
               >
                 {link.name}
@@ -131,8 +160,8 @@ const Navbar: React.FC = () => {
                 <div
                   className={`ml-auto w-2 h-2 rounded-full bg-brand-500 shrink-0 transition-all duration-300 ${
                     isSidebarOpen
-                      ? 'opacity-100'
-                      : 'opacity-0 md:group-hover/nav:opacity-100'
+                      ? "opacity-100"
+                      : "opacity-0 md:group-hover/nav:opacity-100"
                   }`}
                 />
               )}
@@ -146,7 +175,7 @@ const Navbar: React.FC = () => {
             onClick={handleBooking}
             fullWidth={true}
             className={`flex items-center justify-center transition-all duration-300 ${
-              !isSidebarOpen ? 'md:px-0 md:group-hover/nav:px-6' : ''
+              !isSidebarOpen ? "md:px-0 md:group-hover/nav:px-6" : ""
             }`}
           >
             <div className="shrink-0">
@@ -155,8 +184,8 @@ const Navbar: React.FC = () => {
             <span
               className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${
                 isSidebarOpen
-                  ? 'w-auto opacity-100 ml-2'
-                  : 'w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-2'
+                  ? "w-auto opacity-100 ml-2"
+                  : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-2"
               }`}
             >
               Chụp Thử Ngay
@@ -170,8 +199,8 @@ const Navbar: React.FC = () => {
         onClick={() => setSidebarOpen(true)}
         className={`fixed top-6 left-6 z-40 p-3 bg-white shadow-lg rounded-full text-slate-700 hover:text-brand-600 hover:scale-110 transition-all duration-300 border border-slate-100 md:hidden ${
           isSidebarOpen
-            ? 'opacity-0 scale-0 pointer-events-none'
-            : 'opacity-100 scale-100'
+            ? "opacity-0 scale-0 pointer-events-none"
+            : "opacity-100 scale-100"
         }`}
         title="Mở Menu"
       >
@@ -182,8 +211,8 @@ const Navbar: React.FC = () => {
       <div
         className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
           isSidebarOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setSidebarOpen(false)}
       />

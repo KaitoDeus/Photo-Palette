@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface RevealProps {
   children: React.ReactNode;
@@ -6,7 +6,11 @@ interface RevealProps {
   className?: string;
 }
 
-const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = "" }) => {
+const Reveal: React.FC<RevealProps> = ({
+  children,
+  delay = 0,
+  className = "",
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -22,8 +26,8 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = "" }) 
       },
       {
         threshold: 0,
-        rootMargin: "0px"
-      }
+        rootMargin: "0px",
+      },
     );
 
     if (currentRef) {

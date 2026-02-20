@@ -1,5 +1,5 @@
-import React from 'react';
-import { RefreshCw } from 'lucide-react';
+import React from "react";
+import { RefreshCw } from "lucide-react";
 
 const ProcessingStep: React.FC = () => {
   return (

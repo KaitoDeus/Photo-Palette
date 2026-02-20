@@ -1,15 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import GalleryPage from './pages/GalleryPage';
-import FrameLibraryPage from './pages/FrameLibraryPage';
-import ContactPage from './pages/ContactPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import DisclaimerModal from './components/common/DisclaimerModal';
-import Background3D from './components/layout/Background3D';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import GalleryPage from "./pages/GalleryPage";
+import FrameLibraryPage from "./pages/FrameLibraryPage";
+import ContactPage from "./pages/ContactPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import DisclaimerModal from "./components/common/DisclaimerModal";
+import Background3D from "./components/layout/Background3D";
 
 const App: React.FC = () => {
   return (

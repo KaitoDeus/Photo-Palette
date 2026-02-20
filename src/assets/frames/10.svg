@@ -1,0 +1,18 @@
+<svg width="600" height="900" viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg">
+     <defs>
+        <mask id="cutout">
+            <rect x="0" y="0" width="600" height="900" fill="white" />
+            <rect x="20" y="60" width="272.5" height="362.5" fill="black" /><rect x="307.5" y="60" width="272.5" height="362.5" fill="black" /><rect x="20" y="437.5" width="272.5" height="362.5" fill="black" /><rect x="307.5" y="437.5" width="272.5" height="362.5" fill="black" />
+        </mask>
+     </defs>
+     
+     <rect x="0" y="0" width="600" height="900" fill="#ffffff" mask="url(#cutout)" />
+     
+     <!-- Borders around holes -->
+      <rect x="20" y="60" width="272.5" height="362.5" fill="none" stroke="#000000" stroke-width="4" /><rect x="20" y="60" width="272.5" height="362.5" fill="transparent" /><rect x="307.5" y="60" width="272.5" height="362.5" fill="none" stroke="#000000" stroke-width="4" /><rect x="307.5" y="60" width="272.5" height="362.5" fill="transparent" /><rect x="20" y="437.5" width="272.5" height="362.5" fill="none" stroke="#000000" stroke-width="4" /><rect x="20" y="437.5" width="272.5" height="362.5" fill="transparent" /><rect x="307.5" y="437.5" width="272.5" height="362.5" fill="none" stroke="#000000" stroke-width="4" /><rect x="307.5" y="437.5" width="272.5" height="362.5" fill="transparent" />
+      
+      <!-- Text on top -->
+      <text x="300" y="860" font-family="Arial, sans-serif" font-size="30" fill="#000000" text-anchor="middle" font-weight="bold">Magazine</text>
+      <text x="300" y="30" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Photo Palette</text>
+      
+</svg>

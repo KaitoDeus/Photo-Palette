@@ -1,7 +1,5 @@
 {
   "name": "Photobooth Palette",
   "description": "Trang web đặt lịch chụp ảnh Photobooth phong cách Hàn Quốc dành cho giới trẻ Việt Nam.",
-  "requestFramePermissions": [
-    "camera"
-  ]
+  "requestFramePermissions": ["camera"]
 }

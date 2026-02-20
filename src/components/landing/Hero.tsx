@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
-import Reveal from '../common/Reveal';
-import { Star, Camera, Play } from 'lucide-react';
-import img1 from '../../assets/1.webp';
-import img2 from '../../assets/2.webp';
-import img3 from '../../assets/3.webp';
-import img4 from '../../assets/4.webp';
-import img5 from '../../assets/5.webp';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../common/Button";
+import Reveal from "../common/Reveal";
+import { Star, Camera, Play } from "lucide-react";
+import img1 from "../../assets/landing/hero_1.webp";
+import img2 from "../../assets/landing/hero_2.webp";
+import img3 from "../../assets/landing/hero_3.webp";
+import img4 from "../../assets/landing/hero_4.webp";
+import img5 from "../../assets/landing/hero_5.webp";
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          
           {/* Left Side: Content */}
           <div className="text-center lg:text-left space-y-12">
             <div>
@@ -44,14 +43,12 @@ const Hero: React.FC = () => {
                 </span>
               </div>
             </div>
-            
+
             <div>
               <div className="space-y-2">
                 <h1 className="text-8xl lg:text-[9rem] font-bold text-slate-900 leading-[1] font-script">
                   Photo <br />
-                  <span className="text-brand-500 block -mt-4">
-                    Palette
-                  </span>
+                  <span className="text-brand-500 block -mt-4">Palette</span>
                 </h1>
                 <div className="flex items-center justify-center lg:justify-start gap-4 pt-6">
                   <p className="text-xl font-black text-brand-500 tracking-[0.3em] uppercase border-r-2 border-brand-200 pr-4">
@@ -63,21 +60,25 @@ const Hero: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             <Reveal delay={0.2}>
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                <Button 
-                  onClick={() => document.getElementById('photobooth')?.scrollIntoView({ behavior: 'smooth' })}
+                <Button
+                  onClick={() =>
+                    document
+                      .getElementById("photobooth")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
                   withIcon
                   size="lg"
                   className="group shadow-2xl shadow-brand-200/50 hover:scale-105 active:scale-95 transition-all"
                 >
                   Chụp Thử Online
                 </Button>
-                <button 
+                <button
                   onClick={() => {
-                     navigate('/gallery');
-                     window.scrollTo(0, 0);
+                    navigate("/gallery");
+                    window.scrollTo(0, 0);
                   }}
                   className="flex items-center justify-center gap-3 px-8 py-5 rounded-full font-black text-slate-600 hover:text-brand-500 transition-all group"
                 >
@@ -93,10 +94,13 @@ const Hero: React.FC = () => {
               <div className="flex items-center justify-center lg:justify-start gap-6 pt-8 border-t border-slate-100">
                 <div className="flex -space-x-4">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="w-14 h-14 rounded-full border-4 border-white shadow-xl overflow-hidden ring-1 ring-slate-100">
-                      <img 
-                        src={`https://picsum.photos/seed/${i + 70}/100/100`} 
-                        alt="User" 
+                    <div
+                      key={i}
+                      className="w-14 h-14 rounded-full border-4 border-white shadow-xl overflow-hidden ring-1 ring-slate-100"
+                    >
+                      <img
+                        src={`https://picsum.photos/seed/${i + 70}/100/100`}
+                        alt="User"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -104,10 +108,14 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="text-left">
                   <div className="flex items-center gap-1.5 text-yellow-400 mb-1">
-                    {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} size={16} fill="currentColor" />
+                    ))}
                   </div>
                   <p className="text-slate-500 font-bold text-sm">
-                    Được yêu thích bởi <span className="text-slate-900 text-base">50k+</span> Trendsetters
+                    Được yêu thích bởi{" "}
+                    <span className="text-slate-900 text-base">50k+</span>{" "}
+                    Trendsetters
                   </p>
                 </div>
               </div>
@@ -120,7 +128,9 @@ const Hero: React.FC = () => {
               {heroImages.map((src, index) => {
                 const isActive = activeLayer === index;
                 const isNext = (activeLayer + 1) % heroImages.length === index;
-                const isPrev = (activeLayer - 1 + heroImages.length) % heroImages.length === index;
+                const isPrev =
+                  (activeLayer - 1 + heroImages.length) % heroImages.length ===
+                  index;
 
                 let zIndex = 0;
                 let opacity = 0;
@@ -156,47 +166,51 @@ const Hero: React.FC = () => {
                       zIndex,
                       opacity,
                       transform: `translateX(${xTranslate}px) scale(${scale}) rotate(${rotate}deg)`,
-                      pointerEvents: isActive ? 'auto' : 'none'
+                      pointerEvents: isActive ? "auto" : "none",
                     }}
                   >
                     <div className="w-full h-full bg-white rounded-[3.5rem] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] p-4 border-8 border-white overflow-hidden group/card relative">
-                      <img 
-                        src={src} 
-                        alt={`Moment ${index + 1}`} 
+                      <img
+                        src={src}
+                        alt={`Moment ${index + 1}`}
                         className="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover/card:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
-                      
+
                       {/* Inner Card Detail */}
                       <div className="absolute bottom-8 left-8 right-8 text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500 translate-y-4 group-hover/card:translate-y-0">
-                        <p className="text-xs font-black tracking-widest uppercase mb-1">Seoul Aesthetic</p>
-                        <h4 className="text-xl font-bold">Limited Edition Frame</h4>
+                        <p className="text-xs font-black tracking-widest uppercase mb-1">
+                          Seoul Aesthetic
+                        </p>
+                        <h4 className="text-xl font-bold">
+                          Limited Edition Frame
+                        </h4>
                       </div>
                     </div>
                   </div>
                 );
               })}
 
-
               <div className="absolute -bottom-4 -right-4 lg:-bottom-8 lg:-right-10 z-40 bg-brand-500 text-white w-20 h-20 lg:w-28 lg:h-28 rounded-full shadow-2xl animate-bounce flex flex-col items-center justify-center ring-8 ring-white transition-transform hover:scale-110">
                 <Camera size={24} className="mb-1 lg:w-8 lg:h-8" />
-                <span className="text-[8px] lg:text-[12px] font-black uppercase tracking-widest block text-center">Live Studio</span>
+                <span className="text-[8px] lg:text-[12px] font-black uppercase tracking-widest block text-center">
+                  Live Studio
+                </span>
               </div>
 
               {/* Indicator Dots */}
               <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-3 z-40">
                 {heroImages.map((_, i) => (
-                  <button 
+                  <button
                     key={i}
                     onClick={() => setActiveLayer(i)}
-                    className={`h-2.5 transition-all duration-500 rounded-full ${activeLayer === i ? 'w-12 bg-brand-500' : 'w-2.5 bg-slate-200 hover:bg-brand-300'}`}
+                    className={`h-2.5 transition-all duration-500 rounded-full ${activeLayer === i ? "w-12 bg-brand-500" : "w-2.5 bg-slate-200 hover:bg-brand-300"}`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

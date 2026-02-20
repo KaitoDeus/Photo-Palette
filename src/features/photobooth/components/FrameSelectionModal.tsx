@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { X, Search, Filter } from 'lucide-react';
-import { Frame } from '../types';
-import { FRAMES } from '../data/frames';
+import React, { useState, useMemo } from "react";
+import { X, Search, Filter } from "lucide-react";
+import { Frame } from "../types";
+import { FRAMES } from "../data/frames";
+import { FrameStrip } from "./FrameStrip";
 
 interface FrameSelectionModalProps {
   isOpen: boolean;
@@ -11,12 +12,12 @@ interface FrameSelectionModalProps {
 }
 
 const CATEGORIES = [
-  { id: 'All', label: 'All' },
-  { id: 'COOL', label: 'COOL' },
-  { id: 'CUTE', label: 'CUTE' },
-  { id: 'BASIC', label: 'BASIC' },
-  { id: 'EVENT', label: 'EVENT' },
-  { id: 'VINTAGE', label: 'VINTAGE' },
+  { id: "All", label: "All" },
+  { id: "COOL", label: "COOL" },
+  { id: "CUTE", label: "CUTE" },
+  { id: "BASIC", label: "BASIC" },
+  { id: "EVENT", label: "EVENT" },
+  { id: "VINTAGE", label: "VINTAGE" },
 ];
 
 const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
@@ -25,13 +26,19 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   onSelect,
   selectedFrameId,
 }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredFrames = useMemo(() => {
     return FRAMES.filter((frame) => {
-      const matchesSearch = frame.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === 'All' || frame.category === selectedCategory || (selectedCategory === 'VINTAGE' && frame.name.toLowerCase().includes('vintage'));
+      const matchesSearch = frame.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "All" ||
+        frame.category === selectedCategory ||
+        (selectedCategory === "VINTAGE" &&
+          frame.name.toLowerCase().includes("vintage"));
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, selectedCategory]);
@@ -41,18 +48,17 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Modal Content */}
       <div className="relative bg-white/90 backdrop-blur-md rounded-3xl w-[900px] max-w-[95vw] h-[650px] max-h-[90vh] flex flex-col shadow-2xl border border-white/50 animate-in fade-in zoom-in duration-300">
-        
         {/* Header */}
         <div className="p-6 border-b border-slate-200 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-slate-800">Chọn Khung Hình</h2>
-          <button 
+          <button
             onClick={onClose}
             className="p-2 hover:bg-slate-200 rounded-full transition-colors"
           >
@@ -64,8 +70,11 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
         <div className="p-6 pb-2 grid gap-4 md:grid-cols-3">
           {/* Search */}
           <div className="relative md:col-span-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-            <input 
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              size={18}
+            />
+            <input
               type="text"
               placeholder="Tìm kiếm khung..."
               value={searchQuery}
@@ -77,8 +86,11 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
           {/* Categories Dropdown */}
           <div className="md:col-span-2">
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-              <select 
+              <Filter
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                size={18}
+              />
+              <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full pl-10 pr-10 py-2 bg-white/50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-medium text-slate-700 appearance-none cursor-pointer hover:bg-white"
@@ -90,7 +102,19 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
                 ))}
               </select>
               <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
               </div>
             </div>
           </div>
@@ -102,12 +126,13 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {filteredFrames.map((frame) => {
                 // Determine aspect ratio for the preview content
-                let contentAspect = 'aspect-[1/3]'; // Default strip
-                if (frame.layout === '2x2' || frame.layout === '1x1') contentAspect = 'aspect-[3/4]';
-                if (frame.layout === '2x3') contentAspect = 'aspect-[2/3]';
+                let contentAspect = "aspect-[1/3]"; // Default strip
+                if (frame.layout === "2x2" || frame.layout === "1x1")
+                  contentAspect = "aspect-[3/4]";
+                if (frame.layout === "2x3") contentAspect = "aspect-[2/3]";
 
                 // Unified card container aspect ratio to keep grid uniform
-                const cardAspect = 'aspect-[2/3]';
+                const cardAspect = "aspect-[2/3]";
 
                 return (
                   <button
@@ -118,43 +143,36 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
                     }}
                     className={`
                       group relative flex flex-col items-center justify-between rounded-xl transition-all duration-300 border-2
-                      ${selectedFrameId === frame.id 
-                        ? 'border-brand-500 bg-brand-50 ring-2 ring-brand-200 ring-offset-2' 
-                        : 'border-slate-100 hover:border-brand-200 hover:shadow-lg bg-white'}
+                      ${
+                        selectedFrameId === frame.id
+                          ? "border-brand-500 bg-brand-50 ring-2 ring-brand-200 ring-offset-2"
+                          : "border-slate-100 hover:border-brand-200 hover:shadow-lg bg-white"
+                      }
                       p-3 gap-2 ${cardAspect}
                     `}
                   >
                     {/* Frame Preview Wrapper - Centers and scales the frame */}
-                    <div className="flex-1 w-full flex items-center justify-center p-1 overflow-hidden">
-                        <div className={`w-full max-h-full ${contentAspect} shadow-sm border transition-transform duration-300 group-hover:scale-105 relative
-                          ${selectedFrameId === frame.id ? 'border-brand-300' : 'border-slate-200'}
-                          ${frame.layout === '1x4' ? 'w-[50%]' : 'w-[80%]'}
-                        `}>
-                          {/* CSS-drawn Frame */}
-                          <div className={`w-full h-full ${frame.color} flex items-center justify-center p-[4%]`}>
-                             <div className={`w-full h-full border ${frame.borderColor} bg-white/40 flex items-center justify-center`}>
-                               {/* Layout lines simulation */}
-                               <div className={`w-full h-full opacity-30 ${frame.layout === '1x4' ? 'flex flex-col gap-[1px]' : 'grid grid-cols-2 gap-[1px]'}`}>
-                                  {Array.from({ length: frame.layout === '1x4' || frame.layout === '2x2' ? 4 : (frame.layout === '1x1' ? 1 : 6) }).map((_, i) => (
-                                    <div key={i} className={`bg-slate-800/20 ${frame.layout === '1x1' ? 'w-full h-full' : ''} ${frame.layout === '2x3' && i >= 4 ? 'hidden' : ''}`} style={{ flex: 1 }}></div>
-                                  ))}
-                               </div>
-                             </div>
-                          </div>
-                        </div>
+                    <div className="flex-1 w-full flex items-center justify-center p-1 overflow-hidden scale-[0.6]">
+                      <FrameStrip frame={frame} filled={true} size="sm" />
                     </div>
-                    
+
                     {/* Name Label */}
                     <div className="w-full text-center">
-                       <span className={`block text-xs font-bold truncate ${frame.textColor}`}>{frame.name}</span>
-                       <span className="text-[10px] text-slate-400 font-medium uppercase">{frame.layout}</span>
+                      <span
+                        className={`block text-xs font-bold truncate ${frame.textColor}`}
+                      >
+                        {frame.name}
+                      </span>
+                      <span className="text-[10px] text-slate-400 font-medium uppercase">
+                        {frame.layout}
+                      </span>
                     </div>
 
                     {/* Selection Checkmark */}
                     {selectedFrameId === frame.id && (
-                       <div className="absolute top-2 right-2 bg-brand-500 text-white p-1 rounded-full shadow-md z-10">
-                         <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                       </div>
+                      <div className="absolute top-2 right-2 bg-brand-500 text-white p-1 rounded-full shadow-md z-10">
+                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                      </div>
                     )}
                   </button>
                 );

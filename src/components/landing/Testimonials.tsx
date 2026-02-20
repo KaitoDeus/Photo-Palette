@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Star } from 'lucide-react';
-import Reveal from '../common/Reveal';
+import React, { useEffect, useState } from "react";
+import { Star } from "lucide-react";
+import Reveal from "../common/Reveal";
 
 const ALL_REVIEWS = [
   {
@@ -9,7 +9,7 @@ const ALL_REVIEWS = [
     branch: "Quận 7, TP.HCM",
     text: "Màu ảnh siêu xinh, ảnh rõ nét, thik nhất là phòng máy bay nha, mình khá bất ngờ vì phòng overhead ảnh form nhỏ có 70k à... sẽ ghé lại nhiều ahh",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review1/100/100"
+    avatar: "https://picsum.photos/seed/review1/100/100",
   },
   {
     name: "Khánh Đắc",
@@ -17,7 +17,7 @@ const ALL_REVIEWS = [
     branch: "Quận 7, TP.HCM",
     text: "Tiệm xịn nha, Tết có chương trình ưu đãi khi mang áo dài tới quán, quán rất dễ thương, nhân viên nhiệt tình. Sẽ đến vào lần sau 💯",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review2/100/100"
+    avatar: "https://picsum.photos/seed/review2/100/100",
   },
   {
     name: "Nguyễn Xuân Quỳnh",
@@ -25,7 +25,7 @@ const ALL_REVIEWS = [
     branch: "Quận 7, TP.HCM",
     text: "Trải nghiệm siêu tuyệt vời, nhân viên hỗ trợ nhiệt tình và thân thiện. 10 điểm không có nhưng!",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review3/100/100"
+    avatar: "https://picsum.photos/seed/review3/100/100",
   },
   {
     name: "Văn Thành",
@@ -33,7 +33,7 @@ const ALL_REVIEWS = [
     branch: "Quận 10, TP.HCM",
     text: "Very good 100đ nha. Nhân viên nhiệt tình, phòng chụp sạch sẽ.",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review4/100/100"
+    avatar: "https://picsum.photos/seed/review4/100/100",
   },
   {
     name: "Mira Harrison",
@@ -41,7 +41,7 @@ const ALL_REVIEWS = [
     branch: "Quận 10, TP.HCM",
     text: "Great picture, the staff are so nice! Highly recommend for anyone visiting HCMC.",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review5/100/100"
+    avatar: "https://picsum.photos/seed/review5/100/100",
   },
   {
     name: "Thúc Anh",
@@ -49,7 +49,7 @@ const ALL_REVIEWS = [
     branch: "Quận 10, TP.HCM",
     text: "Shop dễ thương, nhiều phụ kiện xinh xắn để chụp hình. Rất ưng ý!",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review6/100/100"
+    avatar: "https://picsum.photos/seed/review6/100/100",
   },
   {
     name: "Minhhoi Nguyen",
@@ -57,7 +57,7 @@ const ALL_REVIEWS = [
     branch: "Cầu Giấy, Hà Nội",
     text: "Cute vãi luôn, chụp hình siêu đẹp, nhân viên thân thiện. Sẽ quay lại dài dài.",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review7/100/100"
+    avatar: "https://picsum.photos/seed/review7/100/100",
   },
   {
     name: "Ky Chu",
@@ -65,7 +65,7 @@ const ALL_REVIEWS = [
     branch: "Cầu Giấy, Hà Nội",
     text: "Very good service and photo quality. Love the vibe here!",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review8/100/100"
+    avatar: "https://picsum.photos/seed/review8/100/100",
   },
   {
     name: "Linh Khánh",
@@ -73,7 +73,7 @@ const ALL_REVIEWS = [
     branch: "Cầu Giấy, Hà Nội",
     text: "I love Photo Palette 🥰🥰 Không gian decor xinh xỉu, chụp góc nào cũng đẹp.",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review9/100/100"
+    avatar: "https://picsum.photos/seed/review9/100/100",
   },
   {
     name: "Kim Hương",
@@ -81,7 +81,7 @@ const ALL_REVIEWS = [
     branch: "Tân Phú, TP.HCM",
     text: "Nhân viên siêu tận tình, 10/10 <3 Có 4 phòng chụp khác nhau, nhiều phụ kiện, gương và dụng cụ. Rất đáng trải nghiệm! 💖",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review10/100/100"
+    avatar: "https://picsum.photos/seed/review10/100/100",
   },
   {
     name: "Yeon-i",
@@ -89,7 +89,7 @@ const ALL_REVIEWS = [
     branch: "Tân Phú, TP.HCM",
     text: "Chi nhánh sạch sẽ, rộng rãi, nhiều phụ kiện, nhân viên dễ thương và màu ảnh cực xinh luôn các nàng ơi!",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review11/100/100"
+    avatar: "https://picsum.photos/seed/review11/100/100",
   },
   {
     name: "Ý Huỳnh",
@@ -97,12 +97,14 @@ const ALL_REVIEWS = [
     branch: "Tân Phú, TP.HCM",
     text: "Palette nổi tiếng màu ảnh đẹp rồi không cần bàn cãi, mặt mộc chụp lên vẫn xinh. Tiệm đã tiếp thu feedback rất tốt hehe 🫦",
     rating: 5,
-    avatar: "https://picsum.photos/seed/review12/100/100"
-  }
+    avatar: "https://picsum.photos/seed/review12/100/100",
+  },
 ];
 
 const Testimonials: React.FC = () => {
-  const [displayedReviews, setDisplayedReviews] = useState<typeof ALL_REVIEWS>([]);
+  const [displayedReviews, setDisplayedReviews] = useState<typeof ALL_REVIEWS>(
+    [],
+  );
 
   useEffect(() => {
     // Randomly select 3 unique reviews
@@ -121,20 +123,39 @@ const Testimonials: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {displayedReviews.map((review, idx) => (
-            <Reveal key={idx} delay={idx * 0.1} className="bg-white p-8 rounded-3xl border border-brand-100 shadow-sm hover:shadow-md transition-all h-full flex flex-col">
+            <Reveal
+              key={idx}
+              delay={idx * 0.1}
+              className="bg-white p-8 rounded-3xl border border-brand-100 shadow-sm hover:shadow-md transition-all h-full flex flex-col"
+            >
               <div className="flex gap-1 mb-4">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <Star
+                    key={i}
+                    className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                  />
                 ))}
               </div>
-              <p className="text-slate-700 italic mb-6 flex-grow">"{review.text}"</p>
+              <p className="text-slate-700 italic mb-6 flex-grow">
+                "{review.text}"
+              </p>
               <div className="flex items-center gap-4 pt-4 border-t border-brand-100/50">
-                <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
+                <img
+                  src={review.avatar}
+                  alt={review.name}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-sm">{review.name}</h4>
+                  <h4 className="font-bold text-slate-900 text-sm">
+                    {review.name}
+                  </h4>
                   <div className="flex flex-col">
-                    <span className="text-xs text-slate-500">{review.role}</span>
-                    <span className="text-[10px] uppercase font-bold text-brand-400 tracking-wider mt-0.5">{review.branch}</span>
+                    <span className="text-xs text-slate-500">
+                      {review.role}
+                    </span>
+                    <span className="text-[10px] uppercase font-bold text-brand-400 tracking-wider mt-0.5">
+                      {review.branch}
+                    </span>
                   </div>
                 </div>
               </div>

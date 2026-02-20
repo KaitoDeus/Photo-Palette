@@ -1,25 +1,25 @@
-import React from 'react';
-import Reveal from '../../components/common/Reveal';
-import { usePhotoBooth } from './hooks/usePhotoBooth';
-import IntroStep from './components/IntroStep';
-import LayoutSelectionStep from './components/LayoutSelectionStep';
-import InstructionStep from './components/InstructionStep';
-import CaptureStep from './components/CaptureStep';
-import ProcessingStep from './components/ProcessingStep';
-import ResultStep from './components/ResultStep';
+import React from "react";
+import Reveal from "../../components/common/Reveal";
+import { usePhotoBooth } from "./hooks/usePhotoBooth";
+import IntroStep from "./components/IntroStep";
+import LayoutSelectionStep from "./components/LayoutSelectionStep";
+import InstructionStep from "./components/InstructionStep";
+import CaptureStep from "./components/CaptureStep";
+import ProcessingStep from "./components/ProcessingStep";
+import ResultStep from "./components/ResultStep";
 
 const PhotoBooth: React.FC = () => {
   const { state, refs, actions } = usePhotoBooth();
 
   const handleBookingScroll = () => {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const renderStep = () => {
     switch (state.step) {
-      case 'INTRO':
+      case "INTRO":
         return <IntroStep onStart={actions.handleStart} />;
-      case 'SELECT_FRAME':
+      case "SELECT_FRAME":
         return (
           <LayoutSelectionStep
             selectedLayout={state.selectedLayout}
@@ -31,7 +31,7 @@ const PhotoBooth: React.FC = () => {
             onConfirm={actions.handleConfirmSelection}
           />
         );
-      case 'INSTRUCTION':
+      case "INSTRUCTION":
         return (
           <InstructionStep
             permissionDenied={state.permissionDenied}
@@ -47,7 +47,7 @@ const PhotoBooth: React.FC = () => {
             onToggleRecap={actions.toggleRecap}
           />
         );
-      case 'CAPTURE':
+      case "CAPTURE":
         return (
           <CaptureStep
             videoRef={refs.videoRef}
@@ -59,9 +59,9 @@ const PhotoBooth: React.FC = () => {
             isMirrored={state.isMirrored}
           />
         );
-      case 'PROCESSING':
+      case "PROCESSING":
         return <ProcessingStep />;
-      case 'RESULT':
+      case "RESULT":
         return (
           <ResultStep
             photos={state.photos}
@@ -69,7 +69,7 @@ const PhotoBooth: React.FC = () => {
             selectedFrame={state.selectedFrame}
             recapVideoUrl={state.recapVideoUrl}
             onRetake={actions.handleRetake}
-            onBooking={() => alert('Chức năng đặt lịch đang phát triển!')}
+            onBooking={() => alert("Chức năng đặt lịch đang phát triển!")}
           />
         );
       default:
@@ -78,7 +78,10 @@ const PhotoBooth: React.FC = () => {
   };
 
   return (
-    <section id="photobooth" className="py-20 bg-transparent relative overflow-hidden min-h-[600px] flex items-center">
+    <section
+      id="photobooth"
+      className="py-20 bg-transparent relative overflow-hidden min-h-[600px] flex items-center"
+    >
       <canvas ref={refs.canvasRef} className="hidden" />
 
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

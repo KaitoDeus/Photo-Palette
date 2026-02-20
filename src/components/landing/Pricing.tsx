@@ -1,7 +1,7 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+import React from "react";
+import { Check } from "lucide-react";
 
-import Reveal from '../common/Reveal';
+import Reveal from "../common/Reveal";
 
 const Pricing: React.FC = () => {
   const packages = [
@@ -10,25 +10,41 @@ const Pricing: React.FC = () => {
       price: "150k",
       unit: "VND",
       desc: "Phù hợp cho chụp đơn hoặc đôi nhanh gọn.",
-      features: ["15 Phút Chụp", "2 Ảnh In (Photo Strip)", "Bao Gồm File Ảnh Gốc", "Phụ Kiện Cơ Bản"],
-      highlight: false
+      features: [
+        "15 Phút Chụp",
+        "2 Ảnh In (Photo Strip)",
+        "Bao Gồm File Ảnh Gốc",
+        "Phụ Kiện Cơ Bản",
+      ],
+      highlight: false,
     },
     {
       name: "Cao Cấp",
       price: "250k",
       unit: "VND",
       desc: "Lựa chọn phổ biến nhất cho nhóm bạn.",
-      features: ["30 Phút Chụp", "4 Ảnh In Lớn", "File Gốc Chất Lượng Cao", "Tất Cả Phụ Kiện", "Video Timelapse"],
-      highlight: true
+      features: [
+        "30 Phút Chụp",
+        "4 Ảnh In Lớn",
+        "File Gốc Chất Lượng Cao",
+        "Tất Cả Phụ Kiện",
+        "Video Timelapse",
+      ],
+      highlight: true,
     },
     {
       name: "Sự Kiện",
       price: "Liên Hệ",
       unit: "",
       desc: "Dành cho sinh nhật, tiệc công ty.",
-      features: ["In Ảnh Không Giới Hạn", "Thiết Kế Frame Riêng", "Hỗ Trợ Tại Chỗ", "Thuê Nguyên Studio"],
-      highlight: false
-    }
+      features: [
+        "In Ảnh Không Giới Hạn",
+        "Thiết Kế Frame Riêng",
+        "Hỗ Trợ Tại Chỗ",
+        "Thuê Nguyên Studio",
+      ],
+      highlight: false,
+    },
   ];
 
   return (
@@ -42,13 +58,13 @@ const Pricing: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {packages.map((pkg, index) => (
-            <Reveal 
+            <Reveal
               key={pkg.name}
               delay={index * 0.1}
               className={`relative p-8 rounded-3xl border ${
-                pkg.highlight 
-                  ? 'bg-rose-50 border-brand-200 shadow-xl scale-105 z-10' 
-                  : 'bg-white border-brand-100 shadow-md hover:shadow-xl transition-all duration-300'
+                pkg.highlight
+                  ? "bg-rose-50 border-brand-200 shadow-xl scale-105 z-10"
+                  : "bg-white border-brand-100 shadow-md hover:shadow-xl transition-all duration-300"
               }`}
             >
               {pkg.highlight && (
@@ -56,10 +72,12 @@ const Pricing: React.FC = () => {
                   Khuyên Dùng
                 </div>
               )}
-              
+
               <h3 className="text-xl font-bold text-slate-800">{pkg.name}</h3>
               <div className="mt-4 flex items-baseline">
-                <span className="text-4xl font-bold text-slate-900">{pkg.price}</span>
+                <span className="text-4xl font-bold text-slate-900">
+                  {pkg.price}
+                </span>
                 <span className="ml-1 text-slate-500">{pkg.unit}</span>
               </div>
               <p className="mt-4 text-sm text-slate-500">{pkg.desc}</p>
@@ -72,8 +90,6 @@ const Pricing: React.FC = () => {
                   </li>
                 ))}
               </ul>
-
-
             </Reveal>
           ))}
         </div>
