@@ -32,6 +32,7 @@ export interface Frame {
     pr: number;
     rowGap: number;
     colGap?: number;
+    imageSlots?: { x: number; y: number; w: number; h: number }[];
   };
 }
 

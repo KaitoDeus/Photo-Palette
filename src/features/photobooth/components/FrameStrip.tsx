@@ -51,6 +51,45 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       colGap: 15
     };
 
+    if (metrics.imageSlots && metrics.imageSlots.length > 0) {
+      return (
+        <div className={`${wrapperClasses} overflow-hidden bg-white`} style={{ position: "relative" }}>
+          {metrics.imageSlots.map((slot, i) => {
+            const top = (slot.y / metrics.h) * 100 + "%";
+            const left = (slot.x / metrics.w) * 100 + "%";
+            const width = (slot.w / metrics.w) * 100 + "%";
+            const height = (slot.h / metrics.h) * 100 + "%";
+            return (
+              <div
+                key={i}
+                className={`bg-slate-200 overflow-hidden absolute`}
+                style={{ top, left, width, height }}
+              >
+                {filled && (
+                  <img
+                    src={modelImg}
+                    alt="pose"
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            );
+          })}
+          <div className="absolute inset-0 z-10 pointer-events-none">
+            <img
+              src={frame.overlayImage}
+              alt="Frame Overlay"
+              className="w-full h-full object-fill"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
+          </div>
+        </div>
+      );
+    }
+
     const pl = (metrics.pl / metrics.w) * 100 + "%";
     const pr = (metrics.pr / metrics.w) * 100 + "%";
     const pt = (metrics.pt / metrics.w) * 100 + "%";
