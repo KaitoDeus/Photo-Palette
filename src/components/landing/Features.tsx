@@ -15,24 +15,24 @@ const Features: React.FC = () => {
   const features = [
     {
       icon: <Camera className="w-8 h-8 text-brand-500" />,
-      title: "Phong Cách Hàn Quốc",
-      description: "Bộ lọc màu và ánh sáng được thiết kế chuẩn studio Seoul.",
+      title: "Chuẩn Vibe Hàn Quốc",
+      description: "Ánh sáng nịnh mặt, filter màu siêu xinh giúp bạn lúc nào cũng lung linh như đang ở studio Seoul vậy đó.",
     },
     {
       icon: <Zap className="w-8 h-8 text-brand-500" />,
-      title: "In Lấy Ngay",
-      description: "Nhận ảnh in chất lượng cao chỉ trong chưa đầy 30 giây.",
+      title: "Có Ảnh Liền Tay",
+      description: "Chưa tới 30 giây là bạn đã cầm trên tay những tấm ảnh siêu nét, màu sắc cực bền rùi nha.",
     },
     {
       icon: <Sparkles className="w-8 h-8 text-brand-500" />,
-      title: "Phụ Kiện Độc Đáo",
-      description: "Hàng trăm mẫu bờm, kính mát và gấu bông cực xinh.",
+      title: "Kho Phụ Kiện Cute",
+      description: "Tụi mình có sẵn hàng trăm mẫu bờm, kính mát, gấu bông... để bạn tha hồ mix & match đổi style liên tục.",
     },
     {
       icon: <Heart className="w-8 h-8 text-brand-500" />,
-      title: "Không Gian Riêng",
+      title: "Thoải Mái Biến Hóa",
       description:
-        "Buồng chụp kín đáo, thoải mái tạo dáng không lo ngại ngùng.",
+        "Buồng chụp riêng tư tuyệt đối, cứ tự nhiên quậy tung nóc, pose mọi dáng khó mà không lo ngại ngùng!",
     },
   ];
 
@@ -47,15 +47,14 @@ const Features: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-brand-100 mb-6">
             <Award className="w-4 h-4 text-brand-400" />
             <span className="text-xs font-black text-brand-600 uppercase tracking-widest">
-              Trái tim của trải nghiệm
+              Bí mật của chúng mình
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
             Tại Sao Chọn <span className="text-brand-500">Palette?</span>
           </h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">
-            Chúng tôi cung cấp mọi thứ bạn cần để tạo nên những bức ảnh hoàn
-            hảo. Bạn chỉ cần mang theo nụ cười!
+            Mọi thứ đã được chuẩn bị sẵn sàng để bạn toả sáng rực rỡ nhất. Việc của bạn chỉ là ghé chơi và mang theo một nụ cười thật tươi thui nè!
           </p>
         </Reveal>
 

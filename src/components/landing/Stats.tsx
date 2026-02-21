@@ -7,26 +7,22 @@ const Stats: React.FC = () => {
     {
       icon: <Users className="w-6 h-6 text-brand-500" />,
       value: "50,000+",
-      label: "Khách hàng hài lòng",
-      suffix: "Smile",
+      suffix: "CUSTOMERS",
     },
     {
       icon: <Camera className="w-6 h-6 text-brand-500" />,
       value: "100,000+",
-      label: "Bức ảnh được tạo ra",
-      suffix: "Moments",
+      suffix: "MOMENTS",
     },
     {
       icon: <MapPin className="w-6 h-6 text-brand-500" />,
       value: "15+",
-      label: "Chi nhánh toàn quốc",
-      suffix: "Stores",
+      suffix: "STUDIOS",
     },
     {
       icon: <Sparkles className="w-6 h-6 text-brand-500" />,
       value: "200+",
-      label: "Phụ kiện độc đáo",
-      suffix: "Props",
+      suffix: "PROPS",
     },
   ];
 
@@ -44,11 +40,8 @@ const Stats: React.FC = () => {
                   <h3 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
                     {stat.value}
                   </h3>
-                  <p className="text-sm font-bold text-brand-500 uppercase tracking-widest opacity-80">
+                  <p className="text-sm font-bold text-brand-500 uppercase tracking-widest opacity-80 pt-1">
                     {stat.suffix}
-                  </p>
-                  <p className="text-slate-500 font-medium pt-1">
-                    {stat.label}
                   </p>
                 </div>
               </div>

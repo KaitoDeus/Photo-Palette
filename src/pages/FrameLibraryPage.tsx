@@ -144,8 +144,16 @@ const FrameLibraryPage: React.FC = () => {
   const filteredFrames = FRAMES.filter((frame) => {
     const matchesCategory =
       activeCategory === "All" || frame.category === activeCategory;
-    const matchesLayout =
-      activeLayout === "All" || frame.layout === activeLayout;
+    
+    let matchesLayout = true;
+    if (activeLayout === "Nhỏ") {
+      matchesLayout = frame.layout === "1x4";
+    } else if (activeLayout === "Lớn") {
+      matchesLayout = frame.layout === "2x2";
+    } else if (activeLayout !== "All") {
+      matchesLayout = frame.layout === activeLayout;
+    }
+
     const matchesSearch = frame.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -187,8 +195,8 @@ const FrameLibraryPage: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  const categories = ["All", "COOL", "CUTE", "BASIC", "EVENT", "VINTAGE"];
-  const layouts = ["All", "1x4", "2x2", "2x3"];
+  const categories = ["All", "EVENT"];
+  const layouts = ["All", "Nhỏ", "Lớn"];
 
   return (
     <div className="pt-20 min-h-screen bg-brand-50">
@@ -216,7 +224,7 @@ const FrameLibraryPage: React.FC = () => {
                   value={activeLayout}
                   options={layouts}
                   onChange={setActiveLayout}
-                  placeholder="Tất Cả Layout"
+                  placeholder="Tất Cả Kích Thước"
                 />
               </div>
               <div className="relative w-full md:w-1/4 z-10">
