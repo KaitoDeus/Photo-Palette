@@ -125,13 +125,13 @@ const GalleryPage: React.FC = () => {
       {/* Lightbox Modal */}
       {selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-bg"
           onClick={() => setSelectedIndex(null)}
         >
           {/* Close Button */}
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 p-2 rounded-full hover:bg-white/20 z-10"
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-2 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <X size={24} />
           </button>
@@ -139,27 +139,27 @@ const GalleryPage: React.FC = () => {
           {/* Prev Button */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 md:left-8 text-white/70 hover:text-white transition-colors bg-white/10 p-3 rounded-full hover:bg-white/20 z-10"
+            className="absolute left-4 md:left-8 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-3 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <ChevronLeft size={32} />
           </button>
 
           {/* Image */}
           <div
-            className="relative max-w-full max-h-full flex items-center justify-center"
+            className="relative max-w-full max-h-full flex items-center justify-center animate-zoom-in"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={MOMENTS[selectedIndex].url}
               alt="Gallery Preview"
-              className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300 select-none"
+              className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl select-none"
             />
           </div>
 
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="absolute right-4 md:right-8 text-white/70 hover:text-white transition-colors bg-white/10 p-3 rounded-full hover:bg-white/20 z-10"
+            className="absolute right-4 md:right-8 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-3 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <ChevronRight size={32} />
           </button>

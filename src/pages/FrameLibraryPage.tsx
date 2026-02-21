@@ -271,13 +271,13 @@ const FrameLibraryPage: React.FC = () => {
       {/* Lightbox Modal */}
       {selectedIndex !== null && filteredFrames[selectedIndex] && (
         <div
-          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-bg"
           onClick={() => setSelectedIndex(null)}
         >
           {/* Close Button */}
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 p-2 rounded-full hover:bg-white/20 z-10"
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-2 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <X size={24} />
           </button>
@@ -285,17 +285,17 @@ const FrameLibraryPage: React.FC = () => {
           {/* Prev Button */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 md:left-8 text-white/70 hover:text-white transition-colors bg-white/10 p-3 rounded-full hover:bg-white/20 z-10"
+            className="absolute left-4 md:left-8 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-3 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <ChevronLeft size={32} />
           </button>
 
           {/* Frame Content */}
           <div
-            className="relative max-w-full max-h-full flex items-center justify-center p-10 animate-in fade-in zoom-in duration-300 select-none"
+            className="relative max-w-full max-h-full flex items-center justify-center p-10 select-none animate-zoom-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="transform scale-[1.5] md:scale-[2] pointer-events-none">
+            <div className="transform scale-[1.8] md:scale-[2.5] lg:scale-[3] pointer-events-none mt-8 transition-transform duration-500 hover:scale-[1.85] md:hover:scale-[2.55] lg:hover:scale-[3.05]">
               <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} />
             </div>
           </div>
@@ -303,7 +303,7 @@ const FrameLibraryPage: React.FC = () => {
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="absolute right-4 md:right-8 text-white/70 hover:text-white transition-colors bg-white/10 p-3 rounded-full hover:bg-white/20 z-10"
+            className="absolute right-4 md:right-8 text-white/70 hover:text-white transition-all duration-300 hover:scale-110 bg-white/10 p-3 rounded-full hover:bg-white/20 z-10 animate-fade-in"
           >
             <ChevronRight size={32} />
           </button>
