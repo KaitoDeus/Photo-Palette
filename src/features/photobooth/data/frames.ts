@@ -1,8 +1,8 @@
 import { Frame } from "../types";
 
 // Frame Images
-import loveFrame from "../../../assets/frames/20.svg";
-import loveFrameGrid from "../../../assets/frames/21.svg";
+import loveFrame from "../../../assets/frames/love-certificate_LoveCertificate_1x4.svg";
+import loveFrameGrid from "../../../assets/frames/love-certificate-grid_LoveCertificate_2x2.svg";
 
 export const FRAMES: Frame[] = [
   {
