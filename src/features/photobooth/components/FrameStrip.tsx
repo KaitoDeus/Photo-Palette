@@ -70,7 +70,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                     src={modelImg}
                     alt="pose"
                     className="w-full h-full object-cover object-center"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                   />
                 )}
               </div>
@@ -81,6 +82,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               src={frame.overlayImage}
               alt="Frame Overlay"
               className="w-full h-full object-fill"
+              loading="eager"
+              decoding="async"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
@@ -126,7 +129,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                 src={modelImg}
                 alt="pose"
                 className="w-full h-full object-cover object-center"
-                loading="lazy"
+                loading="eager"
+                decoding="async"
               />
             )}
           </div>
@@ -136,6 +140,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
             src={frame.overlayImage}
             alt="Frame Overlay"
             className="w-full h-full object-fill"
+            loading="eager"
+            decoding="async"
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -171,7 +177,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               src={modelImg}
               alt="pose"
               className="w-full h-full object-cover"
-              loading="lazy"
+              loading="eager"
+              decoding="async"
             />
           )}
         </div>

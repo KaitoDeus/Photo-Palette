@@ -115,6 +115,8 @@ const GalleryPage: React.FC = () => {
               <img
                 src={moment.url}
                 alt={`Feedback ${moment.id}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -152,6 +154,8 @@ const GalleryPage: React.FC = () => {
             <img
               src={MOMENTS[selectedIndex].url}
               alt="Gallery Preview"
+              loading="eager"
+              decoding="async"
               className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl select-none"
             />
           </div>
