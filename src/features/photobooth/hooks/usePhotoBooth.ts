@@ -285,6 +285,7 @@ export const usePhotoBooth = () => {
       // Stop recording
       stopRecorder();
 
+      setLastPhoto(null);
       stopCamera();
       setStep("PROCESSING");
       await new Promise((r) => setTimeout(r, 2000));
@@ -322,6 +323,7 @@ export const usePhotoBooth = () => {
     // We captured one photo, so the new count will be photos.length + 1
     if (photos.length + 1 >= targetCount) {
       stopRecorder();
+      setLastPhoto(null);
       stopCamera();
       setStep("PROCESSING");
       setTimeout(() => setStep("RESULT"), 2000);
@@ -335,6 +337,7 @@ export const usePhotoBooth = () => {
 
   const handleRetake = () => {
     setPhotos([]);
+    setLastPhoto(null);
     startCamera();
     setStep("SELECT_FRAME");
   };
@@ -342,6 +345,7 @@ export const usePhotoBooth = () => {
   const goToStart = () => {
     setStep("INTRO");
     setPhotos([]);
+    setLastPhoto(null);
   };
 
   return {

@@ -251,17 +251,19 @@ const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
 
             {/* Camera Area */}
             <div
-              className="w-full relative bg-slate-800 rounded-3xl md:rounded-[2.5rem] mt-2 mb-10 shadow-lg"
-              style={{ height: "65vh", maxHeight: "700px", minHeight: "400px" }}
+              className={`w-full relative bg-slate-800 rounded-3xl md:rounded-[2.5rem] mt-2 mb-10 shadow-lg mx-auto overflow-hidden ${
+                selectedLayout === "STRIP_1X4" ? "aspect-[4/3] max-w-lg sm:max-w-xl md:max-w-2xl" :
+                selectedLayout === "GRID_2X3" ? "aspect-square max-w-md sm:max-w-lg" :
+                "aspect-[3/4] max-w-sm sm:max-w-md"
+              }`}
             >
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
                 muted
-                className={`w-full h-full object-cover rounded-3xl md:rounded-[2.5rem] transition-transform duration-500 ${isMirrored ? "transform -scale-x-100" : ""}`}
+                className={`w-full h-full object-cover transition-transform duration-500 ${isMirrored ? "transform -scale-x-100" : ""}`}
               />
-
               {/* Flash Overlay - Scoped to video */}
               <div
                 className={`absolute inset-0 bg-white rounded-3xl md:rounded-[2.5rem] transition-opacity duration-150 pointer-events-none z-50 ${flash ? "opacity-100" : "opacity-0"}`}
@@ -322,7 +324,6 @@ const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
                 </div>
               </div>
             </div>
-
             {/* Bottom Controls panel */}
             <div className="flex flex-col items-center gap-6 md:gap-8 w-full mt-4">
               <div className="flex justify-center items-center gap-6 md:gap-14 w-full">
