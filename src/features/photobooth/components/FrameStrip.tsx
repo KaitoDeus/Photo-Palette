@@ -29,30 +29,35 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   disableHover = false,
 }) => {
   const isStrip = frame.layout === "1x4";
-  const slotCount = frame.layout === "2x3" ? 6 : 4;
+  const slotCount = frame.layout === "2x3" ? 6 : frame.layout === "1x1" ? 1 : 4;
   const slots = Array.from({ length: slotCount }, (_, i) => i + 1);
 
   const sizeClasses = {
     sm: {
       "1x4": "w-12 h-36", // 48px x 144px
-      other: "w-24 h-36", // 96px x 144px
+      "2x3": "w-24 h-36", // 96px x 144px
+      portrait: "w-24 h-32", // 96px x 128px
     },
     md: {
       "1x4": "w-16 h-48", // 64px x 192px
-      other: "w-32 h-48", // 128px x 192px
+      "2x3": "w-32 h-48", // 128px x 192px
+      portrait: "w-36 h-48", // 144px x 192px
     },
     lg: {
       "1x4": "w-[260px] h-[780px]", // 260px x 780px
-      other: "w-[360px] h-[540px]", // 360px x 540px
+      "2x3": "w-[360px] h-[540px]", // 360px x 540px
+      portrait: "w-[405px] h-[540px]", // 405px x 540px
     },
   };
 
   const dimensions =
     frame.layout === "1x4"
       ? sizeClasses[size]["1x4"]
-      : sizeClasses[size]["other"];
+      : frame.layout === "2x3"
+        ? sizeClasses[size]["2x3"]
+        : sizeClasses[size]["portrait"];
 
-  let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "rotate-1 hover:rotate-0" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
+  let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
 
   if (frame.overlayImage) {
     const is1x4 = frame.layout === "1x4";
@@ -67,12 +72,15 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       pl: 20,
       pr: 20,
       rowGap: 15,
-      colGap: 15
+      colGap: 15,
     };
 
     if (metrics.imageSlots && metrics.imageSlots.length > 0) {
       return (
-        <div className={`${wrapperClasses} overflow-hidden bg-white`} style={{ position: "relative" }}>
+        <div
+          className={`${wrapperClasses} overflow-hidden bg-white`}
+          style={{ position: "relative" }}
+        >
           {metrics.imageSlots.map((slot, i) => {
             const top = `calc(${(slot.y / metrics.h) * 100}% - 1px)`;
             const left = `calc(${(slot.x / metrics.w) * 100}% - 1px)`;
@@ -86,7 +94,13 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               >
                 {filled && (
                   <img
-                    src={photos.length > 0 ? (photos[i] || photos[0]) : (is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4])}
+                    src={
+                      photos.length > 0
+                        ? photos[i] || photos[0]
+                        : is1x4
+                          ? MODELS_1X4[i % 4]
+                          : MODELS[i % 4]
+                    }
                     alt={`pose ${i + 1}`}
                     className="w-full h-full object-cover object-center"
                     loading="eager"
@@ -145,7 +159,13 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           >
             {filled && (
               <img
-                src={photos.length > 0 ? (photos[i] || photos[0]) : (is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4])}
+                src={
+                  photos.length > 0
+                    ? photos[i] || photos[0]
+                    : is1x4
+                      ? MODELS_1X4[i % 4]
+                      : MODELS[i % 4]
+                }
                 alt={`pose ${i + 1}`}
                 className="w-full h-full object-cover object-center"
                 loading="eager"
@@ -175,10 +195,13 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   if (isStrip) {
     wrapperClasses += " flex flex-col items-center justify-between";
   } else {
-    wrapperClasses += " grid grid-cols-2";
-    if (frame.layout === "2x2") wrapperClasses += " grid-rows-2";
-    if (frame.layout === "2x3") wrapperClasses += " grid-rows-3";
-    wrapperClasses += " gap-1";
+    wrapperClasses += " grid gap-1";
+    if (frame.layout === "2x2") wrapperClasses += " grid-cols-2 grid-rows-2";
+    else if (frame.layout === "2x3")
+      wrapperClasses += " grid-cols-2 grid-rows-3";
+    else if (frame.layout === "1x1")
+      wrapperClasses += " grid-cols-1 grid-rows-1";
+    else wrapperClasses += " grid-cols-2";
   }
 
   return (
@@ -193,7 +216,13 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
         >
           {filled && (
             <img
-              src={photos.length > 0 ? (photos[i] || photos[0]) : (isStrip ? MODELS_1X4[i % 4] : MODELS[i % 4])}
+              src={
+                photos.length > 0
+                  ? photos[i] || photos[0]
+                  : isStrip
+                    ? MODELS_1X4[i % 4]
+                    : MODELS[i % 4]
+              }
               alt={`pose ${i + 1}`}
               className="w-full h-full object-cover"
               loading="eager"

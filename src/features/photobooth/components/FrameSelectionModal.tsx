@@ -13,13 +13,85 @@ interface FrameSelectionModalProps {
 }
 
 const CATEGORIES = [
-  { id: "All", label: "All" },
-  { id: "COOL", label: "COOL" },
-  { id: "CUTE", label: "CUTE" },
-  { id: "BASIC", label: "BASIC" },
-  { id: "EVENT", label: "EVENT" },
-  { id: "VINTAGE", label: "VINTAGE" },
+  { id: "All", label: "Tất cả" },
+  { id: "VALENTINE", label: "VALENTINE" },
+  { id: "TET HOLIDAY", label: "TET HOLIDAY" },
 ];
+
+interface CustomDropdownProps {
+  value: string;
+  options: { id: string; label: string }[];
+  onChange: (value: string) => void;
+}
+
+const CustomDropdown: React.FC<CustomDropdownProps> = ({
+  value,
+  options,
+  onChange,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedLabel =
+    options.find((opt) => opt.id === value)?.label || "Tất cả";
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full pl-10 pr-4 py-2 bg-white/50 border border-slate-200 rounded-xl text-slate-600 font-medium hover:bg-white hover:border-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 flex justify-between items-center transition-all duration-300 hover:shadow-sm"
+      >
+        <span className="truncate mr-3">{selectedLabel}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`text-slate-400 transition-transform duration-500 ${isOpen ? "rotate-180 text-brand-500" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      <div
+        className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden transition-all duration-300 origin-top z-50 ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"}`}
+      >
+        <div className="max-h-60 overflow-y-auto custom-scrollbar flex flex-col py-1">
+          {options.map((option) => (
+            <div
+              key={option.id}
+              onClick={() => {
+                onChange(option.id);
+                setIsOpen(false);
+              }}
+              className={`px-4 py-3 cursor-pointer transition-colors duration-200 text-sm font-semibold ${value === option.id ? "bg-brand-50 text-brand-600" : "text-slate-600 hover:bg-slate-50 hover:text-brand-500"}`}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   isOpen,
@@ -35,10 +107,14 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
     return FRAMES.filter((frame) => {
       // Filter by Layout mapping
       let matchesLayout = false;
-      if (selectedLayoutId === "STRIP_1X4" && frame.layout === "1x4") matchesLayout = true;
-      if (selectedLayoutId === "PORTRAIT_2X2" && frame.layout === "2x2") matchesLayout = true;
-      if (selectedLayoutId === "PORTRAIT_1X1" && frame.layout === "1x1") matchesLayout = true;
-      if (selectedLayoutId === "GRID_2X3" && frame.layout === "2x3") matchesLayout = true;
+      if (selectedLayoutId === "STRIP_1X4" && frame.layout === "1x4")
+        matchesLayout = true;
+      if (selectedLayoutId === "PORTRAIT_2X2" && frame.layout === "2x2")
+        matchesLayout = true;
+      if (selectedLayoutId === "PORTRAIT_1X1" && frame.layout === "1x1")
+        matchesLayout = true;
+      if (selectedLayoutId === "GRID_2X3" && frame.layout === "2x3")
+        matchesLayout = true;
 
       const matchesSearch = frame.name
         .toLowerCase()
@@ -58,12 +134,12 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-900/10 backdrop-blur-md"
         onClick={onClose}
       />
 
       {/* Modal Content */}
-      <div className="relative bg-white/90 backdrop-blur-md rounded-3xl w-[900px] max-w-[95vw] h-[650px] max-h-[90vh] flex flex-col shadow-2xl border border-white/50 animate-in fade-in zoom-in duration-300">
+      <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl w-[900px] max-w-[95vw] h-[650px] max-h-[90vh] flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/60 animate-in fade-in zoom-in duration-300">
         {/* Header */}
         <div className="p-6 border-b border-slate-200 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-slate-800">Chọn Khung Hình</h2>
@@ -94,37 +170,16 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
 
           {/* Categories Dropdown */}
           <div className="md:col-span-2">
-            <div className="relative">
+            <div className="relative z-10 w-full mb-2">
               <Filter
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-3 top-[20px] -translate-y-1/2 text-slate-400 z-10 pointer-events-none"
                 size={18}
               />
-              <select
+              <CustomDropdown
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full pl-10 pr-10 py-2 bg-white/50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-medium text-slate-700 appearance-none cursor-pointer hover:bg-white"
-              >
-                {CATEGORIES.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.label}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </div>
+                options={CATEGORIES}
+                onChange={setSelectedCategory}
+              />
             </div>
           </div>
         </div>

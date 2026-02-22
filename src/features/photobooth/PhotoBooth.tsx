@@ -3,8 +3,7 @@ import Reveal from "../../components/common/Reveal";
 import { usePhotoBooth } from "./hooks/usePhotoBooth";
 import IntroStep from "./components/IntroStep";
 import LayoutSelectionStep from "./components/LayoutSelectionStep";
-import InstructionStep from "./components/InstructionStep";
-import CaptureStep from "./components/CaptureStep";
+
 import ProcessingStep from "./components/ProcessingStep";
 import ResultStep from "./components/ResultStep";
 
@@ -25,38 +24,56 @@ const PhotoBooth: React.FC = () => {
             selectedLayout={state.selectedLayout}
             selectedFrame={state.selectedFrame}
             countDownDuration={state.countDownDuration}
+            permissionDenied={state.permissionDenied}
+            videoRef={refs.videoRef}
+            isMirrored={state.isMirrored}
+            isRecapEnabled={state.isRecapEnabled}
+            isFlashEnabled={state.isFlashEnabled}
             onSelectLayout={actions.setSelectedLayout}
             onSelectFrame={actions.setSelectedFrame}
             onSelectCountDown={actions.setCountDownDuration}
-            onConfirm={actions.handleConfirmSelection}
-          />
-        );
-      case "INSTRUCTION":
-        return (
-          <InstructionStep
-            permissionDenied={state.permissionDenied}
-            videoRef={refs.videoRef}
-            countDownDuration={state.countDownDuration}
-            selectedLayout={state.selectedLayout}
-            isMirrored={state.isMirrored}
-            isRecapEnabled={state.isRecapEnabled}
-            onRetryPermission={actions.startCamera}
-            onStartCapture={actions.startCaptureSequence}
-            onBack={actions.handleBackToSelect}
             onToggleMirror={actions.toggleMirrored}
             onToggleRecap={actions.toggleRecap}
+            onToggleFlash={actions.toggleFlash}
+            onRetryPermission={actions.startCamera}
+            onStartCapture={actions.startCaptureSequence}
+            onManualCapture={actions.handleManualCapture}
+            onAbortCapture={actions.abortCapture}
+            onBack={actions.goToStart}
+            flash={state.flash}
+            countDown={state.countDown}
+            photos={state.photos}
+            lastPhoto={state.lastPhoto}
+            isCapturing={state.step === "CAPTURE"}
           />
         );
       case "CAPTURE":
         return (
-          <CaptureStep
+          <LayoutSelectionStep
+            selectedLayout={state.selectedLayout}
+            selectedFrame={state.selectedFrame}
+            countDownDuration={state.countDownDuration}
+            permissionDenied={state.permissionDenied}
             videoRef={refs.videoRef}
+            isMirrored={state.isMirrored}
+            isRecapEnabled={state.isRecapEnabled}
+            isFlashEnabled={state.isFlashEnabled}
+            onSelectLayout={actions.setSelectedLayout}
+            onSelectFrame={actions.setSelectedFrame}
+            onSelectCountDown={actions.setCountDownDuration}
+            onToggleMirror={actions.toggleMirrored}
+            onToggleRecap={actions.toggleRecap}
+            onToggleFlash={actions.toggleFlash}
+            onRetryPermission={actions.startCamera}
+            onStartCapture={actions.startCaptureSequence}
+            onManualCapture={actions.handleManualCapture}
+            onAbortCapture={actions.abortCapture}
+            onBack={actions.goToStart}
             flash={state.flash}
             countDown={state.countDown}
-            selectedLayout={state.selectedLayout}
             photos={state.photos}
             lastPhoto={state.lastPhoto}
-            isMirrored={state.isMirrored}
+            isCapturing={true}
           />
         );
       case "PROCESSING":

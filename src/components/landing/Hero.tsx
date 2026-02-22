@@ -175,17 +175,9 @@ const Hero: React.FC = () => {
                         alt={`Moment ${index + 1}`}
                         className="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover/card:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
 
-                      {/* Inner Card Detail */}
-                      <div className="absolute bottom-8 left-8 right-8 text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500 translate-y-4 group-hover/card:translate-y-0">
-                        <p className="text-xs font-black tracking-widest uppercase mb-1">
-                          Seoul Aesthetic
-                        </p>
-                        <h4 className="text-xl font-bold">
-                          Limited Edition Frame
-                        </h4>
-                      </div>
+
+
                     </div>
                   </div>
                 );

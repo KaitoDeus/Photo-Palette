@@ -16,17 +16,17 @@ export const usePhotoBooth = () => {
 
   const handleSelectLayout = useCallback((layout: LayoutType) => {
     setSelectedLayout(layout);
-    
+
     // Determine the corresponding layout string in Frame
     let frameLayoutStr = "";
     if (layout === "STRIP_1X4") frameLayoutStr = "1x4";
     else if (layout === "PORTRAIT_2X2") frameLayoutStr = "2x2";
     else if (layout === "PORTRAIT_1X1") frameLayoutStr = "1x1";
-    // others if any
+    else if (layout === "GRID_2X3") frameLayoutStr = "2x3";
 
     // Find the first frame matching the new layout
     const matchingFrame = FRAMES.find((f) => f.layout === frameLayoutStr);
-    
+
     // If a match is found, update the selected frame
     if (matchingFrame) {
       setSelectedFrame(matchingFrame);
@@ -48,6 +48,7 @@ export const usePhotoBooth = () => {
 
   const [isMirrored, setIsMirrored] = useState(true);
   const [isRecapEnabled, setIsRecapEnabled] = useState(false);
+  const [isFlashEnabled, setIsFlashEnabled] = useState(true);
   const [recapVideoUrl, setRecapVideoUrl] = useState<string | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -57,6 +58,7 @@ export const usePhotoBooth = () => {
   const recordedChunksRef = useRef<Blob[]>([]);
 
   const animationFrameRef = useRef<number | null>(null);
+  const isAutoCapturingRef = useRef<boolean>(false);
 
   useEffect(() => {
     return () => {
@@ -239,6 +241,7 @@ export const usePhotoBooth = () => {
     setPhotos([]);
     setLastPhoto(null);
     setRecapVideoUrl(null);
+    isAutoCapturingRef.current = true;
 
     // Wait for the CaptureStep to mount and video to be ready
     await new Promise((r) => setTimeout(r, 500));
@@ -250,48 +253,90 @@ export const usePhotoBooth = () => {
       LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4;
 
     for (let i = 0; i < targetCount; i++) {
+      if (!isAutoCapturingRef.current) break;
+
       for (let c = countDownDuration; c > 0; c--) {
+        if (!isAutoCapturingRef.current) break;
         setCountDown(c);
         await new Promise((r) => setTimeout(r, 1000));
       }
+
+      if (!isAutoCapturingRef.current) break;
       setCountDown(null);
 
-      setFlash(true);
+      if (isFlashEnabled) setFlash(true);
       const capturedUrl = capturePhoto();
       if (capturedUrl) {
         setLastPhoto(capturedUrl);
       }
 
       await new Promise((r) => setTimeout(r, 150));
-      setFlash(false);
+      if (isFlashEnabled) setFlash(false);
+
+      if (!isAutoCapturingRef.current) break;
 
       if (i < targetCount - 1) {
-        // Preview time (reduced delay)
-        await new Promise((r) => setTimeout(r, 1500));
-        setLastPhoto(null);
+        // No delay between captures - next countdown starts immediately
+        // We also keep the lastPhoto visible during the next countdown
       }
     }
 
-    // Stop recording
-    stopRecorder();
+    if (isAutoCapturingRef.current) {
+      // Stop recording
+      stopRecorder();
 
-    stopCamera();
-    setStep("PROCESSING");
-    await new Promise((r) => setTimeout(r, 2000));
-    setStep("RESULT");
+      stopCamera();
+      setStep("PROCESSING");
+      await new Promise((r) => setTimeout(r, 2000));
+      setStep("RESULT");
+    }
+    isAutoCapturingRef.current = false;
   };
 
-  const handleStart = () => setStep("SELECT_FRAME");
+  const abortCapture = () => {
+    isAutoCapturingRef.current = false;
+    setCountDown(null);
+    setPhotos([]);
+    setLastPhoto(null);
+    stopRecorder();
+    setStep("SELECT_FRAME");
+  };
 
-  const handleConfirmSelection = () => {
+  const handleManualCapture = async () => {
+    if (photos.length === 0) {
+      startRecorder();
+    }
+
+    if (isFlashEnabled) setFlash(true);
+    const capturedUrl = capturePhoto();
+    if (capturedUrl) {
+      setLastPhoto(capturedUrl);
+    }
+
+    await new Promise((r) => setTimeout(r, 150));
+    if (isFlashEnabled) setFlash(false);
+
+    const targetCount =
+      LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4;
+
+    // We captured one photo, so the new count will be photos.length + 1
+    if (photos.length + 1 >= targetCount) {
+      stopRecorder();
+      stopCamera();
+      setStep("PROCESSING");
+      setTimeout(() => setStep("RESULT"), 2000);
+    }
+  };
+
+  const handleStart = () => {
     startCamera();
-    setStep("INSTRUCTION");
+    setStep("SELECT_FRAME");
   };
 
   const handleRetake = () => {
     setPhotos([]);
     startCamera();
-    setStep("INSTRUCTION");
+    setStep("SELECT_FRAME");
   };
 
   const goToStart = () => {
@@ -312,6 +357,7 @@ export const usePhotoBooth = () => {
       permissionDenied,
       isMirrored,
       isRecapEnabled,
+      isFlashEnabled,
       recapVideoUrl,
     },
     refs: {
@@ -325,13 +371,18 @@ export const usePhotoBooth = () => {
       setCountDownDuration,
       startCamera,
       startCaptureSequence,
+      handleManualCapture,
+      abortCapture,
       handleStart,
-      handleConfirmSelection,
       handleRetake,
       handleBackToSelect: () => setStep("SELECT_FRAME"),
-      toggleMirrored,
-      toggleRecap,
-      goToStart,
+      toggleMirrored: () => setIsMirrored((prev) => !prev),
+      toggleRecap: () => setIsRecapEnabled((prev) => !prev),
+      toggleFlash: () => setIsFlashEnabled((prev) => !prev),
+      goToStart: () => {
+        setStep("INTRO");
+        setPhotos([]);
+      },
     },
   };
 };
