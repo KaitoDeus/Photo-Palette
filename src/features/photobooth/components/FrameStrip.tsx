@@ -1,6 +1,17 @@
 import React from "react";
 import { Frame } from "../types";
-import modelImg from "../../../assets/photobooth/model.jpg";
+import model1 from "../../../assets/photobooth/model-1.jpg";
+import model2 from "../../../assets/photobooth/model-2.jpg";
+import model3 from "../../../assets/photobooth/model-3.jpg";
+import model4 from "../../../assets/photobooth/model-4.jpg";
+
+import model1x4_1 from "../../../assets/photobooth/model-1x4-1.jpg";
+import model1x4_2 from "../../../assets/photobooth/model-1x4-2.jpg";
+import model1x4_3 from "../../../assets/photobooth/model-1x4-3.jpg";
+import model1x4_4 from "../../../assets/photobooth/model-1x4-4.jpg";
+
+const MODELS = [model1, model2, model3, model4];
+const MODELS_1X4 = [model1x4_1, model1x4_2, model1x4_3, model1x4_4];
 
 interface FrameStripProps {
   frame: Frame;
@@ -55,10 +66,10 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       return (
         <div className={`${wrapperClasses} overflow-hidden bg-white`} style={{ position: "relative" }}>
           {metrics.imageSlots.map((slot, i) => {
-            const top = (slot.y / metrics.h) * 100 + "%";
-            const left = (slot.x / metrics.w) * 100 + "%";
-            const width = (slot.w / metrics.w) * 100 + "%";
-            const height = (slot.h / metrics.h) * 100 + "%";
+            const top = `calc(${(slot.y / metrics.h) * 100}% - 1px)`;
+            const left = `calc(${(slot.x / metrics.w) * 100}% - 1px)`;
+            const width = `calc(${(slot.w / metrics.w) * 100}% + 2px)`;
+            const height = `calc(${(slot.h / metrics.h) * 100}% + 2px)`;
             return (
               <div
                 key={i}
@@ -67,8 +78,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               >
                 {filled && (
                   <img
-                    src={modelImg}
-                    alt="pose"
+                    src={is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+                    alt={`pose ${i + 1}`}
                     className="w-full h-full object-cover object-center"
                     loading="eager"
                     decoding="async"
@@ -114,9 +125,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           columnGap: colGap,
         }}
       >
-        {slots.map((i) => (
+        {slots.map((slotNum, i) => (
           <div
-            key={i}
+            key={slotNum}
             className={`w-full h-full bg-slate-200 overflow-hidden relative ${is1x4 ? "flex-1" : ""}`}
             style={
               !is1x4
@@ -126,8 +137,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           >
             {filled && (
               <img
-                src={modelImg}
-                alt="pose"
+                src={is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+                alt={`pose ${i + 1}`}
                 className="w-full h-full object-cover object-center"
                 loading="eager"
                 decoding="async"
@@ -167,15 +178,15 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       className={wrapperClasses}
       style={{ backgroundColor: filled ? "white" : "transparent" }}
     >
-      {slots.map((i) => (
+      {slots.map((slotNum, i) => (
         <div
-          key={i}
+          key={slotNum}
           className={`w-full h-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative`}
         >
           {filled && (
             <img
-              src={modelImg}
-              alt="pose"
+              src={isStrip ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+              alt={`pose ${i + 1}`}
               className="w-full h-full object-cover"
               loading="eager"
               decoding="async"

@@ -11,7 +11,7 @@ import Reveal from "../components/common/Reveal";
 
 import { FRAMES } from "../features/photobooth/data/frames";
 import { Frame } from "../features/photobooth/types";
-import modelImg from "../assets/photobooth/model.jpg";
+
 import { FrameStrip } from "../features/photobooth/components/FrameStrip";
 
 interface CustomDropdownProps {
