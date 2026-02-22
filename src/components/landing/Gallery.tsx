@@ -1,11 +1,11 @@
 import React from "react";
 import Reveal from "../common/Reveal";
-import insta1 from "../../assets/landing/insta_1.jpg";
-import insta2 from "../../assets/landing/insta_2.jpg";
-import insta3 from "../../assets/landing/insta_3.jpg";
-import insta4 from "../../assets/landing/insta_4.jpg";
-import insta5 from "../../assets/landing/insta_5.jpg";
-import insta6 from "../../assets/landing/insta_6.jpg";
+import insta1 from "../../assets/landing/insta_1.webp";
+import insta2 from "../../assets/landing/insta_2.webp";
+import insta3 from "../../assets/landing/insta_3.webp";
+import insta4 from "../../assets/landing/insta_4.webp";
+import insta5 from "../../assets/landing/insta_5.webp";
+import insta6 from "../../assets/landing/insta_6.webp";
 
 const Gallery: React.FC = () => {
   const items = [

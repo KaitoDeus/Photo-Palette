@@ -1,14 +1,14 @@
 import React from "react";
 import { Frame } from "../types";
-import model1 from "../../../assets/photobooth/model-1.jpg";
-import model2 from "../../../assets/photobooth/model-2.jpg";
-import model3 from "../../../assets/photobooth/model-3.jpg";
-import model4 from "../../../assets/photobooth/model-4.jpg";
+import model1 from "../../../assets/photobooth/model-1.webp";
+import model2 from "../../../assets/photobooth/model-2.webp";
+import model3 from "../../../assets/photobooth/model-3.webp";
+import model4 from "../../../assets/photobooth/model-4.webp";
 
-import model1x4_1 from "../../../assets/photobooth/model-1x4-1.jpg";
-import model1x4_2 from "../../../assets/photobooth/model-1x4-2.jpg";
-import model1x4_3 from "../../../assets/photobooth/model-1x4-3.jpg";
-import model1x4_4 from "../../../assets/photobooth/model-1x4-4.jpg";
+import model1x4_1 from "../../../assets/photobooth/model-1x4-1.webp";
+import model1x4_2 from "../../../assets/photobooth/model-1x4-2.webp";
+import model1x4_3 from "../../../assets/photobooth/model-1x4-3.webp";
+import model1x4_4 from "../../../assets/photobooth/model-1x4-4.webp";
 
 const MODELS = [model1, model2, model3, model4];
 const MODELS_1X4 = [model1x4_1, model1x4_2, model1x4_3, model1x4_4];
