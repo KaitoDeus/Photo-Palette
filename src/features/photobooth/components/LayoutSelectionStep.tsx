@@ -34,7 +34,7 @@ const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
         <h3 className="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wider text-center">
           Chọn Kiểu Layout
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {LAYOUTS.map((layout) => (
             <button
               key={layout.id}
@@ -91,7 +91,7 @@ const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
         <div className="flex flex-col items-center gap-4">
           {/* Selected Frame Preview Card */}
           <div className={`shadow-xl transition-all`}>
-            <FrameStrip frame={selectedFrame} filled={true} size="sm" />
+            <FrameStrip frame={selectedFrame} filled={false} size="sm" />
           </div>
 
           <Button
@@ -116,6 +116,7 @@ const LayoutSelectionStep: React.FC<LayoutSelectionStepProps> = ({
         isOpen={isFrameModalOpen}
         onClose={() => setIsFrameModalOpen(false)}
         selectedFrameId={selectedFrame.id}
+        selectedLayoutId={selectedLayout}
         onSelect={onSelectFrame}
       />
     </div>

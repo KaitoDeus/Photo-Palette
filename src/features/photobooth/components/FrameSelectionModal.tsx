@@ -9,6 +9,7 @@ interface FrameSelectionModalProps {
   onClose: () => void;
   onSelect: (frame: Frame) => void;
   selectedFrameId: string;
+  selectedLayoutId: string;
 }
 
 const CATEGORIES = [
@@ -25,12 +26,20 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   onClose,
   onSelect,
   selectedFrameId,
+  selectedLayoutId,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredFrames = useMemo(() => {
     return FRAMES.filter((frame) => {
+      // Filter by Layout mapping
+      let matchesLayout = false;
+      if (selectedLayoutId === "STRIP_1X4" && frame.layout === "1x4") matchesLayout = true;
+      if (selectedLayoutId === "PORTRAIT_2X2" && frame.layout === "2x2") matchesLayout = true;
+      if (selectedLayoutId === "PORTRAIT_1X1" && frame.layout === "1x1") matchesLayout = true;
+      if (selectedLayoutId === "GRID_2X3" && frame.layout === "2x3") matchesLayout = true;
+
       const matchesSearch = frame.name
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
@@ -39,9 +48,9 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
         frame.category === selectedCategory ||
         (selectedCategory === "VINTAGE" &&
           frame.name.toLowerCase().includes("vintage"));
-      return matchesSearch && matchesCategory;
+      return matchesLayout && matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedLayoutId]);
 
   if (!isOpen) return null;
 
@@ -153,7 +162,7 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
                   >
                     {/* Frame Preview Wrapper - Centers and scales the frame */}
                     <div className="flex-1 w-full flex items-center justify-center p-1 overflow-hidden scale-[0.6]">
-                      <FrameStrip frame={frame} filled={true} size="sm" />
+                      <FrameStrip frame={frame} filled={false} size="sm" />
                     </div>
 
                     {/* Name Label */}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Sparkles, RefreshCw, Video, X } from "lucide-react";
 import Button from "../../../components/common/Button";
 import { LayoutType, Frame } from "../types";
+import { FrameStrip } from "./FrameStrip";
 
 interface ResultStepProps {
   photos: string[];
@@ -44,30 +45,14 @@ const ResultStep: React.FC<ResultStepProps> = ({
 
   return (
     <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-center">
-      <div
-        className={`
-          relative p-4 shadow-2xl rotate-1 transition-transform hover:rotate-0 duration-500 
-          bg-white border-4 ${containerClass} w-full rounded-sm
-          ${selectedFrame.borderColor} ${selectedFrame.color}
-        `}
-      >
-        <div className={`grid ${gridClass} gap-2`}>
-          {photos.map((photo, idx) => (
-            <div key={idx} className="overflow-hidden bg-white">
-              <img
-                src={photo}
-                className="w-full h-full object-cover block"
-                alt={`Capture ${idx}`}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div
-          className={`mt-4 text-center font-bold tracking-widest uppercase text-xs opacity-70 ${selectedFrame.textColor}`}
-        >
-          {selectedFrame.name} • {new Date().toLocaleDateString("vi-VN")}
-        </div>
+      <div className="flex justify-center w-full max-w-sm">
+        <FrameStrip
+          frame={selectedFrame}
+          filled={true}
+          photos={photos}
+          size="lg"
+          disableHover={true}
+        />
       </div>
 
       <div className="flex flex-col gap-4 max-w-xs text-center md:text-left">

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Hero from "../components/landing/Hero";
-import Features from "../components/landing/Features";
 import Gallery from "../components/landing/Gallery";
 import Pricing from "../components/landing/Pricing";
 import HowItWorks from "../components/landing/HowItWorks";
@@ -29,7 +28,6 @@ const HomePage: React.FC = () => {
     <div className="bg-transparent overflow-x-hidden font-sans space-y-0">
       <Hero />
       <Stats />
-      <Features />
       <Gallery />
       <HowItWorks />
       <Pricing />

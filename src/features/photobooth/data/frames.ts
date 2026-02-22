@@ -34,7 +34,13 @@ export const FRAMES: Frame[] = [
       pb: 56,
       pl: 13,
       pr: 13,
-      rowGap: 9
+      rowGap: 9,
+      imageSlots: [
+        { x: 13, y: 20, w: 146, h: 104.25 },
+        { x: 13, y: 133.25, w: 146, h: 104.25 },
+        { x: 13, y: 246.5, w: 146, h: 104.25 },
+        { x: 13, y: 359.75, w: 146, h: 104.25 }
+      ]
     }
   },
   {
@@ -54,7 +60,13 @@ export const FRAMES: Frame[] = [
       pl: 28,
       pr: 30,
       rowGap: 23,
-      colGap: 25
+      colGap: 25,
+      imageSlots: [
+        { x: 28, y: 91, w: 299.5, h: 435 },
+        { x: 352.5, y: 91, w: 299.5, h: 435 },
+        { x: 28, y: 549, w: 299.5, h: 435 },
+        { x: 352.5, y: 549, w: 299.5, h: 435 }
+      ]
     }
   },
   {

@@ -16,13 +16,17 @@ const MODELS_1X4 = [model1x4_1, model1x4_2, model1x4_3, model1x4_4];
 interface FrameStripProps {
   frame: Frame;
   filled: boolean;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
+  photos?: string[];
+  disableHover?: boolean;
 }
 
 export const FrameStrip: React.FC<FrameStripProps> = ({
   frame,
   filled,
   size = "md",
+  photos = [],
+  disableHover = false,
 }) => {
   const isStrip = frame.layout === "1x4";
   const slotCount = frame.layout === "2x3" ? 6 : 4;
@@ -37,6 +41,10 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       "1x4": "w-16 h-48", // 64px x 192px
       other: "w-32 h-48", // 128px x 192px
     },
+    lg: {
+      "1x4": "w-[260px] h-[780px]", // 260px x 780px
+      other: "w-[360px] h-[540px]", // 360px x 540px
+    },
   };
 
   const dimensions =
@@ -44,7 +52,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       ? sizeClasses[size]["1x4"]
       : sizeClasses[size]["other"];
 
-  let wrapperClasses = `relative shadow-sm transition-transform hover:scale-105 duration-300 ${filled ? "translate-y-2" : ""} ${dimensions}`;
+  let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "rotate-1 hover:rotate-0" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
 
   if (frame.overlayImage) {
     const is1x4 = frame.layout === "1x4";
@@ -78,7 +86,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               >
                 {filled && (
                   <img
-                    src={is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+                    src={photos.length > 0 ? (photos[i] || photos[0]) : (is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4])}
                     alt={`pose ${i + 1}`}
                     className="w-full h-full object-cover object-center"
                     loading="eager"
@@ -137,7 +145,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           >
             {filled && (
               <img
-                src={is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+                src={photos.length > 0 ? (photos[i] || photos[0]) : (is1x4 ? MODELS_1X4[i % 4] : MODELS[i % 4])}
                 alt={`pose ${i + 1}`}
                 className="w-full h-full object-cover object-center"
                 loading="eager"
@@ -185,7 +193,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
         >
           {filled && (
             <img
-              src={isStrip ? MODELS_1X4[i % 4] : MODELS[i % 4]}
+              src={photos.length > 0 ? (photos[i] || photos[0]) : (isStrip ? MODELS_1X4[i % 4] : MODELS[i % 4])}
               alt={`pose ${i + 1}`}
               className="w-full h-full object-cover"
               loading="eager"

@@ -14,6 +14,36 @@ export const usePhotoBooth = () => {
   const [flash, setFlash] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false);
 
+  const handleSelectLayout = useCallback((layout: LayoutType) => {
+    setSelectedLayout(layout);
+    
+    // Determine the corresponding layout string in Frame
+    let frameLayoutStr = "";
+    if (layout === "STRIP_1X4") frameLayoutStr = "1x4";
+    else if (layout === "PORTRAIT_2X2") frameLayoutStr = "2x2";
+    else if (layout === "PORTRAIT_1X1") frameLayoutStr = "1x1";
+    // others if any
+
+    // Find the first frame matching the new layout
+    const matchingFrame = FRAMES.find((f) => f.layout === frameLayoutStr);
+    
+    // If a match is found, update the selected frame
+    if (matchingFrame) {
+      setSelectedFrame(matchingFrame);
+    } else {
+      // Create a fallback frame if no matching frame found
+      setSelectedFrame({
+        id: `fallback-${frameLayoutStr}`,
+        name: "Basic Frame",
+        layout: frameLayoutStr as any,
+        category: "BASIC",
+        color: "bg-white",
+        borderColor: "border-slate-200",
+        textColor: "text-slate-800",
+      });
+    }
+  }, []);
+
   const [lastPhoto, setLastPhoto] = useState<string | null>(null);
 
   const [isMirrored, setIsMirrored] = useState(true);
@@ -290,7 +320,7 @@ export const usePhotoBooth = () => {
     },
     actions: {
       setStep,
-      setSelectedLayout,
+      setSelectedLayout: handleSelectLayout,
       setSelectedFrame,
       setCountDownDuration,
       startCamera,
