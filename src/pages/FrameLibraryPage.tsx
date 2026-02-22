@@ -195,7 +195,7 @@ const FrameLibraryPage: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  const categories = ["All", "EVENT"];
+  const categories = ["All", "VALENTINE", "TET HOLIDAY"];
   const layouts = ["All", "Nhỏ", "Lớn"];
 
   return (
