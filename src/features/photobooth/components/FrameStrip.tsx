@@ -37,16 +37,19 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       "1x4": "w-12 h-36", // 48px x 144px
       "2x3": "w-24 h-36", // 96px x 144px
       portrait: "w-24 h-32", // 96px x 128px
+      square: "w-24 h-24", // 96px x 96px
     },
     md: {
       "1x4": "w-16 h-48", // 64px x 192px
       "2x3": "w-32 h-48", // 128px x 192px
       portrait: "w-36 h-48", // 144px x 192px
+      square: "w-40 h-40", // 160px x 160px
     },
     lg: {
       "1x4": "w-[260px] h-[960px] max-w-[70vw] h-auto aspect-[1/3.7]", 
       "2x3": "w-[360px] h-[540px] max-w-[85vw] h-auto aspect-[2/3]", 
       portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
+      square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
     },
   };
 
@@ -55,7 +58,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       ? sizeClasses[size]["1x4"]
       : frame.layout === "2x3"
         ? sizeClasses[size]["2x3"]
-        : sizeClasses[size]["portrait"];
+        : (frame.layout === "2x2" || frame.layout === "1x1")
+          ? sizeClasses[size]["square"]
+          : sizeClasses[size]["portrait"];
 
   let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
 
@@ -153,7 +158,14 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
             className={`w-full bg-slate-200 overflow-hidden relative ${is1x4 ? "flex-1" : ""}`}
             style={
               !is1x4
-                ? { aspectRatio: frame.layout === "2x1" ? "auto" : "3/4" }
+                ? {
+                    aspectRatio:
+                      frame.layout === "2x2" || frame.layout === "1x1"
+                        ? "1/1"
+                        : frame.layout === "2x1"
+                          ? "auto"
+                          : "3/4",
+                  }
                 : { minHeight: "150px" } // Ensure minimum height for 1x4 slots
             }
           >
@@ -212,7 +224,11 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       {slots.map((slotNum, i) => (
         <div
           key={slotNum}
-          className={`w-full h-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative`}
+          className={`w-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative ${
+            frame.layout === "2x2" || frame.layout === "1x1"
+              ? "aspect-square"
+              : "aspect-[3/4]"
+          }`}
         >
           {filled && (
             <img
