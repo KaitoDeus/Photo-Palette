@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import GalleryPage from "./pages/GalleryPage";
@@ -28,7 +27,6 @@ const App: React.FC = () => {
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </Router>
   );
