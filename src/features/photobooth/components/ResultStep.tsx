@@ -23,29 +23,11 @@ const ResultStep: React.FC<ResultStepProps> = ({
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-  // Define grid class based on LayoutType
-  const getGridClass = () => {
-    switch (selectedLayout) {
-      case "STRIP_1X4":
-        return "grid-cols-1 grid-rows-4 aspect-[1/3]"; // 1 column, 4 rows (Classic Strip 1:3)
-      case "PORTRAIT_2X2":
-        return "grid-cols-2 grid-rows-2 aspect-[3/4]"; // Standard 2x2 grid
-      case "GRID_2X3":
-        return "grid-cols-2 grid-rows-3 aspect-[2/3]"; // 6 photos grid
-      case "PORTRAIT_1X1":
-        return "grid-cols-1 grid-rows-1 aspect-[3/4]"; // Single portrait
-      default:
-        return "grid-cols-2";
-    }
-  };
 
-  const gridClass = getGridClass();
-  const containerClass =
-    selectedLayout === "STRIP_1X4" ? "max-w-[280px]" : "max-w-sm";
 
   return (
     <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-center">
-      <div className="flex justify-center w-full max-w-sm">
+      <div className="flex justify-center w-full max-w-md">
         <FrameStrip
           frame={selectedFrame}
           filled={true}

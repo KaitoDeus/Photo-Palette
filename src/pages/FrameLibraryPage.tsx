@@ -84,44 +84,51 @@ const FrameCard: React.FC<{
   onClick: (filled: boolean) => void;
 }> = ({ frame, index, onClick }) => {
   return (
-    <div key={frame.id} className="group h-full">
+    <div key={frame.id} className="group">
       <div
-        className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-brand-100 hover:border-brand-400 flex flex-col items-center h-full relative"
+        className="bg-white rounded-[40px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full"
       >
-        <div className="flex justify-center gap-2 sm:gap-4 w-full mb-4">
+        {/* Previews Container */}
+        <div className="flex justify-center gap-4 w-full mb-8">
           {/* Left: Original */}
-          <div 
-            className="flex flex-col items-center gap-3 cursor-pointer group/left"
-            onClick={() => onClick(false)}
-          >
-            <div className="bg-brand-50/30 p-2 rounded-xl group-hover/left:bg-brand-100/50 transition-colors">
-              <FrameStrip frame={frame} filled={false} size="sm" />
+          <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
+            <div 
+              className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
+              onClick={() => onClick(false)}
+            >
+              <FrameStrip frame={frame} filled={false} size="sm" aspectMode="original" />
             </div>
-            <span className="px-3 py-1 bg-brand-300 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm group-hover/left:bg-brand-400 transition-colors">
+            <button
+               onClick={() => onClick(false)}
+               className="w-full py-2.5 bg-[#FF99A4] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
+            >
               Khung Gốc
-            </span>
+            </button>
           </div>
 
           {/* Right: Preview */}
-          <div 
-            className="flex flex-col items-center gap-3 cursor-pointer group/right"
-            onClick={() => onClick(true)}
-          >
-            <div className="bg-blue-50/30 p-2 rounded-xl group-hover/right:bg-blue-100/50 transition-colors">
-              <FrameStrip frame={frame} filled={true} size="sm" />
+          <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
+            <div 
+              className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
+              onClick={() => onClick(true)}
+            >
+              <FrameStrip frame={frame} filled={true} size="sm" aspectMode="original" />
             </div>
-            <span className="px-3 py-1 bg-blue-300 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm group-hover/right:bg-blue-400 transition-colors">
+            <button
+              onClick={() => onClick(true)}
+              className="w-full py-2.5 bg-[#93C5FD] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
+            >
               Xem trước
-            </span>
+            </button>
           </div>
         </div>
 
-        {/* Info */}
-        <div className="mt-auto text-center">
-          <h3 className={`text-lg sm:text-xl font-bold text-brand-500 mb-1`}>
+        {/* Info Area */}
+        <div className="mt-auto w-full text-center py-2">
+          <h3 className="text-[26px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight">
             {frame.name}
           </h3>
-          <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">
+          <p className="text-[13px] text-slate-400 font-extrabold uppercase tracking-[0.1em] opacity-80">
             {frame.layout} • {frame.category}
           </p>
         </div>
@@ -296,7 +303,7 @@ const FrameLibraryPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="pointer-events-none mt-8 transition-transform duration-500">
-              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" />
+              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" aspectMode="original" />
             </div>
           </div>
 

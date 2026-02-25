@@ -19,6 +19,7 @@ interface FrameStripProps {
   size?: "sm" | "md" | "lg";
   photos?: string[];
   disableHover?: boolean;
+  aspectMode?: "capture" | "original";
 }
 
 export const FrameStrip: React.FC<FrameStripProps> = ({
@@ -27,27 +28,26 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   size = "md",
   photos = [],
   disableHover = false,
+  aspectMode = "capture",
 }) => {
   const isStrip = frame.layout === "1x4";
-  const slotCount = frame.layout === "2x3" ? 6 : frame.layout === "1x1" ? 1 : 4;
+  const isOriginal = aspectMode === "original";
+  const slotCount = frame.layout === "1x1" ? 1 : 4;
   const slots = Array.from({ length: slotCount }, (_, i) => i + 1);
 
   const sizeClasses = {
     sm: {
       "1x4": "w-12 h-36", // 48px x 144px
-      "2x3": "w-24 h-36", // 96px x 144px
       portrait: "w-24 h-32", // 96px x 128px
       square: "w-24 h-24", // 96px x 96px
     },
     md: {
-      "1x4": "w-16 h-48", // 64px x 192px
-      "2x3": "w-32 h-48", // 128px x 192px
+      "1x4": "w-14 h-40", // Balanced for 4 grid columns
       portrait: "w-36 h-48", // 144px x 192px
       square: "w-40 h-40", // 160px x 160px
     },
     lg: {
-      "1x4": "w-[260px] h-[960px] max-w-[70vw] h-auto aspect-[1/3.7]", 
-      "2x3": "w-[360px] h-[540px] max-w-[85vw] h-auto aspect-[2/3]", 
+      "1x4": "w-[180px] h-[666px] max-w-[50vw] h-auto aspect-[1/3.7]", 
       portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
       square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
     },
@@ -56,11 +56,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   const dimensions =
     frame.layout === "1x4"
       ? sizeClasses[size]["1x4"]
-      : frame.layout === "2x3"
-        ? sizeClasses[size]["2x3"]
-        : (frame.layout === "2x2" || frame.layout === "1x1")
-          ? sizeClasses[size]["square"]
-          : sizeClasses[size]["portrait"];
+      : (frame.layout === "2x2" || frame.layout === "1x1")
+        ? isOriginal ? sizeClasses[size]["portrait"] : sizeClasses[size]["square"]
+        : sizeClasses[size]["portrait"];
 
   let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
 
@@ -161,7 +159,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                 ? {
                     aspectRatio:
                       frame.layout === "2x2" || frame.layout === "1x1"
-                        ? "1/1"
+                        ? isOriginal ? "3/4" : "1/1"
                         : frame.layout === "2x1"
                           ? "auto"
                           : "3/4",
@@ -203,50 +201,84 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   }
 
   // Fallback for basic frames
-  wrapperClasses += ` border-2 py-1 px-1 gap-1 ${frame.borderColor} ${frame.color}`;
+  const is1x1 = frame.layout === "1x1";
+  const is2x2 = frame.layout === "2x2";
+  
+  // Increase padding for 2x2 and 1x1 to create a clear border/Polaroid look
+  const fallbackPadding = isStrip ? "p-1.5" : (is2x2 || is1x1) ? "p-4" : "p-2";
+  wrapperClasses += ` border-2 ${fallbackPadding} gap-2 ${frame.borderColor} ${frame.color}`;
+  
   if (isStrip) {
     wrapperClasses += " flex flex-col items-center justify-between";
   } else {
-    wrapperClasses += " grid gap-1";
+    wrapperClasses += " grid gap-2";
     if (frame.layout === "2x2") wrapperClasses += " grid-cols-2 grid-rows-2";
-    else if (frame.layout === "2x3")
-      wrapperClasses += " grid-cols-2 grid-rows-3";
     else if (frame.layout === "1x1")
       wrapperClasses += " grid-cols-1 grid-rows-1";
     else wrapperClasses += " grid-cols-2";
   }
 
+  const currentDate = new Date().toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
   return (
     <div
-      className={wrapperClasses}
+      className={`${wrapperClasses} flex flex-col`}
       style={{ backgroundColor: filled ? "white" : "transparent" }}
     >
-      {slots.map((slotNum, i) => (
-        <div
-          key={slotNum}
-          className={`w-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative ${
-            frame.layout === "2x2" || frame.layout === "1x1"
-              ? "aspect-square"
-              : "aspect-[3/4]"
-          }`}
+      <div
+        className={
+          isStrip
+            ? "flex flex-col flex-1 gap-1"
+            : `grid gap-1 flex-1 ${
+                frame.layout === "2x2"
+                  ? "grid-cols-2 grid-rows-2"
+                  : "grid-cols-1"
+              }`
+        }
+      >
+        {slots.map((slotNum, i) => (
+          <div
+            key={slotNum}
+            className={`w-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative ${
+              frame.layout === "2x2" || frame.layout === "1x1"
+                ? isOriginal ? "aspect-[3/4]" : "aspect-square"
+                : "aspect-[3/4]"
+            }`}
+          >
+            {filled && (
+              <img
+                src={
+                  photos.length > 0
+                    ? photos[i] || photos[0]
+                    : isStrip
+                      ? MODELS_1X4[i % 4]
+                      : MODELS[i % 4]
+                }
+                alt={`pose ${i + 1}`}
+                className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Branded Footer for Fallback Frames */}
+      <div className="pt-4 pb-1 flex items-center justify-between mt-auto px-1 border-t border-slate-100/30">
+        <span
+          className={`text-[9px] font-black tracking-tight ${frame.textColor || "text-slate-900"}`}
         >
-          {filled && (
-            <img
-              src={
-                photos.length > 0
-                  ? photos[i] || photos[0]
-                  : isStrip
-                    ? MODELS_1X4[i % 4]
-                    : MODELS[i % 4]
-              }
-              alt={`pose ${i + 1}`}
-              className="w-full h-full object-cover"
-              loading="eager"
-              decoding="async"
-            />
-          )}
-        </div>
-      ))}
+          Photo Palette
+        </span>
+        <span className="text-[9px] font-bold text-slate-800 opacity-90">
+          {currentDate}
+        </span>
+      </div>
     </div>
   );
 };

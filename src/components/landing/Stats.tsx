@@ -1,6 +1,64 @@
-import React from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import { Users, Camera, MapPin, Sparkles } from "lucide-react";
+
+const AnimatedNumber: React.FC<{ value: string }> = ({ value }) => {
+  const [displayValue, setDisplayValue] = useState("0");
+  const countRef = useRef<HTMLSpanElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  useEffect(() => {
+    if (!hasAnimated) return;
+
+    // Parse target number and suffix (comma/plus)
+    const numericPart = parseInt(value.replace(/,/g, ""));
+    const suffix = value.includes("+") ? "+" : "";
+    const hasCommas = value.includes(",");
+
+    let startTime: number | null = null;
+    const duration = 2000; // 2 seconds
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // Easing function: easeOutExpo
+      const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const currentCount = Math.floor(easedProgress * numericPart);
+
+      let formatted = currentCount.toString();
+      if (hasCommas) {
+        formatted = new Intl.NumberFormat().format(currentCount);
+      }
+
+      setDisplayValue(formatted + suffix);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [hasAnimated, value]);
+
+  return <span ref={countRef}>{displayValue}</span>;
+};
 
 const Stats: React.FC = () => {
   const stats = [
@@ -45,7 +103,7 @@ const Stats: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 tracking-tight group-hover:scale-105 transition-transform duration-500">
-                    {stat.value}
+                    <AnimatedNumber value={stat.value} />
                   </h3>
                   <p className="text-sm font-bold text-brand-500 uppercase tracking-widest opacity-80 pt-1">
                     {stat.suffix}

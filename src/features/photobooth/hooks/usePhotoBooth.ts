@@ -21,7 +21,6 @@ export const usePhotoBooth = () => {
     if (layout === "STRIP_1X4") frameLayoutStr = "1x4";
     else if (layout === "PORTRAIT_2X2") frameLayoutStr = "2x2";
     else if (layout === "PORTRAIT_1X1") frameLayoutStr = "1x1";
-    else if (layout === "GRID_2X3") frameLayoutStr = "2x3";
 
     // Find the first frame matching the new layout
     const matchingFrame = FRAMES.find((f) => f.layout === frameLayoutStr);
