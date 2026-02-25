@@ -10,10 +10,6 @@ import ResultStep from "./components/ResultStep";
 const PhotoBooth: React.FC = () => {
   const { state, refs, actions } = usePhotoBooth();
 
-  const handleBookingScroll = () => {
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const renderStep = () => {
     switch (state.step) {
       case "INTRO":
@@ -28,19 +24,16 @@ const PhotoBooth: React.FC = () => {
             videoRef={refs.videoRef}
             isMirrored={state.isMirrored}
             isRecapEnabled={state.isRecapEnabled}
-            isFlashEnabled={state.isFlashEnabled}
             onSelectLayout={actions.setSelectedLayout}
             onSelectFrame={actions.setSelectedFrame}
             onSelectCountDown={actions.setCountDownDuration}
             onToggleMirror={actions.toggleMirrored}
             onToggleRecap={actions.toggleRecap}
-            onToggleFlash={actions.toggleFlash}
             onRetryPermission={actions.startCamera}
             onStartCapture={actions.startCaptureSequence}
             onManualCapture={actions.handleManualCapture}
             onAbortCapture={actions.abortCapture}
             onBack={actions.goToStart}
-            flash={state.flash}
             countDown={state.countDown}
             photos={state.photos}
             lastPhoto={state.lastPhoto}
@@ -57,19 +50,16 @@ const PhotoBooth: React.FC = () => {
             videoRef={refs.videoRef}
             isMirrored={state.isMirrored}
             isRecapEnabled={state.isRecapEnabled}
-            isFlashEnabled={state.isFlashEnabled}
             onSelectLayout={actions.setSelectedLayout}
             onSelectFrame={actions.setSelectedFrame}
             onSelectCountDown={actions.setCountDownDuration}
             onToggleMirror={actions.toggleMirrored}
             onToggleRecap={actions.toggleRecap}
-            onToggleFlash={actions.toggleFlash}
             onRetryPermission={actions.startCamera}
             onStartCapture={actions.startCaptureSequence}
             onManualCapture={actions.handleManualCapture}
             onAbortCapture={actions.abortCapture}
             onBack={actions.goToStart}
-            flash={state.flash}
             countDown={state.countDown}
             photos={state.photos}
             lastPhoto={state.lastPhoto}
@@ -106,9 +96,9 @@ const PhotoBooth: React.FC = () => {
         <div className="absolute bottom-10 left-10 w-80 h-80 bg-purple-200 rounded-full blur-3xl opacity-30 animate-float-reverse"></div>
       </div>
 
-      <div className="max-w-4xl mx-auto w-full px-4 relative z-10">
+      <div className="max-w-6xl mx-auto w-full px-0 sm:px-4 relative z-10">
         <Reveal>
-          <div className="rounded-[2.5rem] overflow-hidden min-h-[500px] flex justify-center items-center">
+          <div className="min-h-[500px] flex justify-center items-center">
             {renderStep()}
           </div>
         </Reveal>

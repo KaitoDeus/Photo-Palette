@@ -11,7 +11,6 @@ export const usePhotoBooth = () => {
   const [countDownDuration, setCountDownDuration] =
     useState<CountdownDuration>(3);
   const [countDown, setCountDown] = useState<number | null>(null);
-  const [flash, setFlash] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false);
 
   const handleSelectLayout = useCallback((layout: LayoutType) => {
@@ -48,7 +47,6 @@ export const usePhotoBooth = () => {
 
   const [isMirrored, setIsMirrored] = useState(true);
   const [isRecapEnabled, setIsRecapEnabled] = useState(false);
-  const [isFlashEnabled, setIsFlashEnabled] = useState(true);
   const [recapVideoUrl, setRecapVideoUrl] = useState<string | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -71,12 +69,12 @@ export const usePhotoBooth = () => {
     };
   }, []);
 
-  // Re-attach stream to video element when step changes (because video element is recreated)
+  // Re-attach stream to video element when step changes or component remounts
   useEffect(() => {
-    if (streamRef.current && videoRef.current) {
+    if (streamRef.current && videoRef.current && videoRef.current.srcObject !== streamRef.current) {
       videoRef.current.srcObject = streamRef.current;
     }
-  }, [step]);
+  }); // Run on every render to ensure video gets re-attached if view switches (Desktop/Mobile)
 
   const startCamera = async () => {
     try {
@@ -88,9 +86,10 @@ export const usePhotoBooth = () => {
         },
         audio: false,
       });
+      
+      streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        streamRef.current = stream;
       }
       setPermissionDenied(false);
     } catch (err) {
@@ -137,6 +136,7 @@ export const usePhotoBooth = () => {
 
         const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
         setPhotos((prev) => [...prev, dataUrl]);
+ 
         return dataUrl;
       }
     }
@@ -264,14 +264,12 @@ export const usePhotoBooth = () => {
       if (!isAutoCapturingRef.current) break;
       setCountDown(null);
 
-      if (isFlashEnabled) setFlash(true);
       const capturedUrl = capturePhoto();
       if (capturedUrl) {
         setLastPhoto(capturedUrl);
       }
 
       await new Promise((r) => setTimeout(r, 150));
-      if (isFlashEnabled) setFlash(false);
 
       if (!isAutoCapturingRef.current) break;
 
@@ -308,14 +306,12 @@ export const usePhotoBooth = () => {
       startRecorder();
     }
 
-    if (isFlashEnabled) setFlash(true);
     const capturedUrl = capturePhoto();
     if (capturedUrl) {
       setLastPhoto(capturedUrl);
     }
 
     await new Promise((r) => setTimeout(r, 150));
-    if (isFlashEnabled) setFlash(false);
 
     const targetCount =
       LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4;
@@ -357,11 +353,9 @@ export const usePhotoBooth = () => {
       lastPhoto,
       countDownDuration,
       countDown,
-      flash,
       permissionDenied,
       isMirrored,
       isRecapEnabled,
-      isFlashEnabled,
       recapVideoUrl,
     },
     refs: {
@@ -379,10 +373,8 @@ export const usePhotoBooth = () => {
       abortCapture,
       handleStart,
       handleRetake,
-      handleBackToSelect: () => setStep("SELECT_FRAME"),
       toggleMirrored: () => setIsMirrored((prev) => !prev),
       toggleRecap: () => setIsRecapEnabled((prev) => !prev),
-      toggleFlash: () => setIsFlashEnabled((prev) => !prev),
       goToStart: () => {
         setStep("INTRO");
         setPhotos([]);

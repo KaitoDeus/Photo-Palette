@@ -3,7 +3,6 @@ import React from "react";
 export type BoothStep =
   | "INTRO"
   | "SELECT_FRAME"
-  | "INSTRUCTION"
   | "CAPTURE"
   | "PROCESSING"
   | "RESULT";

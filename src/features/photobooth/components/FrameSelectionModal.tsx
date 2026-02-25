@@ -3,6 +3,7 @@ import { X, Search, Filter } from "lucide-react";
 import { Frame } from "../types";
 import { FRAMES } from "../data/frames";
 import { FrameStrip } from "./FrameStrip";
+import CustomDropdown from "./CustomDropdown";
 
 interface FrameSelectionModalProps {
   isOpen: boolean;
@@ -13,85 +14,10 @@ interface FrameSelectionModalProps {
 }
 
 const CATEGORIES = [
-  { id: "All", label: "Tất cả" },
-  { id: "VALENTINE", label: "VALENTINE" },
-  { id: "TET HOLIDAY", label: "TET HOLIDAY" },
+  { value: "All", label: "Tất cả" },
+  { value: "VALENTINE", label: "VALENTINE" },
+  { value: "TET HOLIDAY", label: "TET HOLIDAY" },
 ];
-
-interface CustomDropdownProps {
-  value: string;
-  options: { id: string; label: string }[];
-  onChange: (value: string) => void;
-}
-
-const CustomDropdown: React.FC<CustomDropdownProps> = ({
-  value,
-  options,
-  onChange,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const selectedLabel =
-    options.find((opt) => opt.id === value)?.label || "Tất cả";
-
-  return (
-    <div className="relative w-full" ref={dropdownRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full pl-10 pr-4 py-2 bg-white/50 border border-slate-200 rounded-xl text-slate-600 font-medium hover:bg-white hover:border-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 flex justify-between items-center transition-all duration-300 hover:shadow-sm"
-      >
-        <span className="truncate mr-3">{selectedLabel}</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={`text-slate-400 transition-transform duration-500 ${isOpen ? "rotate-180 text-brand-500" : ""}`}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
-
-      <div
-        className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden transition-all duration-300 origin-top z-50 ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"}`}
-      >
-        <div className="max-h-60 overflow-y-auto custom-scrollbar flex flex-col py-1">
-          {options.map((option) => (
-            <div
-              key={option.id}
-              onClick={() => {
-                onChange(option.id);
-                setIsOpen(false);
-              }}
-              className={`px-4 py-3 cursor-pointer transition-colors duration-200 text-sm font-semibold ${value === option.id ? "bg-brand-50 text-brand-600" : "text-slate-600 hover:bg-slate-50 hover:text-brand-500"}`}
-            >
-              {option.label}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   isOpen,
