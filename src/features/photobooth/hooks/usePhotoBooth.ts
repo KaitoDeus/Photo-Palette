@@ -109,6 +109,25 @@ export const usePhotoBooth = () => {
   const toggleMirrored = () => setIsMirrored((prev) => !prev);
   const toggleRecap = () => setIsRecapEnabled((prev) => !prev);
 
+  const getTargetDimensions = useCallback(() => {
+    let targetWidth, targetHeight;
+    if (selectedLayout === "STRIP_1X4") {
+      targetWidth = 1600;
+      targetHeight = 1200; // 4:3 Landscape
+    } else if (selectedLayout === "PORTRAIT_2X2") {
+      targetWidth = 1500;
+      targetHeight = 1500; // 1:1 Square
+    } else {
+      targetWidth = 1200;
+      targetHeight = 1600; // 3:4 Portrait
+    }
+    return {
+      targetWidth,
+      targetHeight,
+      targetRatio: targetWidth / targetHeight,
+    };
+  }, [selectedLayout]);
+
   const capturePhoto = useCallback(() => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
@@ -122,13 +141,7 @@ export const usePhotoBooth = () => {
         return null;
       }
 
-      // Determine target ratio based on layout
-      // STRIP_1X4 uses horizontal slots (~4:3 landscape)
-      // Others use vertical slots (~3:4 portrait)
-      const isStrip = selectedLayout === "STRIP_1X4";
-      const targetWidth = isStrip ? 1600 : 1200;
-      const targetHeight = isStrip ? 1200 : 1600;
-      const targetRatio = targetWidth / targetHeight;
+      const { targetWidth, targetHeight, targetRatio } = getTargetDimensions();
 
       canvas.width = targetWidth;
       canvas.height = targetHeight;
@@ -185,10 +198,11 @@ export const usePhotoBooth = () => {
   const startRecorder = () => {
     if (isRecapEnabled) {
       try {
+        const { targetWidth, targetHeight } = getTargetDimensions();
         const canvas = document.createElement("canvas");
-        // Preset dimensions to avoid 0x0 issues if video isn't ready immediately
-        canvas.width = 1280;
-        canvas.height = 720;
+        // Use target dimensions for the recap video as well
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
         const ctx = canvas.getContext("2d");
 
         if (!ctx) return;
@@ -199,11 +213,33 @@ export const usePhotoBooth = () => {
           if (video && video.readyState >= 2) {
             // Update canvas size to match video if needed (once or dynamic)
             if (
-              canvas.width !== video.videoWidth ||
-              canvas.height !== video.videoHeight
+              canvas.width !== targetWidth ||
+              canvas.height !== targetHeight
             ) {
-              canvas.width = video.videoWidth;
-              canvas.height = video.videoHeight;
+              canvas.width = targetWidth;
+              canvas.height = targetHeight;
+            }
+
+            const videoWidth = video.videoWidth;
+            const videoHeight = video.videoHeight;
+            const videoRatio = videoWidth / videoHeight;
+            const targetRatio = targetWidth / targetHeight;
+
+            let sw, sh, sx, sy;
+
+            // "Object-fit: cover" logic for the canvas capture
+            if (videoRatio > targetRatio) {
+              // Video is proportionally wider than target ratio
+              sh = videoHeight;
+              sw = sh * targetRatio;
+              sx = (videoWidth - sw) / 2;
+              sy = 0;
+            } else {
+              // Video is proportionally narrower than target ratio
+              sw = videoWidth;
+              sh = sw / targetRatio;
+              sx = 0;
+              sy = (videoHeight - sh) / 2;
             }
 
             ctx.save();
@@ -212,7 +248,8 @@ export const usePhotoBooth = () => {
               ctx.translate(canvas.width, 0);
               ctx.scale(-1, 1);
             }
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            // Draw the cropped portion of the video to the full canvas
+            ctx.drawImage(video, sx, sy, sw, sh, 0, 0, targetWidth, targetHeight);
             ctx.restore();
           }
           animationFrameRef.current = requestAnimationFrame(draw);

@@ -112,6 +112,7 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
             <div
               className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden transition-all duration-500 ${
                 selectedLayout === "STRIP_1X4" ? "aspect-[4/3]" : 
+                selectedLayout === "PORTRAIT_2X2" ? "aspect-square" :
                 "aspect-[3/4]"
               }`}
             >
