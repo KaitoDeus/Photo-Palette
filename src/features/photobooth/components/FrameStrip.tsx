@@ -44,7 +44,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       portrait: "w-36 h-48", // 144px x 192px
     },
     lg: {
-      "1x4": "w-[260px] h-[780px] max-w-[70vw] h-auto aspect-[1/3]", 
+      "1x4": "w-[260px] h-[960px] max-w-[70vw] h-auto aspect-[1/3.7]", 
       "2x3": "w-[360px] h-[540px] max-w-[85vw] h-auto aspect-[2/3]", 
       portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
     },
@@ -150,11 +150,11 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
         {slots.map((slotNum, i) => (
           <div
             key={slotNum}
-            className={`w-full h-full bg-slate-200 overflow-hidden relative ${is1x4 ? "flex-1" : ""}`}
+            className={`w-full bg-slate-200 overflow-hidden relative ${is1x4 ? "flex-1" : ""}`}
             style={
               !is1x4
                 ? { aspectRatio: frame.layout === "2x1" ? "auto" : "3/4" }
-                : {}
+                : { minHeight: "150px" } // Ensure minimum height for 1x4 slots
             }
           >
             {filled && (
@@ -178,7 +178,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           <img
             src={frame.overlayImage}
             alt="Frame Overlay"
-            className="w-full h-full object-fill"
+            className="w-full h-full object-fill md:object-fill" // Use object-fill for frames to match metrics, but rely on container aspect ratio
             loading="eager"
             decoding="async"
             onError={(e) => {

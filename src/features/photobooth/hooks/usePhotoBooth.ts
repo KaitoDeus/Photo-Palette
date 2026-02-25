@@ -122,22 +122,58 @@ export const usePhotoBooth = () => {
         return null;
       }
 
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
+      // We want a high-resolution 3:4 (Portrait) output to match mobile previews
+      // This ensures "What You See Is What You Get" (WYSIWYG)
+      const targetWidth = 1200;
+      const targetHeight = 1600;
+      const targetRatio = targetWidth / targetHeight; // 0.75
+
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      const ctx = canvas.getContext("2d", { alpha: false });
+
       if (ctx) {
+        const videoWidth = video.videoWidth;
+        const videoHeight = video.videoHeight;
+        const videoRatio = videoWidth / videoHeight;
+
+        let sw, sh, sx, sy;
+
+        // "Object-fit: cover" logic for the canvas capture
+        if (videoRatio > targetRatio) {
+          // Video is proportionaly wider than 3:4 (e.g. 16:9 or 4:3 landscape)
+          sh = videoHeight;
+          sw = sh * targetRatio;
+          sx = (videoWidth - sw) / 2;
+          sy = 0;
+        } else {
+          // Video is proportionally narrower than 3:4 (e.g. 9:16 portrait)
+          sw = videoWidth;
+          sh = sw / targetRatio;
+          sx = 0;
+          sy = (videoHeight - sh) / 2;
+        }
+
         ctx.save();
+        // If mirrored, flip the canvas globally
         if (isMirrored) {
-          ctx.translate(canvas.width, 0);
+          ctx.translate(targetWidth, 0);
           ctx.scale(-1, 1);
         }
-        ctx.filter = "contrast(1.1) brightness(1.05) saturate(1.1)";
-        ctx.drawImage(video, 0, 0);
+
+        // Apply clean processing
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        ctx.filter = "contrast(1.08) brightness(1.04) saturate(1.1)";
+
+        // Draw the cropped portion of the video to the full canvas
+        ctx.drawImage(video, sx, sy, sw, sh, 0, 0, targetWidth, targetHeight);
         ctx.restore();
 
-        const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+        
+        // Update state
         setPhotos((prev) => [...prev, dataUrl]);
- 
         return dataUrl;
       }
     }
