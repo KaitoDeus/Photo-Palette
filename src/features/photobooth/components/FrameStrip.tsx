@@ -20,6 +20,7 @@ interface FrameStripProps {
   photos?: string[];
   disableHover?: boolean;
   aspectMode?: "capture" | "original";
+  imageFit?: "cover" | "fill";
 }
 
 export const FrameStrip: React.FC<FrameStripProps> = ({
@@ -29,6 +30,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   photos = [],
   disableHover = false,
   aspectMode = "capture",
+  imageFit = "cover",
 }) => {
   const isStrip = frame.layout === "1x4";
   const isOriginal = aspectMode === "original";
@@ -105,7 +107,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                           : MODELS[i % 4]
                     }
                     alt={`pose ${i + 1}`}
-                    className="w-full h-full object-cover object-center"
+                    className={`w-full h-full object-center ${imageFit === "fill" ? "object-fill" : "object-cover"}`}
                     loading="eager"
                     decoding="async"
                   />
@@ -177,7 +179,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                       : MODELS[i % 4]
                 }
                 alt={`pose ${i + 1}`}
-                className="w-full h-full object-cover object-center"
+                className={`w-full h-full object-center ${imageFit === "fill" ? "object-fill" : "object-cover"}`}
                 loading="eager"
                 decoding="async"
               />
@@ -259,7 +261,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                       : MODELS[i % 4]
                 }
                 alt={`pose ${i + 1}`}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${imageFit === "fill" ? "object-fill" : "object-cover"}`}
                 loading="eager"
                 decoding="async"
               />

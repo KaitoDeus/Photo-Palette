@@ -112,7 +112,7 @@ const FrameCard: React.FC<{
               className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(true)}
             >
-              <FrameStrip frame={frame} filled={true} size="sm" aspectMode="original" />
+              <FrameStrip frame={frame} filled={true} size="sm" aspectMode="original" imageFit="fill" />
             </div>
             <button
               onClick={() => onClick(true)}
@@ -303,7 +303,7 @@ const FrameLibraryPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="pointer-events-none mt-8 transition-transform duration-500">
-              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" aspectMode="original" />
+              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" aspectMode="original" imageFit="fill" />
             </div>
           </div>
 

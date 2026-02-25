@@ -34,6 +34,7 @@ const ResultStep: React.FC<ResultStepProps> = ({
           photos={photos}
           size="lg"
           disableHover={true}
+          imageFit="fill"
         />
       </div>
 
