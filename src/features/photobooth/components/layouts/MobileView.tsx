@@ -110,9 +110,8 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
 
             {/* Camera Area */}
             <div
-              className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden ring-4 ring-white transition-all duration-500 ${
+              className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden transition-all duration-500 ${
                 selectedLayout === "STRIP_1X4" ? "aspect-[4/3]" : 
-                selectedLayout === "GRID_2X3" ? "aspect-[3/4]" :
                 "aspect-[3/4]"
               }`}
             >
@@ -153,11 +152,13 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
                 </div>
               )}
 
-              <div className="absolute left-1/2 -translate-x-1/2 bottom-3 z-40">
-                <div className="bg-pink-100/90 backdrop-blur-sm text-pink-600 font-extrabold py-1 px-6 rounded-full shadow-lg text-[11px] whitespace-nowrap border-[3px] border-white/70">
-                  Đã Chụp {photos.length}/
-                  {LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4}
-                </div>
+            </div>
+
+            {/* Status Indicator outside capture area */}
+            <div className="flex justify-center -mt-3 mb-4 relative z-40">
+              <div className="bg-pink-100/90 backdrop-blur-sm text-pink-600 font-extrabold py-1.5 px-6 rounded-full shadow-md text-[11px] whitespace-nowrap border-2 border-white transition-all duration-300">
+                Đã Chụp {photos.length}/
+                {LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4}
               </div>
             </div>
 

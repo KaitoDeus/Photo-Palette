@@ -109,7 +109,7 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
 
             {/* Camera Area with Countdown Overlay inside */}
             <div
-              className={`w-full relative bg-slate-800 rounded-2xl mb-6 shadow-xl mx-auto overflow-hidden border-[4px] border-white transition-all duration-500 ${
+              className={`w-full relative bg-slate-800 rounded-2xl mb-6 shadow-xl mx-auto overflow-hidden transition-all duration-500 ${
                 selectedLayout === "STRIP_1X4" ? "aspect-[4/3] max-w-3xl" :
                 "aspect-[3/4] max-w-xl"
               }`}
@@ -155,11 +155,13 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
                 </div>
               )}
 
-              <div className="absolute left-1/2 -translate-x-1/2 bottom-4 z-40">
-                <div className="bg-pink-100/90 backdrop-blur-sm text-pink-600 font-extrabold py-2 px-8 rounded-full shadow-lg text-sm whitespace-nowrap border-[4px] border-white/70">
-                  Đã Chụp {photos.length}/
-                  {LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4}
-                </div>
+            </div>
+
+            {/* Status Indicator outside capture area */}
+            <div className="flex justify-center -mt-3 mb-6 relative z-40">
+              <div className="bg-pink-100/90 backdrop-blur-sm text-pink-600 font-extrabold py-2 px-8 rounded-full shadow-md text-sm whitespace-nowrap border-[4px] border-white transition-all duration-300">
+                Đã Chụp {photos.length}/
+                {LAYOUTS.find((l) => l.id === selectedLayout)?.count || 4}
               </div>
             </div>
 
