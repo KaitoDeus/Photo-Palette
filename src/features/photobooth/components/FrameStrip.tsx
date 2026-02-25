@@ -49,7 +49,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       square: "w-40 h-40", // 160px x 160px
     },
     lg: {
-      "1x4": "w-[180px] h-[666px] max-w-[50vw] h-auto aspect-[1/3.7]", 
+      "1x4": "w-[200px] h-[600px] max-w-[50vw] h-auto aspect-[1/3]", 
       portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
       square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
     },
