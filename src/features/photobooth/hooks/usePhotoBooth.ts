@@ -114,7 +114,7 @@ export const usePhotoBooth = () => {
     if (selectedLayout === "STRIP_1X4") {
       targetWidth = 1600;
       targetHeight = 1200; // 4:3 Landscape
-    } else if (selectedLayout === "PORTRAIT_2X2") {
+    } else if (selectedLayout === "PORTRAIT_2X2" || selectedLayout === "PORTRAIT_1X1") {
       targetWidth = 1500;
       targetHeight = 1500; // 1:1 Square
     } else {
