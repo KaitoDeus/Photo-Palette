@@ -54,9 +54,9 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
         ) : (
           <>
             {/* Horizontal Settings Row */}
-            <div className="w-full grid grid-cols-3 gap-2 items-end mb-6 px-1">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-3 items-end mb-6 px-1">
               <div className="flex flex-col gap-1.5 min-w-0">
-                <span className="text-[11px] font-bold text-pink-400 truncate">
+                <span className="text-[10px] sm:text-[11px] font-black text-pink-400 uppercase tracking-wider">
                   Layout Ảnh
                 </span>
                 <CustomDropdown
@@ -72,47 +72,45 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
                 />
               </div>
 
-              <div className="flex flex-col gap-1.5 min-w-0">
-                <span className="text-[11px] font-bold text-purple-500 truncate">
-                  Đếm Ngược
-                </span>
-                <CustomDropdown
-                  value={countDownDuration}
-                  options={[
-                    { value: 3, label: "3s" },
-                    { value: 5, label: "5s" },
-                    { value: 10, label: "10s" },
-                  ]}
-                  onChange={(val) =>
-                    onSelectCountDown(val as CountdownDuration)
-                  }
-                  disabled={isCapturing}
-                  activeColorClass="text-purple-600 bg-purple-50"
-                  minWidth="100%"
-                />
-              </div>
+              <div className="grid grid-cols-2 gap-2 sm:contents">
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <span className="text-[10px] sm:text-[11px] font-black text-purple-500 uppercase tracking-wider">
+                    Đếm Ngược
+                  </span>
+                  <CustomDropdown
+                    value={countDownDuration}
+                    options={[
+                      { value: 3, label: "3s" },
+                      { value: 5, label: "5s" },
+                      { value: 10, label: "10s" },
+                    ]}
+                    onChange={(val) =>
+                      onSelectCountDown(val as CountdownDuration)
+                    }
+                    disabled={isCapturing}
+                    activeColorClass="text-purple-600 bg-purple-50"
+                    minWidth="100%"
+                  />
+                </div>
 
-              <div className="flex flex-col gap-1.5 min-w-0">
-                <span className="text-[11px] font-bold text-blue-500 truncate">
-                  Hỗ Trợ Chụp
-                </span>
-                <button
-                  onClick={() => setIsFrameModalOpen(true)}
-                  disabled={isCapturing}
-                  className="bg-pink-100 text-pink-500 px-2 py-2.5 rounded-xl hover:bg-pink-200 transition-all font-bold cursor-pointer text-xs shadow-sm disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                >
-                  Chọn Khung
-                </button>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <span className="text-[10px] sm:text-[11px] font-black text-blue-500 uppercase tracking-wider">
+                    Hỗ Trợ Chụp
+                  </span>
+                  <button
+                    onClick={() => setIsFrameModalOpen(true)}
+                    disabled={isCapturing}
+                    className="bg-pink-100 text-pink-500 px-2 py-2.5 rounded-xl hover:bg-pink-200 transition-all font-bold cursor-pointer text-xs shadow-sm disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap h-[42px] flex items-center justify-center border border-pink-200"
+                  >
+                    Chọn Khung
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Camera Area */}
             <div
-              className={`w-full relative bg-slate-800 rounded-2xl mt-1 mb-6 shadow-md mx-auto overflow-hidden ${
-                selectedLayout === "STRIP_1X4" ? "aspect-[4/3]" :
-                selectedLayout === "GRID_2X3" ? "aspect-square" :
-                "aspect-[3/4]"
-              }`}
+              className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden ring-4 ring-white aspect-[3/4]`}
             >
               <video
                 ref={videoRef}

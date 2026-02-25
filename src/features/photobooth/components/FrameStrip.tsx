@@ -44,9 +44,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       portrait: "w-36 h-48", // 144px x 192px
     },
     lg: {
-      "1x4": "w-[260px] h-[780px]", // 260px x 780px
-      "2x3": "w-[360px] h-[540px]", // 360px x 540px
-      portrait: "w-[405px] h-[540px]", // 405px x 540px
+      "1x4": "w-[260px] h-[780px] max-w-[70vw] h-auto aspect-[1/3]", 
+      "2x3": "w-[360px] h-[540px] max-w-[85vw] h-auto aspect-[2/3]", 
+      portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
     },
   };
 

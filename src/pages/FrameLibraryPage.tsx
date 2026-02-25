@@ -7,7 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import Reveal from "../components/common/Reveal";
+
 
 import { FRAMES } from "../features/photobooth/data/frames";
 import { Frame } from "../features/photobooth/types";
@@ -84,7 +84,7 @@ const FrameCard: React.FC<{
   onClick: (filled: boolean) => void;
 }> = ({ frame, index, onClick }) => {
   return (
-    <Reveal key={frame.id} delay={index * 0.05} className="group h-full">
+    <div key={frame.id} className="group h-full">
       <div
         className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-brand-100 hover:border-brand-400 flex flex-col items-center h-full relative"
       >
@@ -126,7 +126,7 @@ const FrameCard: React.FC<{
           </p>
         </div>
       </div>
-    </Reveal>
+    </div>
   );
 };
 
@@ -203,7 +203,7 @@ const FrameLibraryPage: React.FC = () => {
       <section id="features" className="py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <Reveal className="text-center mb-12">
+          <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Cherry className="text-brand-500 animate-bounce" />
               <h2 className="text-3xl md:text-4xl font-bold text-brand-500">
@@ -214,10 +214,10 @@ const FrameLibraryPage: React.FC = () => {
             <p className="text-green-500 font-medium">
               Xem trước ảnh lên khung nhé ✨
             </p>
-          </Reveal>
+          </div>
 
           {/* Filters */}
-          <Reveal className="bg-white border border-slate-100 shadow-lg rounded-2xl p-4 mb-16 w-full mx-auto relative z-30">
+          <div className="bg-white border border-slate-100 shadow-lg rounded-2xl p-4 mb-16 w-full mx-auto relative z-30">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="relative w-full md:w-1/4 z-20">
                 <CustomDropdown
@@ -249,7 +249,7 @@ const FrameLibraryPage: React.FC = () => {
                 />
               </div>
             </div>
-          </Reveal>
+          </div>
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -292,11 +292,11 @@ const FrameLibraryPage: React.FC = () => {
 
           {/* Frame Content */}
           <div
-            className="relative max-w-full max-h-full flex items-center justify-center p-10 select-none animate-zoom-in"
+            className="relative max-w-full max-h-full flex items-center justify-center p-4 sm:p-10 select-none animate-zoom-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="transform scale-[1.8] md:scale-[2.5] lg:scale-[3] pointer-events-none mt-8 transition-transform duration-500 hover:scale-[1.85] md:hover:scale-[2.55] lg:hover:scale-[3.05]">
-              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} />
+            <div className="pointer-events-none mt-8 transition-transform duration-500">
+              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" />
             </div>
           </div>
 

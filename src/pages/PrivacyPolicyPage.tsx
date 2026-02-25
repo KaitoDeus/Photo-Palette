@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Reveal from "../components/common/Reveal";
+
 
 const PrivacyPolicyPage: React.FC = () => {
   useEffect(() => {
@@ -9,7 +9,7 @@ const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className="pt-24 pb-20 min-h-screen bg-brand-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-brand-100">
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-brand-100">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 border-b-2 border-brand-200 pb-4 inline-block">
             Chính Sách & Miễn Trừ Trách Nhiệm
           </h1>
@@ -97,7 +97,7 @@ const PrivacyPolicyPage: React.FC = () => {
               Cập nhật lần cuối ngày 21 tháng 02 năm 2026
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </div>
   );

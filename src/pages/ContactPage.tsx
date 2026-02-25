@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Reveal from "../components/common/Reveal";
+
 import { Mail, Facebook, Instagram, Code } from "lucide-react";
 import avatar from "../assets/about/avatar.webp";
 
@@ -14,10 +14,7 @@ const ContactPage: React.FC = () => {
         {/* Header */}
         <div className="flex justify-center">
           {/* Left Card - Developer Profile & Store Info */}
-          <Reveal
-            delay={0.1}
-            className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl border border-white/50 relative overflow-hidden w-full max-w-lg"
-          >
+          <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl border border-white/50 relative overflow-hidden w-full max-w-lg">
             {/* 1. Developer Section */}
             <div className="text-center mb-8">
               <div className="mb-6">
@@ -213,7 +210,7 @@ const ContactPage: React.FC = () => {
                 </div>
               </a>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from "react";
-import Reveal from "../components/common/Reveal";
+
 import { BRANCHES } from "../data/branches";
 import { MapPin, Store, Flag, Calendar, Star, ChevronDown } from "lucide-react";
 import storyImage from "../assets/about/story_1.webp";
@@ -140,92 +140,90 @@ const AboutPage: React.FC = () => {
       {/* Brand Story */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Left Side - Image */}
-              <div className="relative">
-                <div className="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square bg-slate-100 relative group">
-                  <img
-                    src={storyImage}
-                    alt="Palette Studio Story"
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Image */}
+            <div className="relative">
+              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square bg-slate-100 relative group">
+                <img
+                  src={storyImage}
+                  alt="Palette Studio Story"
+                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              {/* Decorative blob */}
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-200 rounded-full blur-3xl opacity-50 -z-10"></div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl opacity-50 -z-10"></div>
+            </div>
+
+            {/* Right Side - Content */}
+            <div>
+              <div>
+                <span className="inline-block px-3 py-1 bg-brand-100 text-brand-600 rounded-full text-[10px] font-bold tracking-wider mb-4 uppercase">
+                  Câu Chuyện Thương Hiệu
+                </span>
+                <h1 className="text-4xl md:text-5xl font-bold text-brand-500 mb-6 leading-tight">
+                  Photo Palette
+                </h1>
+
+                <div className="space-y-6 text-slate-600 text-lg leading-relaxed mb-10">
+                  <p>
+                    Được thành lập với niềm đam mê văn hóa Photobooth Hàn Quốc
+                  </p>
+                  <p>
+                    Từ một cửa hàng nhỏ, chúng tôi đã phát triển thành hệ
+                    thống Photobooth hàng đầu Việt Nam với 24 chi nhánh trải
+                    dài từ Bắc vào Nam, mang đến trải nghiệm chụp ảnh lấy ngay
+                    hiện đại, trẻ trung và đầy màu sắc.
+                  </p>
                 </div>
-                {/* Decorative blob */}
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-200 rounded-full blur-3xl opacity-50 -z-10"></div>
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl opacity-50 -z-10"></div>
               </div>
 
-              {/* Right Side - Content */}
-              <div>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-slate-100">
                 <div>
-                  <span className="inline-block px-3 py-1 bg-brand-100 text-brand-600 rounded-full text-[10px] font-bold tracking-wider mb-4 uppercase">
-                    Câu Chuyện Thương Hiệu
-                  </span>
-                  <h1 className="text-4xl md:text-5xl font-bold text-brand-500 mb-6 leading-tight">
-                    Photo Palette
-                  </h1>
-
-                  <div className="space-y-6 text-slate-600 text-lg leading-relaxed mb-10">
-                    <p>
-                      Được thành lập với niềm đam mê văn hóa Photobooth Hàn Quốc
-                    </p>
-                    <p>
-                      Từ một cửa hàng nhỏ, chúng tôi đã phát triển thành hệ
-                      thống Photobooth hàng đầu Việt Nam với 24 chi nhánh trải
-                      dài từ Bắc vào Nam, mang đến trải nghiệm chụp ảnh lấy ngay
-                      hiện đại, trẻ trung và đầy màu sắc.
-                    </p>
+                  <Store className="w-6 h-6 text-brand-400 mb-2" />
+                  <div className="text-2xl font-bold text-slate-900">24</div>
+                  <div className="text-xs text-slate-500 font-medium">
+                    Chi Nhánh
                   </div>
                 </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-slate-100">
-                  <div>
-                    <Store className="w-6 h-6 text-brand-400 mb-2" />
-                    <div className="text-2xl font-bold text-slate-900">24</div>
-                    <div className="text-xs text-slate-500 font-medium">
-                      Chi Nhánh
-                    </div>
+                <div>
+                  <Flag className="w-6 h-6 text-brand-400 mb-2" />
+                  <div className="text-2xl font-bold text-slate-900">6+</div>
+                  <div className="text-xs text-slate-500 font-medium">
+                    Tỉnh Thành
                   </div>
-                  <div>
-                    <Flag className="w-6 h-6 text-brand-400 mb-2" />
-                    <div className="text-2xl font-bold text-slate-900">6+</div>
-                    <div className="text-xs text-slate-500 font-medium">
-                      Tỉnh Thành
-                    </div>
+                </div>
+                <div>
+                  <Calendar className="w-6 h-6 text-brand-400 mb-2" />
+                  <div className="text-2xl font-bold text-slate-900">3</div>
+                  <div className="text-xs text-slate-500 font-medium">
+                    Năm Hoạt Động
                   </div>
-                  <div>
-                    <Calendar className="w-6 h-6 text-brand-400 mb-2" />
-                    <div className="text-2xl font-bold text-slate-900">3</div>
-                    <div className="text-xs text-slate-500 font-medium">
-                      Năm Hoạt Động
-                    </div>
+                </div>
+                <div>
+                  <Star className="w-6 h-6 text-brand-400 mb-2" />
+                  <div className="text-2xl font-bold text-slate-900">
+                    4.9/5
                   </div>
-                  <div>
-                    <Star className="w-6 h-6 text-brand-400 mb-2" />
-                    <div className="text-2xl font-bold text-slate-900">
-                      4.9/5
-                    </div>
-                    <div className="text-xs text-slate-500 font-medium">
-                      Đánh Giá
-                    </div>
+                  <div className="text-xs text-slate-500 font-medium">
+                    Đánh Giá
                   </div>
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Branches Locator Section */}
       <section className="py-20" id="locator">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
               Hệ thống Chi Nhánh
             </h2>
-          </Reveal>
+          </div>
 
           <div className="flex flex-col lg:flex-row gap-6 lg:h-[700px]">
             {/* Left Col: Search & List */}

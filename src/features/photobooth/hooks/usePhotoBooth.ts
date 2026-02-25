@@ -81,8 +81,9 @@ export const usePhotoBooth = () => {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: "user",
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
+          width: { min: 640, ideal: 1280 },
+          height: { min: 480, ideal: 720 },
+          aspectRatio: { ideal: 1.333333 }
         },
         audio: false,
       });

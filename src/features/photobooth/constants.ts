@@ -24,11 +24,4 @@ export const LAYOUTS: PhotoLayout[] = [
     icon: React.createElement(RectangleVertical, { size: 24 }),
     description: "1 ảnh lớn",
   },
-  {
-    id: "GRID_2X3",
-    name: "2x3 (6 ảnh)",
-    count: 6,
-    icon: React.createElement(Grid, { size: 24 }),
-    description: "6 ảnh lưới",
-  },
 ];

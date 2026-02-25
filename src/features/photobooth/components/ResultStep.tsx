@@ -95,7 +95,7 @@ const ResultStep: React.FC<ResultStepProps> = ({
       {/* Video Recap Modal */}
       {isVideoOpen && recapVideoUrl && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="relative bg-black rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl aspect-[3/4] md:aspect-video">
+          <div className="relative bg-black rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl aspect-[3/4] md:aspect-video max-h-[90vh]">
             <button
               onClick={() => setIsVideoOpen(false)}
               className="absolute top-4 right-4 text-white/70 hover:text-white bg-black/50 p-2 rounded-full z-10"

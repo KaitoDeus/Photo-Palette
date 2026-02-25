@@ -1,5 +1,5 @@
 import React from "react";
-import Reveal from "../common/Reveal";
+
 import insta1 from "../../assets/landing/insta_1.webp";
 import insta2 from "../../assets/landing/insta_2.webp";
 import insta3 from "../../assets/landing/insta_3.webp";
@@ -44,7 +44,7 @@ const Gallery: React.FC = () => {
   return (
     <section id="gallery" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
             <span className="text-brand-500 font-semibold tracking-wide uppercase text-sm">
               Khung nổi bật
@@ -61,11 +61,11 @@ const Gallery: React.FC = () => {
           >
             Theo dõi Instagram @photopalette_vn
           </a>
-        </Reveal>
+        </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {items.map((item, index) => (
-            <Reveal key={item.id} delay={index * 0.05} className="h-full">
+          {items.map((item) => (
+            <div key={item.id} className="h-full">
               <a
                 href={item.link}
                 target="_blank"
@@ -99,7 +99,7 @@ const Gallery: React.FC = () => {
                   </span>
                 </div>
               </a>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

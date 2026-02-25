@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Reveal from "../components/common/Reveal";
+
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Imports from assets/mẫu
@@ -93,14 +93,12 @@ const GalleryPage: React.FC = () => {
     <div className="pt-20 min-h-screen bg-brand-50/30">
       {/* Header */}
       <section className="py-16 text-center px-4">
-        <Reveal>
-          <span className="inline-block px-3 py-1 bg-brand-100 text-brand-600 rounded-full text-xs font-bold tracking-wider mb-4 uppercase">
-            Showcase
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Bộ Sưu Tập <span className="text-brand-500">PosePalette</span>
-          </h1>
-        </Reveal>
+        <span className="inline-block px-3 py-1 bg-brand-100 text-brand-600 rounded-full text-xs font-bold tracking-wider mb-4 uppercase">
+          Showcase
+        </span>
+        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Bộ Sưu Tập <span className="text-brand-500">PosePalette</span>
+        </h1>
       </section>
 
       {/* Masonry Grid */}

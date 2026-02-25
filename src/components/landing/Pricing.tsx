@@ -1,7 +1,7 @@
 import React from "react";
 import { Check } from "lucide-react";
 
-import Reveal from "../common/Reveal";
+
 
 const Pricing: React.FC = () => {
   const packages = [
@@ -30,20 +30,19 @@ const Pricing: React.FC = () => {
   return (
     <section id="pricing" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Bảng Giá Dịch Vụ
           </h2>
           <p className="text-lg text-brand-600 font-bold max-w-2xl mx-auto">
             Tất cả đều được sử dụng miễn phí các phụ kiện và máy làm tóc, sticker
           </p>
-        </Reveal>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
-          {packages.map((pkg, index) => (
-            <Reveal
+          {packages.map((pkg) => (
+            <div
               key={pkg.name}
-              delay={index * 0.1}
               className={`relative p-8 rounded-3xl border ${
                 pkg.highlight
                   ? "bg-rose-50 border-brand-200 shadow-xl scale-105 z-10"
@@ -73,7 +72,7 @@ const Pricing: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

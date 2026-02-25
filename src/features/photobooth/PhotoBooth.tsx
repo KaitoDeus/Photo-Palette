@@ -1,5 +1,5 @@
 import React from "react";
-import Reveal from "../../components/common/Reveal";
+
 import { usePhotoBooth } from "./hooks/usePhotoBooth";
 import IntroStep from "./components/IntroStep";
 import LayoutSelectionStep from "./components/LayoutSelectionStep";
@@ -97,11 +97,9 @@ const PhotoBooth: React.FC = () => {
       </div>
 
       <div className="max-w-6xl mx-auto w-full px-0 sm:px-4 relative z-10">
-        <Reveal>
-          <div className="min-h-[500px] flex justify-center items-center">
-            {renderStep()}
-          </div>
-        </Reveal>
+        <div className="min-h-[500px] flex justify-center items-center">
+          {renderStep()}
+        </div>
       </div>
     </section>
   );

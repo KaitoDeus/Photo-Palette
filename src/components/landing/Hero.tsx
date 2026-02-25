@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
-import Reveal from "../common/Reveal";
+
 import { Star, Camera, Play } from "lucide-react";
 import img1 from "../../assets/landing/hero_1.webp";
 import img2 from "../../assets/landing/hero_2.webp";
@@ -46,9 +46,9 @@ const Hero: React.FC = () => {
 
             <div>
               <div className="space-y-2">
-                <h1 className="text-8xl lg:text-[9rem] font-bold text-slate-900 leading-[1] font-script">
+                <h1 className="text-5xl sm:text-7xl lg:text-[8rem] xl:text-[9rem] font-bold text-slate-900 leading-[1] font-script">
                   Photo <br />
-                  <span className="text-brand-500 block -mt-4">Palette</span>
+                  <span className="text-brand-500 block -mt-2 sm:-mt-4">Palette</span>
                 </h1>
                 <div className="flex items-center justify-center lg:justify-start gap-4 pt-6">
                   <p className="text-xl font-black text-brand-500 tracking-[0.3em] uppercase border-r-2 border-brand-200 pr-4">
@@ -61,65 +61,61 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            <Reveal delay={0.2}>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                <Button
-                  onClick={() =>
-                    document
-                      .getElementById("photobooth")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  withIcon
-                  size="lg"
-                  className="group shadow-2xl shadow-brand-200/50 hover:scale-105 active:scale-95 transition-all"
-                >
-                  Chụp Thử Online
-                </Button>
-                <button
-                  onClick={() => {
-                    navigate("/gallery");
-                    window.scrollTo(0, 0);
-                  }}
-                  className="flex items-center justify-center gap-3 px-8 py-5 rounded-full font-black text-slate-600 hover:text-brand-500 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center group-hover:border-brand-500 group-hover:bg-brand-50 transition-all">
-                    <Play className="w-4 h-4 fill-current ml-0.5" />
-                  </div>
-                  Xem Ảnh Mẫu
-                </button>
-              </div>
-            </Reveal>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+              <Button
+                onClick={() =>
+                  document
+                    .getElementById("photobooth")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                withIcon
+                size="lg"
+                className="group shadow-2xl shadow-brand-200/50 hover:scale-105 active:scale-95 transition-all"
+              >
+                Chụp Thử Online
+              </Button>
+              <button
+                onClick={() => {
+                  navigate("/gallery");
+                  window.scrollTo(0, 0);
+                }}
+                className="flex items-center justify-center gap-3 px-8 py-5 rounded-full font-black text-slate-600 hover:text-brand-500 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center group-hover:border-brand-500 group-hover:bg-brand-50 transition-all">
+                  <Play className="w-4 h-4 fill-current ml-0.5" />
+                </div>
+                Xem Ảnh Mẫu
+              </button>
+            </div>
 
-            <Reveal delay={0.3}>
-              <div className="flex items-center justify-center lg:justify-start gap-6 pt-8 border-t border-slate-100">
-                <div className="flex -space-x-4">
+            <div className="flex items-center justify-center lg:justify-start gap-6 pt-8 border-t border-slate-100">
+              <div className="flex -space-x-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="w-14 h-14 rounded-full border-4 border-white shadow-xl overflow-hidden ring-1 ring-slate-100"
+                  >
+                    <img
+                      src={`https://picsum.photos/seed/${i + 70}/100/100`}
+                      alt="User"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="text-left">
+                <div className="flex items-center gap-1.5 text-yellow-400 mb-1">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <div
-                      key={i}
-                      className="w-14 h-14 rounded-full border-4 border-white shadow-xl overflow-hidden ring-1 ring-slate-100"
-                    >
-                      <img
-                        src={`https://picsum.photos/seed/${i + 70}/100/100`}
-                        alt="User"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <Star key={i} size={16} fill="currentColor" />
                   ))}
                 </div>
-                <div className="text-left">
-                  <div className="flex items-center gap-1.5 text-yellow-400 mb-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} size={16} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="text-slate-500 font-bold text-sm">
-                    Được yêu thích bởi{" "}
-                    <span className="text-slate-900 text-base">50k+</span>{" "}
-                    Trendsetters
-                  </p>
-                </div>
+                <p className="text-slate-500 font-bold text-sm">
+                  Được yêu thích bởi{" "}
+                  <span className="text-slate-900 text-base">50k+</span>{" "}
+                  Trendsetters
+                </p>
               </div>
-            </Reveal>
+            </div>
           </div>
 
           {/* Right Side: Layered Image Carousel */}

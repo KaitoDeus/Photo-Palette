@@ -12,8 +12,22 @@ body {
 
 html {
   font-size: 100%;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .font-script {
   font-family: "Dancing Script", cursive;
+}
+
+/* Responsive adjustment for very small screens */
+@media (max-width: 380px) {
+  html {
+    font-size: 90%;
+  }
 }

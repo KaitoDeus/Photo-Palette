@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Star } from "lucide-react";
-import Reveal from "../common/Reveal";
+
 
 const ALL_REVIEWS = [
   {
@@ -115,17 +115,16 @@ const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">
             Khách Hàng Nói Gì?
           </h2>
-        </Reveal>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {displayedReviews.map((review, idx) => (
-            <Reveal
+            <div
               key={idx}
-              delay={idx * 0.1}
               className="bg-white p-8 rounded-3xl border border-brand-100 shadow-sm hover:shadow-md transition-all h-full flex flex-col"
             >
               <div className="flex gap-1 mb-4">
@@ -159,7 +158,7 @@ const Testimonials: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
