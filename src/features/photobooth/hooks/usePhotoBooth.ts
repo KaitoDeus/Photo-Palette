@@ -122,11 +122,13 @@ export const usePhotoBooth = () => {
         return null;
       }
 
-      // We want a high-resolution 3:4 (Portrait) output to match mobile previews
-      // This ensures "What You See Is What You Get" (WYSIWYG)
-      const targetWidth = 1200;
-      const targetHeight = 1600;
-      const targetRatio = targetWidth / targetHeight; // 0.75
+      // Determine target ratio based on layout
+      // STRIP_1X4 uses horizontal slots (~4:3 landscape)
+      // Others use vertical slots (~3:4 portrait)
+      const isStrip = selectedLayout === "STRIP_1X4";
+      const targetWidth = isStrip ? 1600 : 1200;
+      const targetHeight = isStrip ? 1200 : 1600;
+      const targetRatio = targetWidth / targetHeight;
 
       canvas.width = targetWidth;
       canvas.height = targetHeight;
@@ -141,13 +143,13 @@ export const usePhotoBooth = () => {
 
         // "Object-fit: cover" logic for the canvas capture
         if (videoRatio > targetRatio) {
-          // Video is proportionaly wider than 3:4 (e.g. 16:9 or 4:3 landscape)
+          // Video is proportionaly wider than target ratio
           sh = videoHeight;
           sw = sh * targetRatio;
           sx = (videoWidth - sw) / 2;
           sy = 0;
         } else {
-          // Video is proportionally narrower than 3:4 (e.g. 9:16 portrait)
+          // Video is proportionally narrower than target ratio
           sw = videoWidth;
           sh = sw / targetRatio;
           sx = 0;

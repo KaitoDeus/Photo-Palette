@@ -110,7 +110,11 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
 
             {/* Camera Area */}
             <div
-              className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden ring-4 ring-white aspect-[3/4]`}
+              className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden ring-4 ring-white transition-all duration-500 ${
+                selectedLayout === "STRIP_1X4" ? "aspect-[4/3]" : 
+                selectedLayout === "GRID_2X3" ? "aspect-[3/4]" :
+                "aspect-[3/4]"
+              }`}
             >
               <video
                 ref={videoRef}

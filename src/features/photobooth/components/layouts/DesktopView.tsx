@@ -111,7 +111,6 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
             <div
               className={`w-full relative bg-slate-800 rounded-2xl mb-6 shadow-xl mx-auto overflow-hidden border-[4px] border-white transition-all duration-500 ${
                 selectedLayout === "STRIP_1X4" ? "aspect-[4/3] max-w-3xl" :
-                selectedLayout === "GRID_2X3" ? "aspect-square max-w-2xl" :
                 "aspect-[3/4] max-w-xl"
               }`}
             >
