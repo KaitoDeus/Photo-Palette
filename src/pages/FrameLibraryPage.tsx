@@ -86,11 +86,11 @@ const FrameCard: React.FC<{
     <div key={frame.id} className="group">
       <div className="bg-white rounded-[40px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full">
         {/* Previews Container */}
-        <div className="flex justify-center gap-4 w-full mb-8">
-          {/* Left: Original */}
-          <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
+        <div className="flex flex-col items-center w-full h-full">
+          {/* Previews Row - Fixed height to ensure buttons align below */}
+          <div className="flex justify-center items-end gap-6 w-full h-[180px] mb-8">
             <div
-              className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
+              className="bg-slate-50/50 p-2 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(false)}
             >
               <FrameStrip
@@ -100,18 +100,8 @@ const FrameCard: React.FC<{
                 aspectMode="original"
               />
             </div>
-            <button
-              onClick={() => onClick(false)}
-              className="w-full py-2.5 bg-[#FF99A4] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
-            >
-              Khung Gốc
-            </button>
-          </div>
-
-          {/* Right: Preview */}
-          <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
             <div
-              className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
+              className="bg-slate-50/50 p-2 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(true)}
             >
               <FrameStrip
@@ -122,9 +112,19 @@ const FrameCard: React.FC<{
                 imageFit="fill"
               />
             </div>
+          </div>
+
+          {/* Buttons Row */}
+          <div className="flex justify-center gap-3 w-full mt-auto">
+            <button
+              onClick={() => onClick(false)}
+              className="flex-1 py-1.5 px-2 bg-[#FF99A4] text-white text-[10px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider whitespace-nowrap"
+            >
+              Khung Gốc
+            </button>
             <button
               onClick={() => onClick(true)}
-              className="w-full py-2.5 bg-[#93C5FD] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
+              className="flex-1 py-1.5 px-2 bg-[#93C5FD] text-white text-[10px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider whitespace-nowrap"
             >
               Xem trước
             </button>
@@ -132,7 +132,7 @@ const FrameCard: React.FC<{
         </div>
 
         {/* Info Area */}
-        <div className="mt-auto w-full text-center py-2">
+        <div className="w-full text-center py-2 mt-2">
           <h3 className="text-[26px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight">
             {frame.name}
           </h3>

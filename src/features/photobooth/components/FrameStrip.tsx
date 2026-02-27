@@ -64,7 +64,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
           : sizeClasses[size]["square"]
         : sizeClasses[size]["portrait"];
 
-  let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
+  let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : "hover:scale-105 hover:translate-y-1"} duration-500 ${dimensions}`;
 
   if (frame.overlayImage) {
     const is1x4 = frame.layout === "1x4";
