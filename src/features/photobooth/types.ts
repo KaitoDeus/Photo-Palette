@@ -6,10 +6,7 @@ export type BoothStep =
   | "CAPTURE"
   | "PROCESSING"
   | "RESULT";
-export type LayoutType =
-  | "STRIP_1X4"
-  | "PORTRAIT_2X2"
-  | "PORTRAIT_1X1";
+export type LayoutType = "STRIP_1X4" | "PORTRAIT_2X2" | "PORTRAIT_1X1";
 export type CountdownDuration = 3 | 5 | 10;
 
 export interface Frame {

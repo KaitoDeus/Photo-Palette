@@ -110,31 +110,33 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
             {/* Camera Area with Countdown Overlay inside */}
             <div
               className={`w-full relative bg-slate-800 rounded-2xl mb-6 shadow-xl mx-auto overflow-hidden transition-all duration-500 ${
-                selectedLayout === "STRIP_1X4" ? "aspect-[4/3] max-w-3xl" :
-                (selectedLayout === "PORTRAIT_2X2" || selectedLayout === "PORTRAIT_1X1") ? "aspect-square max-w-2xl" :
-                "aspect-[3/4] max-w-xl"
+                selectedLayout === "STRIP_1X4"
+                  ? "aspect-[4/3] max-w-3xl"
+                  : selectedLayout === "PORTRAIT_2X2" ||
+                      selectedLayout === "PORTRAIT_1X1"
+                    ? "aspect-square max-w-2xl"
+                    : "aspect-[3/4] max-w-xl"
               }`}
             >
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className={`w-full h-full object-cover ${isMirrored ? "transform -scale-x-100" : ""}`}
-                  style={{ filter: "none" }}
-                />
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className={`w-full h-full object-cover ${isMirrored ? "transform -scale-x-100" : ""}`}
+                style={{ filter: "none" }}
+              />
 
-                {/* Countdown Overlay (Compact Circle at Top Center - Image 2 Style) */}
-                {countDown && (
-                  <div className="absolute top-6 left-1/2 -translate-x-1/2 z-40 animate-in zoom-in-95 duration-200">
-                    <div className="w-14 h-14 bg-pink-100/90 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white shadow-xl">
-                      <span className="text-3xl font-black text-pink-500 font-mono">
-                        {countDown}
-                      </span>
-                    </div>
+              {/* Countdown Overlay (Compact Circle at Top Center - Image 2 Style) */}
+              {countDown && (
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 z-40 animate-in zoom-in-95 duration-200">
+                  <div className="w-14 h-14 bg-pink-100/90 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white shadow-xl">
+                    <span className="text-3xl font-black text-pink-500 font-mono">
+                      {countDown}
+                    </span>
                   </div>
-                )}
-
+                </div>
+              )}
 
               {!isCapturing && (
                 <>
@@ -148,14 +150,19 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
               )}
 
               {lastPhoto && (
-                <div className={`absolute right-6 bottom-16 bg-white p-2 shadow-2xl rounded-xl -rotate-3 z-30 animate-in fade-in slide-in-from-bottom-8 duration-500 w-32 aspect-[3/4]`}>
-                  <img src={lastPhoto} className="w-full h-full object-cover rounded-lg" alt="Preview" />
+                <div
+                  className={`absolute right-6 bottom-16 bg-white p-2 shadow-2xl rounded-xl -rotate-3 z-30 animate-in fade-in slide-in-from-bottom-8 duration-500 w-32 aspect-[3/4]`}
+                >
+                  <img
+                    src={lastPhoto}
+                    className="w-full h-full object-cover rounded-lg"
+                    alt="Preview"
+                  />
                   <div className="absolute -top-3 -left-3 bg-pink-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold border-2 border-white text-xs">
                     {photos.length}
                   </div>
                 </div>
               )}
-
             </div>
 
             {/* Status Indicator outside capture area */}
@@ -177,7 +184,9 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
                   >
                     <Camera size={28} />
                   </button>
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">Chụp tay</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                    Chụp tay
+                  </span>
                 </div>
 
                 <div className="flex flex-col items-center gap-2">
@@ -186,7 +195,10 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
                     disabled={isCapturing}
                     className={`w-24 h-24 rounded-full flex flex-col items-center justify-center text-white transition-all shadow-xl border-[6px] border-pink-100 ${isCapturing ? "bg-pink-300 scale-95" : "bg-pink-400 hover:bg-pink-500 hover:scale-110 active:scale-90"}`}
                   >
-                    <Aperture size={40} className={isCapturing ? "animate-spin-slow" : ""} />
+                    <Aperture
+                      size={40}
+                      className={isCapturing ? "animate-spin-slow" : ""}
+                    />
                     <span className="font-black text-sm mt-1 tracking-wider uppercase">
                       {isCapturing ? "..." : "AUTO"}
                     </span>
@@ -201,7 +213,9 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
                   >
                     <RefreshCcw size={28} />
                   </button>
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">Chụp Lại</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                    Chụp Lại
+                  </span>
                 </div>
               </div>
 
@@ -210,10 +224,16 @@ const DesktopView: React.FC<LayoutSelectionStepProps> = ({
                 onClick={() => !isCapturing && onToggleRecap()}
                 disabled={isCapturing}
               >
-                <div className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-300 ${isRecapEnabled ? "bg-pink-400" : "bg-slate-200"}`}>
-                  <span className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${isRecapEnabled ? "translate-x-4" : "translate-x-1"}`} />
+                <div
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-300 ${isRecapEnabled ? "bg-pink-400" : "bg-slate-200"}`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${isRecapEnabled ? "translate-x-4" : "translate-x-1"}`}
+                  />
                 </div>
-                <span className="text-sm font-bold text-slate-700">Video Recap</span>
+                <span className="text-sm font-bold text-slate-700">
+                  Video Recap
+                </span>
               </button>
             </div>
           </>

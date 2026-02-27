@@ -23,8 +23,6 @@ const ResultStep: React.FC<ResultStepProps> = ({
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-
-
   return (
     <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-center">
       <div className="flex justify-center w-full max-w-md">

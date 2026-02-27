@@ -111,9 +111,12 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
             {/* Camera Area */}
             <div
               className={`w-full relative bg-slate-800 rounded-3xl mt-1 mb-6 shadow-2xl mx-auto overflow-hidden transition-all duration-500 ${
-                selectedLayout === "STRIP_1X4" ? "aspect-[4/3]" : 
-                (selectedLayout === "PORTRAIT_2X2" || selectedLayout === "PORTRAIT_1X1") ? "aspect-square" :
-                "aspect-[3/4]"
+                selectedLayout === "STRIP_1X4"
+                  ? "aspect-[4/3]"
+                  : selectedLayout === "PORTRAIT_2X2" ||
+                      selectedLayout === "PORTRAIT_1X1"
+                    ? "aspect-square"
+                    : "aspect-[3/4]"
               }`}
             >
               <video
@@ -148,11 +151,16 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
               )}
 
               {lastPhoto && (
-                <div className={`absolute right-3 bottom-12 bg-white p-1 shadow-xl rounded-md -rotate-3 z-30 animate-in fade-in slide-in-from-bottom duration-300 w-20 aspect-[3/4]`}>
-                  <img src={lastPhoto} className="w-full h-full object-cover rounded-sm" alt="Preview" />
+                <div
+                  className={`absolute right-3 bottom-12 bg-white p-1 shadow-xl rounded-md -rotate-3 z-30 animate-in fade-in slide-in-from-bottom duration-300 w-20 aspect-[3/4]`}
+                >
+                  <img
+                    src={lastPhoto}
+                    className="w-full h-full object-cover rounded-sm"
+                    alt="Preview"
+                  />
                 </div>
               )}
-
             </div>
 
             {/* Status Indicator outside capture area */}
@@ -180,7 +188,10 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
                   disabled={isCapturing}
                   className={`w-20 h-20 rounded-full flex flex-col items-center justify-center text-white transition-all shadow-lg border-[4px] border-pink-100 ${isCapturing ? "bg-pink-300 scale-95" : "bg-pink-400 hover:bg-pink-500"}`}
                 >
-                  <Aperture size={32} className={isCapturing ? "animate-spin-slow" : ""} />
+                  <Aperture
+                    size={32}
+                    className={isCapturing ? "animate-spin-slow" : ""}
+                  />
                   <span className="font-bold text-xs mt-0.5 tracking-wider uppercase">
                     {isCapturing ? "..." : "AUTO"}
                   </span>
@@ -201,10 +212,16 @@ const MobileView: React.FC<LayoutSelectionStepProps> = ({
                 onClick={() => !isCapturing && onToggleRecap()}
                 disabled={isCapturing}
               >
-                <div className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-300 ${isRecapEnabled ? "bg-pink-400" : "bg-slate-200"}`}>
-                  <span className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${isRecapEnabled ? "translate-x-4" : "translate-x-1"}`} />
+                <div
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-300 ${isRecapEnabled ? "bg-pink-400" : "bg-slate-200"}`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${isRecapEnabled ? "translate-x-4" : "translate-x-1"}`}
+                  />
                 </div>
-                <span className="text-xs font-semibold text-slate-700">Video Recap</span>
+                <span className="text-xs font-semibold text-slate-700">
+                  Video Recap
+                </span>
               </button>
             </div>
           </>

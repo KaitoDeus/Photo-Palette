@@ -50,17 +50,17 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     <div className="relative w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold bg-white hover:border-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-500/10 flex justify-between items-center transition-all duration-300 hover:shadow-md text-sm"
+        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold bg-white hover:border-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-500/10 flex justify-between items-center transition-all duration-200 hover:shadow-md text-sm"
       >
         <span>{value || placeholder}</span>
         <ChevronDown
           size={18}
-          className={`text-slate-400 transition-transform duration-500 ${isOpen ? "rotate-180 text-brand-500" : ""}`}
+          className={`text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-brand-500" : ""}`}
         />
       </button>
 
       <div
-        className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-brand-50 overflow-hidden transition-all duration-300 origin-top z-50 ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"}`}
+        className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-brand-50 overflow-hidden transition-all duration-150 origin-top z-50 ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"}`}
       >
         <div className="max-h-60 overflow-y-auto custom-scrollbar">
           <div
@@ -99,6 +99,12 @@ const AboutPage: React.FC = () => {
   const [selectedDistrict, setSelectedDistrict] = React.useState("");
   const [filteredBranches, setFilteredBranches] = React.useState(BRANCHES);
   const [selectedBranch, setSelectedBranch] = React.useState(BRANCHES[0]);
+  const [isMapLoading, setIsMapLoading] = React.useState(true);
+
+  // Reset loading state when branch changes
+  useEffect(() => {
+    setIsMapLoading(true);
+  }, [selectedBranch]);
 
   // Extract unique cities
   const cities = useMemo(() => {
@@ -170,10 +176,10 @@ const AboutPage: React.FC = () => {
                     Được thành lập với niềm đam mê văn hóa Photobooth Hàn Quốc
                   </p>
                   <p>
-                    Từ một cửa hàng nhỏ, chúng tôi đã phát triển thành hệ
-                    thống Photobooth hàng đầu Việt Nam với 24 chi nhánh trải
-                    dài từ Bắc vào Nam, mang đến trải nghiệm chụp ảnh lấy ngay
-                    hiện đại, trẻ trung và đầy màu sắc.
+                    Từ một cửa hàng nhỏ, chúng tôi đã phát triển thành hệ thống
+                    Photobooth hàng đầu Việt Nam với 24 chi nhánh trải dài từ
+                    Bắc vào Nam, mang đến trải nghiệm chụp ảnh lấy ngay hiện
+                    đại, trẻ trung và đầy màu sắc.
                   </p>
                 </div>
               </div>
@@ -203,9 +209,7 @@ const AboutPage: React.FC = () => {
                 </div>
                 <div>
                   <Star className="w-6 h-6 text-brand-400 mb-2" />
-                  <div className="text-2xl font-bold text-slate-900">
-                    4.9/5
-                  </div>
+                  <div className="text-2xl font-bold text-slate-900">4.9/5</div>
                   <div className="text-xs text-slate-500 font-medium">
                     Đánh Giá
                   </div>
@@ -301,18 +305,41 @@ const AboutPage: React.FC = () => {
             {/* Right Col: Google Map */}
             <div className="w-full lg:w-2/3 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden h-[500px] lg:h-full relative">
               {selectedBranch ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  id="gmap_canvas"
-                  src={`https://maps.google.com/maps?q=${encodeURIComponent(selectedBranch.address ? selectedBranch.name + " " + selectedBranch.address : selectedBranch.city)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
-                  frameBorder="0"
-                  scrolling="no"
-                  marginHeight={0}
-                  marginWidth={0}
-                  className="w-full h-full"
-                  title="Branch Map"
-                ></iframe>
+                <>
+                  {isMapLoading && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-50 z-10">
+                      <div className="relative">
+                        <div className="w-12 h-12 border-4 border-brand-200 border-t-brand-500 rounded-full animate-spin"></div>
+                        <MapPin
+                          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-brand-500"
+                          size={20}
+                        />
+                      </div>
+                      <p className="mt-4 text-slate-500 font-medium animate-pulse text-sm">
+                        Đang tải bản đồ...
+                      </p>
+                    </div>
+                  )}
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    id="gmap_canvas"
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                      selectedBranch.address
+                        ? selectedBranch.name + " " + selectedBranch.address
+                        : selectedBranch.city,
+                    )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight={0}
+                    marginWidth={0}
+                    className={`w-full h-full transition-opacity duration-500 ${isMapLoading ? "opacity-0" : "opacity-100"}`}
+                    title="Branch Map"
+                    loading="lazy"
+                    onLoad={() => setIsMapLoading(false)}
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-50">
                   <div className="text-center">

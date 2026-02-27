@@ -65,7 +65,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
       </div>
 
       {isOpen && !disabled && (
-        <div className="absolute top-full left-0 min-w-full mt-2 bg-white border border-slate-100 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] z-50 overflow-hidden py-1 animate-in fade-in zoom-in-95 duration-200 origin-top">
+        <div className="absolute top-full left-0 min-w-full mt-2 bg-white border border-slate-100 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] z-50 overflow-hidden py-1 animate-in fade-in zoom-in-95 duration-150 origin-top">
           {options.map((option) => (
             <div
               key={option.value}

@@ -76,9 +76,9 @@ const DisclaimerModal: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed">
-                  Website này hoạt động <strong>PHI LỢI NHUẬN</strong>. Chúng tôi
-                  không thu thập dữ liệu cá nhân hay sử dụng hình ảnh của bạn cho
-                  mục đích thương mại.
+                  Website này hoạt động <strong>PHI LỢI NHUẬN</strong>. Chúng
+                  tôi không thu thập dữ liệu cá nhân hay sử dụng hình ảnh của
+                  bạn cho mục đích thương mại.
                 </p>
                 <p className="text-sm text-slate-500 italic border-l-2 border-brand-200 pl-3">
                   Mọi tài nguyên hình ảnh chỉ mang tính chất minh họa cho giao

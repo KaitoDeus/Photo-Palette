@@ -1,8 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
 
-
-
 const Pricing: React.FC = () => {
   const packages = [
     {
@@ -10,9 +8,7 @@ const Pricing: React.FC = () => {
       price: "70.000",
       unit: "VND",
       desc: "Bao gồm 2 kiểu khung cho bạn lựa chọn",
-      features: [
-        "2 ảnh in giống nhau",
-      ],
+      features: ["2 ảnh in giống nhau"],
       highlight: false,
     },
     {
@@ -20,9 +16,7 @@ const Pricing: React.FC = () => {
       price: "100.000",
       unit: "VND",
       desc: "Bao gồm 5 kiểu khung cho bạn lựa chọn",
-      features: [
-        "2 ảnh in giống nhau",
-      ],
+      features: ["2 ảnh in giống nhau"],
       highlight: false,
     },
   ];
@@ -35,7 +29,8 @@ const Pricing: React.FC = () => {
             Bảng Giá Dịch Vụ
           </h2>
           <p className="text-lg text-brand-600 font-bold max-w-2xl mx-auto">
-            Tất cả đều được sử dụng miễn phí các phụ kiện và máy làm tóc, sticker
+            Tất cả đều được sử dụng miễn phí các phụ kiện và máy làm tóc,
+            sticker
           </p>
         </div>
 

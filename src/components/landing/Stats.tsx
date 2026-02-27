@@ -13,7 +13,7 @@ const AnimatedNumber: React.FC<{ value: string }> = ({ value }) => {
           setHasAnimated(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (countRef.current) {
@@ -37,9 +37,10 @@ const AnimatedNumber: React.FC<{ value: string }> = ({ value }) => {
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      
+
       // Easing function: easeOutExpo
-      const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const easedProgress =
+        progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       const currentCount = Math.floor(easedProgress * numericPart);
 
       let formatted = currentCount.toString();
@@ -92,7 +93,10 @@ const Stats: React.FC = () => {
         <div className="bg-white/70 backdrop-blur-2xl border-2 border-white rounded-[2.5rem] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-8 md:p-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
             {stats.map((stat, index) => (
-              <div key={index} className="flex flex-col items-center text-center group cursor-default">
+              <div
+                key={index}
+                className="flex flex-col items-center text-center group cursor-default"
+              >
                 <div className="relative mb-6">
                   <div className="absolute inset-0 bg-brand-200 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-full" />
                   <div className="relative w-20 h-20 rounded-3xl bg-white border border-brand-100 shadow-md shadow-brand-100/50 flex items-center justify-center group-hover:-translate-y-2 group-hover:rotate-6 transition-all duration-500">

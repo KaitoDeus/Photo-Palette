@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 
-
 const ALL_REVIEWS = [
   {
     name: "Khanh Lưu Phát Anh",

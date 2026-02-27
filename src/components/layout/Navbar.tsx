@@ -83,14 +83,14 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 h-screen bg-brand-50 shadow-2xl z-50 transition-all duration-300 ease-in-out border-r border-brand-100 flex flex-col group/nav overflow-x-hidden ${
+        className={`fixed top-0 left-0 h-screen bg-brand-50 z-50 border-r border-brand-100 flex flex-col group/nav overflow-x-hidden ${
           isSidebarOpen
-            ? "translate-x-0 w-80 shadow-2xl"
-            : "-translate-x-full md:translate-x-0 md:w-20 md:shadow-none hover:md:w-72 hover:md:shadow-2xl"
+            ? "translate-x-0 w-80"
+            : "-translate-x-full md:translate-x-0 md:w-20 hover:md:w-72"
         }`}
       >
         {/* Logo Header */}
-        <div className="p-6 md:px-5 md:group-hover/nav:p-6 flex items-center justify-between border-b border-slate-50 transition-all duration-300 shrink-0">
+        <div className="p-6 md:px-5 md:group-hover/nav:p-6 flex items-center justify-between border-b border-slate-50 shrink-0">
           <div
             className="flex items-center gap-3 cursor-pointer shrink-0"
             onClick={handleLogoClick}
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
               />
             </div>
             <span
-              className={`font-bold text-xl text-slate-800 tracking-tight transition-all duration-300 whitespace-nowrap overflow-hidden ${
+              className={`font-bold text-xl text-slate-800 tracking-tight whitespace-nowrap overflow-hidden ${
                 isSidebarOpen
                   ? "w-auto opacity-100"
                   : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-1"
@@ -124,14 +124,14 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-1 flex flex-col gap-2 p-4 md:px-3 md:group-hover/nav:p-4 overflow-y-auto overflow-x-hidden transition-all duration-300">
+        <div className="flex-1 flex flex-col gap-2 p-4 md:px-3 md:group-hover/nav:p-4 overflow-y-auto overflow-x-hidden">
           {navLinks.map((link) => (
             <button
               key={link.name}
               onClick={() => handleNavigation(link)}
-              className={`flex items-center p-3 rounded-xl transition-all duration-200 group text-left ${
+              className={`flex items-center p-3 rounded-xl transition-colors duration-200 group text-left ${
                 location.pathname === link.path
-                  ? "bg-brand-50 text-brand-600 shadow-sm"
+                  ? "bg-brand-50 text-brand-600"
                   : "text-slate-600 hover:bg-slate-50 hover:text-brand-500"
               }`}
               title={!isSidebarOpen ? link.name : undefined}
@@ -147,7 +147,7 @@ const Navbar: React.FC = () => {
               </div>
 
               <span
-                className={`font-medium text-lg transition-all duration-300 whitespace-nowrap overflow-hidden ${
+                className={`font-medium text-lg whitespace-nowrap overflow-hidden ${
                   isSidebarOpen
                     ? "w-auto opacity-100 ml-4"
                     : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-4"
@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
 
               {location.pathname === link.path && (
                 <div
-                  className={`ml-auto w-2 h-2 rounded-full bg-brand-500 shrink-0 transition-all duration-300 ${
+                  className={`ml-auto w-2 h-2 rounded-full bg-brand-500 shrink-0 ${
                     isSidebarOpen
                       ? "opacity-100"
                       : "opacity-0 md:group-hover/nav:opacity-100"
@@ -170,11 +170,11 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Booking Button */}
-        <div className="p-4 md:px-3 md:group-hover/nav:p-4 border-t border-slate-100 mt-auto transition-all duration-300 shrink-0">
+        <div className="p-4 md:px-3 md:group-hover/nav:p-4 border-t border-slate-100 mt-auto shrink-0">
           <Button
             onClick={handleBooking}
             fullWidth={true}
-            className={`flex items-center justify-center transition-all duration-300 ${
+            className={`flex items-center justify-center ${
               !isSidebarOpen ? "md:px-0 md:group-hover/nav:px-6" : ""
             }`}
           >
@@ -182,7 +182,7 @@ const Navbar: React.FC = () => {
               <Camera size={20} />
             </div>
             <span
-              className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${
+              className={`whitespace-nowrap overflow-hidden ${
                 isSidebarOpen
                   ? "w-auto opacity-100 ml-2"
                   : "w-0 opacity-0 md:group-hover/nav:w-auto md:group-hover/nav:opacity-100 md:group-hover/nav:ml-2"

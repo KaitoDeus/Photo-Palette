@@ -49,8 +49,8 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       square: "w-40 h-40", // 160px x 160px
     },
     lg: {
-      "1x4": "w-[200px] h-[600px] max-w-[50vw] h-auto aspect-[1/3]", 
-      portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]", 
+      "1x4": "w-[200px] h-[600px] max-w-[50vw] h-auto aspect-[1/3]",
+      portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]",
       square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
     },
   };
@@ -58,8 +58,10 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   const dimensions =
     frame.layout === "1x4"
       ? sizeClasses[size]["1x4"]
-      : (frame.layout === "2x2" || frame.layout === "1x1")
-        ? isOriginal ? sizeClasses[size]["portrait"] : sizeClasses[size]["square"]
+      : frame.layout === "2x2" || frame.layout === "1x1"
+        ? isOriginal
+          ? sizeClasses[size]["portrait"]
+          : sizeClasses[size]["square"]
         : sizeClasses[size]["portrait"];
 
   let wrapperClasses = `relative shadow-sm transition-transform ${disableHover ? "" : `hover:scale-105 ${filled ? "translate-y-2" : ""}`} duration-500 ${dimensions}`;
@@ -161,7 +163,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                 ? {
                     aspectRatio:
                       frame.layout === "2x2" || frame.layout === "1x1"
-                        ? isOriginal ? "3/4" : "1/1"
+                        ? isOriginal
+                          ? "3/4"
+                          : "1/1"
                         : frame.layout === "2x1"
                           ? "auto"
                           : "3/4",
@@ -205,11 +209,11 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
   // Fallback for basic frames
   const is1x1 = frame.layout === "1x1";
   const is2x2 = frame.layout === "2x2";
-  
+
   // Increase padding for 2x2 and 1x1 to create a clear border/Polaroid look
-  const fallbackPadding = isStrip ? "p-1.5" : (is2x2 || is1x1) ? "p-4" : "p-2";
+  const fallbackPadding = isStrip ? "p-1.5" : is2x2 || is1x1 ? "p-4" : "p-2";
   wrapperClasses += ` border-2 ${fallbackPadding} gap-2 ${frame.borderColor} ${frame.color}`;
-  
+
   if (isStrip) {
     wrapperClasses += " flex flex-col items-center justify-between";
   } else {
@@ -247,7 +251,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
             key={slotNum}
             className={`w-full border ${filled ? "bg-slate-200" : "bg-white"} border-slate-100/50 overflow-hidden relative ${
               frame.layout === "2x2" || frame.layout === "1x1"
-                ? isOriginal ? "aspect-[3/4]" : "aspect-square"
+                ? isOriginal
+                  ? "aspect-[3/4]"
+                  : "aspect-square"
                 : "aspect-[3/4]"
             }`}
           >

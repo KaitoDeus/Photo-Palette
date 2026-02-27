@@ -40,7 +40,6 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
       if (selectedLayoutId === "PORTRAIT_1X1" && frame.layout === "1x1")
         matchesLayout = true;
 
-
       const matchesSearch = frame.name
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
@@ -118,7 +117,6 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
                 let contentAspect = "aspect-[1/3]"; // Default strip
                 if (frame.layout === "2x2" || frame.layout === "1x1")
                   contentAspect = "aspect-[3/4]";
-
 
                 // Unified card container aspect ratio to keep grid uniform
                 const cardAspect = "aspect-[2/3]";

@@ -8,7 +8,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-
 import { FRAMES } from "../features/photobooth/data/frames";
 import { Frame } from "../features/photobooth/types";
 
@@ -85,22 +84,25 @@ const FrameCard: React.FC<{
 }> = ({ frame, index, onClick }) => {
   return (
     <div key={frame.id} className="group">
-      <div
-        className="bg-white rounded-[40px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full"
-      >
+      <div className="bg-white rounded-[40px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full">
         {/* Previews Container */}
         <div className="flex justify-center gap-4 w-full mb-8">
           {/* Left: Original */}
           <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
-            <div 
+            <div
               className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(false)}
             >
-              <FrameStrip frame={frame} filled={false} size="sm" aspectMode="original" />
+              <FrameStrip
+                frame={frame}
+                filled={false}
+                size="sm"
+                aspectMode="original"
+              />
             </div>
             <button
-               onClick={() => onClick(false)}
-               className="w-full py-2.5 bg-[#FF99A4] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
+              onClick={() => onClick(false)}
+              className="w-full py-2.5 bg-[#FF99A4] text-white text-[13px] font-black rounded-full shadow-sm hover:brightness-105 active:scale-95 transition-all uppercase tracking-wider"
             >
               Khung Gốc
             </button>
@@ -108,11 +110,17 @@ const FrameCard: React.FC<{
 
           {/* Right: Preview */}
           <div className="flex flex-col items-center gap-4 flex-1 max-w-[140px]">
-            <div 
+            <div
               className="bg-slate-50/50 p-1.5 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(true)}
             >
-              <FrameStrip frame={frame} filled={true} size="sm" aspectMode="original" imageFit="fill" />
+              <FrameStrip
+                frame={frame}
+                filled={true}
+                size="sm"
+                aspectMode="original"
+                imageFit="fill"
+              />
             </div>
             <button
               onClick={() => onClick(true)}
@@ -151,7 +159,7 @@ const FrameLibraryPage: React.FC = () => {
   const filteredFrames = FRAMES.filter((frame) => {
     const matchesCategory =
       activeCategory === "All" || frame.category === activeCategory;
-    
+
     let matchesLayout = true;
     if (activeLayout === "Nhỏ") {
       matchesLayout = frame.layout === "1x4";
@@ -303,7 +311,13 @@ const FrameLibraryPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="pointer-events-none mt-8 transition-transform duration-500">
-              <FrameStrip frame={filteredFrames[selectedIndex]} filled={previewFilled} size="lg" aspectMode="original" imageFit="fill" />
+              <FrameStrip
+                frame={filteredFrames[selectedIndex]}
+                filled={previewFilled}
+                size="lg"
+                aspectMode="original"
+                imageFit="fill"
+              />
             </div>
           </div>
 

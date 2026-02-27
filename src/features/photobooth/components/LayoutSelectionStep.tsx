@@ -4,7 +4,9 @@ import MobileView from "./layouts/MobileView";
 import DesktopView from "./layouts/DesktopView";
 import { LayoutSelectionStepProps } from "./layouts/ViewProps";
 
-const LayoutSelectionStep: React.FC<Omit<LayoutSelectionStepProps, "setIsFrameModalOpen">> = (props) => {
+const LayoutSelectionStep: React.FC<
+  Omit<LayoutSelectionStepProps, "setIsFrameModalOpen">
+> = (props) => {
   const [isFrameModalOpen, setIsFrameModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -12,7 +14,7 @@ const LayoutSelectionStep: React.FC<Omit<LayoutSelectionStepProps, "setIsFrameMo
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // 768 is the 'md' breakpoint in Tailwind
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);

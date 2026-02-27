@@ -70,7 +70,11 @@ export const usePhotoBooth = () => {
 
   // Re-attach stream to video element when step changes or component remounts
   useEffect(() => {
-    if (streamRef.current && videoRef.current && videoRef.current.srcObject !== streamRef.current) {
+    if (
+      streamRef.current &&
+      videoRef.current &&
+      videoRef.current.srcObject !== streamRef.current
+    ) {
       videoRef.current.srcObject = streamRef.current;
     }
   }); // Run on every render to ensure video gets re-attached if view switches (Desktop/Mobile)
@@ -82,11 +86,11 @@ export const usePhotoBooth = () => {
           facingMode: "user",
           width: { min: 640, ideal: 1280 },
           height: { min: 480, ideal: 720 },
-          aspectRatio: { ideal: 1.333333 }
+          aspectRatio: { ideal: 1.333333 },
         },
         audio: false,
       });
-      
+
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -113,7 +117,10 @@ export const usePhotoBooth = () => {
     if (selectedLayout === "STRIP_1X4") {
       targetWidth = 1600;
       targetHeight = 1200; // 4:3 Landscape
-    } else if (selectedLayout === "PORTRAIT_2X2" || selectedLayout === "PORTRAIT_1X1") {
+    } else if (
+      selectedLayout === "PORTRAIT_2X2" ||
+      selectedLayout === "PORTRAIT_1X1"
+    ) {
       targetWidth = 1500;
       targetHeight = 1500; // 1:1 Square
     } else {
@@ -185,7 +192,7 @@ export const usePhotoBooth = () => {
         ctx.restore();
 
         const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-        
+
         // Update state
         setPhotos((prev) => [...prev, dataUrl]);
         return dataUrl;
@@ -248,7 +255,17 @@ export const usePhotoBooth = () => {
               ctx.scale(-1, 1);
             }
             // Draw the cropped portion of the video to the full canvas
-            ctx.drawImage(video, sx, sy, sw, sh, 0, 0, targetWidth, targetHeight);
+            ctx.drawImage(
+              video,
+              sx,
+              sy,
+              sw,
+              sh,
+              0,
+              0,
+              targetWidth,
+              targetHeight,
+            );
             ctx.restore();
           }
           animationFrameRef.current = requestAnimationFrame(draw);
