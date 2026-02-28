@@ -1,43 +1,43 @@
 import React from "react";
 
-import insta1 from "../../assets/landing/insta_1.webp";
-import insta2 from "../../assets/landing/insta_2.webp";
-import insta3 from "../../assets/landing/insta_3.webp";
-import insta4 from "../../assets/landing/insta_4.webp";
-import insta5 from "../../assets/landing/insta_5.webp";
-import insta6 from "../../assets/landing/insta_6.webp";
+import insta1 from "../../assets/landing/insta_1.jpg";
+import insta2 from "../../assets/landing/insta_2.jpg";
+import insta3 from "../../assets/landing/insta_3.jpg";
+import insta4 from "../../assets/landing/insta_4.jpg";
+import insta5 from "../../assets/landing/insta_5.jpg";
+import insta6 from "../../assets/landing/insta_6.jpg";
 
 const Gallery: React.FC = () => {
   const items = [
     {
       id: 1,
       src: insta1,
-      link: "https://www.instagram.com/p/DUDUlhPkRg9/",
+      link: "https://www.instagram.com/p/DVTQKaTAjDE/",
     },
     {
       id: 2,
       src: insta2,
-      link: "https://www.instagram.com/p/DUNoVEyDwwR/",
+      link: "https://www.instagram.com/p/DVQynSojzu7/",
     },
     {
       id: 3,
       src: insta3,
-      link: "https://www.instagram.com/p/DULC3d8j8CN/",
+      link: "https://www.instagram.com/p/DVLhUs-mfLw/",
     },
     {
       id: 4,
       src: insta4,
-      link: "https://www.instagram.com/p/DUIeSlkD1bu/",
+      link: "https://www.instagram.com/p/DVJDyM-D6mC/",
     },
     {
       id: 5,
       src: insta5,
-      link: "https://www.instagram.com/p/DUAWyuUj7NR/",
+      link: "https://www.instagram.com/p/DUp-RVqD14e/",
     },
     {
       id: 6,
       src: insta6,
-      link: "https://www.instagram.com/p/DT9Xl6TihOG/",
+      link: "https://www.instagram.com/p/DUnlzUdjxyD/",
     },
   ];
 

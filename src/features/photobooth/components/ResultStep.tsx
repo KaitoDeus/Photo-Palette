@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Sparkles, RefreshCw, Video, X } from "lucide-react";
+import { Sparkles, RefreshCw, Video, X, Download } from "lucide-react";
 import Button from "../../../components/common/Button";
 import { LayoutType, Frame } from "../types";
 import { FrameStrip } from "./FrameStrip";
+import { exportFinalImage } from "../utils/imageExport";
 
 interface ResultStepProps {
   photos: string[];
@@ -22,15 +23,35 @@ const ResultStep: React.FC<ResultStepProps> = ({
   onBooking,
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleDownload = async () => {
+    if (isExporting) return;
+    setIsExporting(true);
+    try {
+      const dataUrl = await exportFinalImage(selectedFrame, photos);
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `photo-palette-${new Date().getTime()}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error("Download failed:", err);
+      alert("Có lỗi khi tải ảnh về, vui lòng thử lại!");
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   return (
     <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-center">
-      <div className="flex justify-center w-full max-w-md">
+      <div className="flex justify-center w-full max-w-xl">
         <FrameStrip
           frame={selectedFrame}
           filled={true}
           photos={photos}
-          size="lg"
+          size="xl"
           disableHover={true}
           imageFit="fill"
         />
@@ -46,6 +67,15 @@ const ResultStep: React.FC<ResultStepProps> = ({
         </p>
 
         <div className="flex flex-col gap-3 mt-4">
+          <Button
+            onClick={handleDownload}
+            disabled={isExporting}
+            className="bg-green-500 hover:bg-green-600 border-none shadow-lg shadow-green-100"
+          >
+            <Download size={18} className="mr-2" />
+            {isExporting ? "Đang xử lý..." : "Tải Ảnh Về"}
+          </Button>
+
           <Button onClick={onBooking}>
             <Sparkles size={18} className="mr-2" />
             Đặt Lịch Chụp

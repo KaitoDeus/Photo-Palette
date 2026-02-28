@@ -16,7 +16,7 @@ const MODELS_1X4 = [model1x4_1, model1x4_2, model1x4_3, model1x4_4];
 interface FrameStripProps {
   frame: Frame;
   filled: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   photos?: string[];
   disableHover?: boolean;
   aspectMode?: "capture" | "original";
@@ -52,6 +52,11 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       "1x4": "w-[200px] h-[600px] max-w-[50vw] h-auto aspect-[1/3]",
       portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]",
       square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
+    },
+    xl: {
+      "1x4": "w-[260px] h-[680px] max-w-[60vw] h-auto aspect-[1/3]",
+      portrait: "w-[480px] h-[640px] max-w-[90vw] h-auto aspect-[3/4]",
+      square: "w-[600px] h-[660px] max-w-[90vw] h-auto aspect-square",
     },
   };
 
