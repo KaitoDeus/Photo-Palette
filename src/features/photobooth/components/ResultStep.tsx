@@ -45,8 +45,8 @@ const ResultStep: React.FC<ResultStepProps> = ({
   };
 
   return (
-    <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 items-center justify-center">
-      <div className="flex justify-center w-full max-w-xl">
+    <div className="p-4 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center min-h-[calc(100vh-120px)]">
+      <div className="flex justify-center w-full transition-all duration-500">
         <FrameStrip
           frame={selectedFrame}
           filled={true}
@@ -57,26 +57,31 @@ const ResultStep: React.FC<ResultStepProps> = ({
         />
       </div>
 
-      <div className="flex flex-col gap-4 max-w-xs text-center md:text-left">
-        <h3 className="text-2xl font-bold text-slate-900">
-          Xinh quá trời ơi! 😍
-        </h3>
-        <p className="text-slate-600 text-sm">
-          Ghé studio để được chụp với ánh sáng chuyên nghiệp và nhận ảnh in xịn
-          xò nhé!
-        </p>
+      <div className="flex flex-col gap-5 w-full max-w-sm text-center lg:text-left animate-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-2">
+          <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+            Xinh quá trời ơi! 😍
+          </h3>
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Ghé studio để được chụp với ánh sáng chuyên nghiệp và nhận ảnh in xịn
+            xò nhé!
+          </p>
+        </div>
 
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-3.5 mt-2">
           <Button
             onClick={handleDownload}
             disabled={isExporting}
-            className="bg-green-500 hover:bg-green-600 border-none shadow-lg shadow-green-100"
+            className="bg-green-500 hover:bg-green-600 border-none shadow-lg shadow-green-100 h-12"
           >
             <Download size={18} className="mr-2" />
             {isExporting ? "Đang xử lý..." : "Tải Ảnh Về"}
           </Button>
 
-          <Button onClick={onBooking}>
+          <Button 
+            onClick={onBooking}
+            className="h-12"
+          >
             <Sparkles size={18} className="mr-2" />
             Đặt Lịch Chụp
           </Button>
@@ -85,20 +90,24 @@ const ResultStep: React.FC<ResultStepProps> = ({
             <Button
               variant="outline"
               onClick={() => setIsVideoOpen(true)}
-              className="border-pink-200 text-pink-500 hover:bg-pink-50"
+              className="border-pink-200 text-pink-500 hover:bg-pink-50 h-12"
             >
               <Video size={18} className="mr-2" />
               Video Recap
             </Button>
           )}
 
-          <Button variant="secondary" onClick={onRetake}>
+          <Button 
+            variant="secondary" 
+            onClick={onRetake}
+            className="h-12"
+          >
             <RefreshCw size={18} className="mr-2" />
             Chụp Lại
           </Button>
         </div>
 
-        <p className="text-xs text-brand-400 mt-2 italic">
+        <p className="text-[11px] sm:text-xs text-brand-400 mt-2 italic opacity-80">
           *Ảnh sẽ không được lưu trên hệ thống để bảo vệ quyền riêng tư.
         </p>
       </div>

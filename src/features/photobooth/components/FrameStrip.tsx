@@ -39,24 +39,25 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
 
   const sizeClasses = {
     sm: {
-      "1x4": "w-12 h-36", // 48px x 144px
-      portrait: "w-24 h-32", // 96px x 128px
-      square: "w-24 h-24", // 96px x 96px
+      "1x4": "w-[60px] aspect-[1/3]", 
+      portrait: "w-[120px] aspect-[3/4]",
+      square: "w-[120px] aspect-square",
     },
     md: {
-      "1x4": "w-14 h-40", // Balanced for 4 grid columns
-      portrait: "w-36 h-48", // 144px x 192px
-      square: "w-40 h-40", // 160px x 160px
+      port: "w-[80px] sm:w-[100px] aspect-[1/3]", // for 1x4 in mobile
+      "1x4": "w-[80px] sm:w-[100px] aspect-[1/3]",
+      portrait: "w-[160px] sm:w-[200px] aspect-[3/4]",
+      square: "w-[180px] sm:w-[220px] aspect-square",
     },
     lg: {
-      "1x4": "w-[200px] h-[600px] max-w-[50vw] h-auto aspect-[1/3]",
-      portrait: "w-[405px] h-[540px] max-w-[85vw] h-auto aspect-[3/4]",
-      square: "w-[450px] h-[450px] max-w-[85vw] h-auto aspect-square",
+      "1x4": "w-[240px] max-w-[40vw] aspect-[1/3]",
+      portrait: "w-[400px] max-w-[80vw] aspect-[3/4]",
+      square: "w-[450px] max-w-[80vw] aspect-square",
     },
     xl: {
-      "1x4": "w-[260px] h-[680px] max-w-[60vw] h-auto aspect-[1/3]",
-      portrait: "w-[480px] h-[640px] max-w-[90vw] h-auto aspect-[3/4]",
-      square: "w-[600px] h-[660px] max-w-[90vw] h-auto aspect-square",
+      "1x4": "w-[280px] max-w-[50vw] sm:max-w-xs aspect-[1/3]",
+      portrait: "w-[480px] max-w-[90vw] sm:max-w-md aspect-[3/4]",
+      square: "w-[600px] max-w-[90vw] sm:max-w-xl aspect-square",
     },
   };
 
@@ -149,7 +150,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
 
     return (
       <div
-        className={`${wrapperClasses} overflow-hidden bg-white ${is1x4 ? "flex flex-col" : "grid grid-cols-2"}`}
+        className={`${wrapperClasses} overflow-hidden bg-white ${
+          is1x4 ? "flex flex-col" : frame.layout === "1x1" ? "flex" : "grid grid-cols-2"
+        }`}
         style={{
           paddingTop: pt,
           paddingBottom: pb,
@@ -175,7 +178,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
                           ? "auto"
                           : "3/4",
                   }
-                : { minHeight: "150px" } // Ensure minimum height for 1x4 slots
+                : { flex: 1 } // Ensure 1x4 slots flex equally
             }
           >
             {filled && (
