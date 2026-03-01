@@ -53,7 +53,7 @@ const ResultStep: React.FC<ResultStepProps> = ({
           photos={photos}
           size="xl"
           disableHover={true}
-          imageFit="fill"
+          imageFit="cover"
         />
       </div>
 

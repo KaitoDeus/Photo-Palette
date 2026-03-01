@@ -101,7 +101,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
             return (
               <div
                 key={i}
-                className={`bg-slate-200 overflow-hidden absolute`}
+                className={`bg-slate-200 overflow-hidden absolute z-0`}
                 style={{ top, left, width, height }}
               >
                 {filled && (
@@ -122,7 +122,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
               </div>
             );
           })}
-          <div className="absolute inset-0 z-10 pointer-events-none">
+          <div className="absolute inset-0 z-20 pointer-events-none">
             <img
               src={frame.overlayImage}
               alt="Frame Overlay"
@@ -162,7 +162,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
         {slots.map((slotNum, i) => (
           <div
             key={slotNum}
-            className={`w-full bg-slate-200 overflow-hidden relative ${is1x4 ? "flex-1" : ""}`}
+            className={`w-full bg-slate-200 overflow-hidden relative z-0 ${is1x4 ? "flex-1" : ""}`}
             style={
               !is1x4
                 ? {
@@ -195,7 +195,7 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
             )}
           </div>
         ))}
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-20 pointer-events-none">
           <img
             src={frame.overlayImage}
             alt="Frame Overlay"

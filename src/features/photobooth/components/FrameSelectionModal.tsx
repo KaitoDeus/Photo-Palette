@@ -17,6 +17,8 @@ const CATEGORIES = [
   { value: "All", label: "Tất cả" },
   { value: "VALENTINE", label: "VALENTINE" },
   { value: "TET HOLIDAY", label: "TET HOLIDAY" },
+  { value: "BIRTHDAY", label: "BIRTHDAY" },
+  { value: "8/3", label: "8/3" },
 ];
 
 const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
@@ -76,9 +78,9 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
         </div>
 
         {/* Filters & Search */}
-        <div className="p-6 pb-2 grid gap-4 md:grid-cols-3">
+        <div className="p-6 pb-2 flex flex-col md:flex-row gap-4">
           {/* Search */}
-          <div className="relative md:col-span-1">
+          <div className="relative flex-1">
             <Search
               className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
               size={18}
@@ -88,23 +90,18 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
               placeholder="Tìm kiếm khung..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-medium text-slate-700"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-semibold text-sm text-slate-700 shadow-sm"
             />
           </div>
 
           {/* Categories Dropdown */}
-          <div className="md:col-span-2">
-            <div className="relative z-10 w-full mb-2">
-              <Filter
-                className="absolute left-3 top-[20px] -translate-y-1/2 text-slate-400 z-10 pointer-events-none"
-                size={18}
-              />
-              <CustomDropdown
-                value={selectedCategory}
-                options={CATEGORIES}
-                onChange={setSelectedCategory}
-              />
-            </div>
+          <div className="relative z-10 w-full md:w-64">
+            <CustomDropdown
+              value={selectedCategory}
+              options={CATEGORIES}
+              onChange={setSelectedCategory}
+              icon={<Filter size={18} />}
+            />
           </div>
         </div>
 

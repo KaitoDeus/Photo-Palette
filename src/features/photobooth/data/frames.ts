@@ -1,8 +1,8 @@
 import { Frame } from "../types";
 
 // Frame Images
-import loveFrame from "../../../assets/frames/love-certificate_LoveCertificate_1x4.webp";
-import loveFrameGrid from "../../../assets/frames/love-certificate-grid_LoveCertificate_2x2.webp";
+import loveFrame from "../../../assets/frames/love-certificate_1x4.webp";
+import loveFrameGrid from "../../../assets/frames/love-certificate_2x2.webp";
 import myOneAndOnlyFrame from "../../../assets/frames/my-one-and-only_MyOneAndOnly_1x4.webp";
 import myOneAndOnlyFrameGrid from "../../../assets/frames/my-one-and-only-grid_MyOneAndOnly_2x2.webp";
 import hoaxuanFrame from "../../../assets/frames/hoaxuan_1x4.webp";
@@ -15,6 +15,11 @@ import sacXuanFrame from "../../../assets/frames/sac-xuan_1x4.webp";
 import sacXuanGridFrame from "../../../assets/frames/sac-xuan_2x2.webp";
 import tanXuanFrame from "../../../assets/frames/tan-xuan_1x4.webp";
 import tanXuanGridFrame from "../../../assets/frames/tan-xuan_2x2.webp";
+import happyBirthdayFrame from "../../../assets/frames/happy-birthday_1x4.webp";
+import happyBirthdayGridFrame from "../../../assets/frames/happy-birthday_2x2.webp";
+import justAGirlFrame from "../../../assets/frames/just-a-girl-just-perfect_1x4.webp";
+import justAGirlGridFrame from "../../../assets/frames/just-a-girl-just-perfect_2x2.webp";
+
 
 export const FRAMES: Frame[] = [
   {
@@ -27,18 +32,18 @@ export const FRAMES: Frame[] = [
     textColor: "text-pink-500",
     overlayImage: loveFrame,
     customMetrics: {
-      w: 172,
-      h: 520,
-      pt: 20,
-      pb: 56,
-      pl: 13,
-      pr: 13,
-      rowGap: 9,
+      w: 572,
+      h: 1714,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
       imageSlots: [
-        { x: 13, y: 20, w: 146, h: 104.25 },
-        { x: 13, y: 133.25, w: 146, h: 104.25 },
-        { x: 13, y: 246.5, w: 146, h: 104.25 },
-        { x: 13, y: 359.75, w: 146, h: 104.25 },
+        { x: 49, y: 59, w: 475, h: 348 },
+        { x: 49, y: 436, w: 472, h: 349 },
+        { x: 49, y: 814, w: 475, h: 348 },
+        { x: 49, y: 1191, w: 472, h: 350 },
       ],
     },
   },
@@ -52,19 +57,19 @@ export const FRAMES: Frame[] = [
     textColor: "text-pink-500",
     overlayImage: loveFrameGrid,
     customMetrics: {
-      w: 682,
-      h: 1024,
-      pt: 91,
-      pb: 40,
-      pl: 28,
-      pr: 30,
-      rowGap: 23,
-      colGap: 25,
+      w: 1144,
+      h: 1718,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
       imageSlots: [
-        { x: 28, y: 91, w: 299.5, h: 435 },
-        { x: 352.5, y: 91, w: 299.5, h: 435 },
-        { x: 28, y: 549, w: 299.5, h: 435 },
-        { x: 352.5, y: 549, w: 299.5, h: 435 },
+        { x: 64, y: 168, w: 483, h: 713 },
+        { x: 597, y: 167, w: 485, h: 715 },
+        { x: 64, y: 926, w: 483, h: 716 },
+        { x: 597, y: 927, w: 485, h: 714 },
       ],
     },
   },
@@ -380,4 +385,109 @@ export const FRAMES: Frame[] = [
       ],
     },
   },
+  {
+    id: "happy-birthday",
+    name: "Happy Birthday",
+    layout: "1x4",
+    category: "BIRTHDAY",
+    color: "bg-yellow-50",
+    borderColor: "border-yellow-400",
+    textColor: "text-yellow-600",
+    overlayImage: happyBirthdayFrame,
+    customMetrics: {
+      w: 594,
+      h: 1756,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 51, y: 60, w: 493, h: 357 },
+        { x: 51, y: 447, w: 490, h: 357 },
+        { x: 51, y: 834, w: 493, h: 357 },
+        { x: 51, y: 1220, w: 490, h: 358 },
+      ],
+    },
+  },
+  {
+    id: "happy-birthday-grid",
+    name: "Happy Birthday",
+    layout: "2x2",
+    category: "BIRTHDAY",
+    color: "bg-yellow-50",
+    borderColor: "border-yellow-400",
+    textColor: "text-yellow-600",
+    overlayImage: happyBirthdayGridFrame,
+    customMetrics: {
+      w: 1176,
+      h: 1754,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 65, y: 172, w: 497, h: 728 },
+        { x: 614, y: 171, w: 499, h: 730 },
+        { x: 65, y: 946, w: 497, h: 731 },
+        { x: 614, y: 946, w: 499, h: 729 },
+      ],
+    },
+  },
+  {
+    id: "just-a-girl-just-perfect",
+    name: "Just a Girl, Just Perfect",
+    layout: "1x4",
+    category: "8/3",
+    color: "bg-purple-50",
+    borderColor: "border-purple-400",
+    textColor: "text-purple-600",
+    overlayImage: justAGirlFrame,
+    customMetrics: {
+      w: 658,
+      h: 1950,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 56, y: 67, w: 546, h: 396 },
+        { x: 56, y: 497, w: 543, h: 397 },
+        { x: 56, y: 926, w: 546, h: 396 },
+        { x: 56, y: 1355, w: 543, h: 398 },
+      ],
+    },
+  },
+  {
+    id: "just-a-girl-just-perfect-grid",
+    name: "Just a Girl, Just Perfect",
+    layout: "2x2",
+    category: "8/3",
+    color: "bg-purple-50",
+    borderColor: "border-purple-400",
+    textColor: "text-purple-600",
+    overlayImage: justAGirlGridFrame,
+    customMetrics: {
+      w: 1308,
+      h: 1954,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 73, y: 191, w: 552, h: 811 },
+        { x: 683, y: 190, w: 555, h: 814 },
+        { x: 73, y: 1054, w: 552, h: 815 },
+        { x: 683, y: 1054, w: 555, h: 812 },
+      ],
+    },
+  },
 ];
+

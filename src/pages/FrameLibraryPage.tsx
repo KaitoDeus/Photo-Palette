@@ -109,7 +109,7 @@ const FrameCard: React.FC<{
                 filled={true}
                 size="sm"
                 aspectMode="original"
-                imageFit="fill"
+                imageFit="cover"
               />
             </div>
           </div>
@@ -210,7 +210,7 @@ const FrameLibraryPage: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  const categories = ["All", "VALENTINE", "TET HOLIDAY"];
+  const categories = ["All", "VALENTINE", "TET HOLIDAY", "BIRTHDAY", "8/3"];
   const layouts = ["All", "Nhỏ", "Lớn"];
 
   return (
@@ -316,7 +316,7 @@ const FrameLibraryPage: React.FC = () => {
                 filled={previewFilled}
                 size="lg"
                 aspectMode="original"
-                imageFit="fill"
+                imageFit="cover"
               />
             </div>
           </div>

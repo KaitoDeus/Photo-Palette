@@ -13,6 +13,7 @@ export interface CustomDropdownProps {
   disabled?: boolean;
   activeColorClass?: string;
   minWidth?: string;
+  icon?: React.ReactNode;
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
@@ -22,6 +23,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   disabled = false,
   activeColorClass = "text-pink-500 bg-pink-50",
   minWidth = "140px",
+  icon,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -50,11 +52,16 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     >
       <div
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex items-center justify-between bg-white border text-slate-700 rounded-xl px-4 py-2.5 transition-all font-semibold text-sm shadow-sm
+        className={`flex items-center justify-between bg-white border text-slate-700 rounded-xl ${icon ? "pl-10 pr-4" : "px-4"} py-2.5 transition-all font-semibold text-sm shadow-sm
           ${disabled ? "opacity-50 cursor-not-allowed border-slate-200" : "cursor-pointer hover:border-slate-300"}
           ${isOpen ? "ring-2 ring-pink-100 border-pink-300" : "border-slate-200"}
         `}
       >
+        {icon && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none flex items-center">
+            {icon}
+          </div>
+        )}
         <span className="truncate mr-3 pointer-events-none">
           {selectedOption?.label}
         </span>
