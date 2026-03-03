@@ -20,6 +20,12 @@ import happyBirthdayGridFrame from "../../../assets/frames/happy-birthday_2x2.we
 import justAGirlFrame from "../../../assets/frames/just-a-girl-just-perfect_1x4.webp";
 import justAGirlGridFrame from "../../../assets/frames/just-a-girl-just-perfect_2x2.webp";
 
+// New Frames
+import beauty1x4 from "../../../assets/frames/an-endless-immersion-into-beauty_1x4.webp";
+import beauty2x2 from "../../../assets/frames/an-endless-immersion-into-beauty_2x2.webp";
+import starlight1x4 from "../../../assets/frames/hidden-in-starlight_1x4.webp";
+import starlight2x2 from "../../../assets/frames/hidden-in-starlight_2x2.webp";
+
 
 export const FRAMES: Frame[] = [
   {
@@ -486,6 +492,108 @@ export const FRAMES: Frame[] = [
         { x: 683, y: 190, w: 555, h: 814 },
         { x: 73, y: 1054, w: 552, h: 815 },
         { x: 683, y: 1054, w: 555, h: 812 },
+      ],
+    },
+  },
+  {
+    id: "an-endless-immersion-into-beauty",
+    name: "An Endless Immersion into Beauty",
+    layout: "1x4",
+    category: "LOVE",
+    color: "bg-red-50",
+    borderColor: "border-red-400",
+    textColor: "text-red-500",
+    overlayImage: beauty1x4,
+    customMetrics: {
+      w: 654,
+      h: 1948,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      imageSlots: [
+        { x: 54, y: 55, w: 547, h: 378 },
+        { x: 54, y: 507, w: 547, h: 378 },
+        { x: 54, y: 959, w: 547, h: 378 },
+        { x: 54, y: 1410, w: 547, h: 378 },
+      ],
+    },
+  },
+  {
+    id: "an-endless-immersion-into-beauty-grid",
+    name: "An Endless Immersion into Beauty",
+    layout: "2x2",
+    category: "LOVE",
+    color: "bg-red-50",
+    borderColor: "border-red-400",
+    textColor: "text-red-500",
+    overlayImage: beauty2x2,
+    customMetrics: {
+      w: 1304,
+      h: 1956,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 58, y: 178, w: 572, h: 826 },
+        { x: 677, y: 182, w: 567, h: 821 },
+        { x: 60, y: 1048, w: 568, h: 805 },
+        { x: 677, y: 1048, w: 567, h: 805 },
+      ],
+    },
+  },
+  {
+    id: "hidden-in-starlight",
+    name: "Hidden in Starlight",
+    layout: "1x4",
+    category: "",
+    color: "bg-slate-50",
+    borderColor: "border-slate-400",
+    textColor: "text-slate-600",
+    overlayImage: starlight1x4,
+    customMetrics: {
+      w: 530,
+      h: 1568,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      imageSlots: [
+        { x: 43, y: 70, w: 448, h: 325 },
+        { x: 43, y: 410, w: 448, h: 325 },
+        { x: 43, y: 750, w: 448, h: 325 },
+        { x: 43, y: 1090, w: 448, h: 325 },
+      ],
+    },
+  },
+  {
+    id: "hidden-in-starlight-grid",
+    name: "Hidden in Starlight",
+    layout: "2x2",
+    category: "",
+    color: "bg-slate-50",
+    borderColor: "border-slate-400",
+    textColor: "text-slate-600",
+    overlayImage: starlight2x2,
+    customMetrics: {
+      w: 1050,
+      h: 1570,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 40, y: 160, w: 460, h: 620 },
+        { x: 550, y: 160, w: 460, h: 620 },
+        { x: 40, y: 840, w: 460, h: 620 },
+        { x: 550, y: 840, w: 460, h: 620 },
       ],
     },
   },

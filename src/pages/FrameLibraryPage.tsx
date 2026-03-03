@@ -84,11 +84,11 @@ const FrameCard: React.FC<{
 }> = ({ frame, index, onClick }) => {
   return (
     <div key={frame.id} className="group">
-      <div className="bg-white rounded-[40px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full">
+      <div className="bg-white rounded-[40px] p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 border border-slate-100 hover:border-brand-200 flex flex-col items-center relative overflow-hidden h-full">
         {/* Previews Container */}
         <div className="flex flex-col items-center w-full h-full">
           {/* Previews Row - Fixed height to ensure buttons align below */}
-          <div className="flex justify-center items-end gap-6 w-full h-[180px] mb-8">
+          <div className="flex justify-center items-end gap-3 w-full h-[180px] mb-4">
             <div
               className="bg-slate-50/50 p-2 rounded-2xl cursor-pointer hover:bg-slate-100/80 transition-all duration-300 hover:scale-105"
               onClick={() => onClick(false)}
@@ -133,10 +133,10 @@ const FrameCard: React.FC<{
 
         {/* Info Area */}
         <div className="w-full text-center py-2 mt-2">
-          <h3 className="text-[26px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight">
+          <h3 className="text-[18px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight">
             {frame.name}
           </h3>
-          <p className="text-[13px] text-slate-400 font-extrabold uppercase tracking-[0.1em] opacity-80">
+          <p className="text-[12px] text-slate-400 font-extrabold uppercase tracking-[0.1em] opacity-80">
             {frame.layout} • {frame.category}
           </p>
         </div>
@@ -210,7 +210,7 @@ const FrameLibraryPage: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  const categories = ["All", "VALENTINE", "TET HOLIDAY", "BIRTHDAY", "8/3"];
+  const categories = ["All", "LOVE", "VALENTINE", "TET HOLIDAY", "BIRTHDAY", "8/3"];
   const layouts = ["All", "Nhỏ", "Lớn"];
 
   return (
@@ -316,7 +316,7 @@ const FrameLibraryPage: React.FC = () => {
                 filled={previewFilled}
                 size="lg"
                 aspectMode="original"
-                imageFit="cover"
+                imageFit="fill"
               />
             </div>
           </div>

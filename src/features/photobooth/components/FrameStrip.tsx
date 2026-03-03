@@ -39,9 +39,9 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
 
   const sizeClasses = {
     sm: {
-      "1x4": "w-[60px] aspect-[1/3]", 
-      portrait: "w-[120px] aspect-[3/4]",
-      square: "w-[120px] aspect-square",
+      "1x4": "w-[50px] aspect-[1/3]", 
+      portrait: "w-[100px] aspect-[3/4]",
+      square: "w-[100px] aspect-square",
     },
     md: {
       port: "w-[80px] sm:w-[100px] aspect-[1/3]", // for 1x4 in mobile

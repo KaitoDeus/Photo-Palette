@@ -136,7 +136,7 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
                     `}
                   >
                     {/* Frame Preview Wrapper - Centers and scales the frame */}
-                    <div className="flex-1 w-full flex items-center justify-center p-1 overflow-hidden scale-[0.6]">
+                    <div className="flex-1 w-full flex items-center justify-center p-0 overflow-visible scale-[0.7]">
                       <FrameStrip frame={frame} filled={false} size="sm" />
                     </div>
 
