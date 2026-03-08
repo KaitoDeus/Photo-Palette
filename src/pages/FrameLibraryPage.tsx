@@ -132,12 +132,15 @@ const FrameCard: React.FC<{
         </div>
 
         {/* Info Area */}
-        <div className="w-full text-center py-2 mt-2">
-          <h3 className="text-[18px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight">
+        <div className="w-full text-center py-2 mt-2 h-[64px] flex flex-col justify-start">
+          <h3 
+            className="text-[17px] sm:text-[18px] font-black text-[#F43F5E] mb-1 leading-tight tracking-tight line-clamp-2 px-1"
+            title={frame.name}
+          >
             {frame.name}
           </h3>
-          <p className="text-[12px] text-slate-400 font-extrabold uppercase tracking-[0.1em] opacity-80">
-            {frame.layout} • {frame.category}
+          <p className="text-[11px] sm:text-[12px] text-slate-400 font-extrabold uppercase tracking-[0.1em] opacity-80 mt-auto">
+            {frame.layout} {frame.category ? `• ${frame.category}` : ""}
           </p>
         </div>
       </div>
@@ -148,6 +151,7 @@ const FrameCard: React.FC<{
 const FrameLibraryPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeLayout, setActiveLayout] = useState("All");
+  const [activeSort, setActiveSort] = useState("Mới nhất");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [previewFilled, setPreviewFilled] = useState<boolean>(true);
@@ -175,28 +179,33 @@ const FrameLibraryPage: React.FC = () => {
     return matchesCategory && matchesLayout && matchesSearch;
   });
 
+  let sortedFrames = [...filteredFrames];
+  if (activeSort === "Mới nhất") {
+    sortedFrames.reverse();
+  }
+
   const handleNext = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
       setSelectedIndex((prev) =>
-        prev !== null && filteredFrames.length > 0
-          ? (prev + 1) % filteredFrames.length
+        prev !== null && sortedFrames.length > 0
+          ? (prev + 1) % sortedFrames.length
           : null,
       );
     },
-    [filteredFrames.length],
+    [sortedFrames.length],
   );
 
   const handlePrev = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
       setSelectedIndex((prev) =>
-        prev !== null && filteredFrames.length > 0
-          ? (prev - 1 + filteredFrames.length) % filteredFrames.length
+        prev !== null && sortedFrames.length > 0
+          ? (prev - 1 + sortedFrames.length) % sortedFrames.length
           : null,
       );
     },
-    [filteredFrames.length],
+    [sortedFrames.length],
   );
 
   useEffect(() => {
@@ -234,23 +243,31 @@ const FrameLibraryPage: React.FC = () => {
           {/* Filters */}
           <div className="bg-white border border-slate-100 shadow-lg rounded-2xl p-4 mb-16 w-full mx-auto relative z-30">
             <div className="flex flex-col md:flex-row gap-4">
-              <div className="relative w-full md:w-1/4 z-20">
+              <div className="relative w-full md:w-1/4 z-30">
                 <CustomDropdown
                   value={activeLayout}
                   options={layouts}
                   onChange={setActiveLayout}
-                  placeholder="Tất Cả Kích Thước"
+                  placeholder="Kích Thước"
                 />
               </div>
-              <div className="relative w-full md:w-1/4 z-10">
+              <div className="relative w-full md:w-1/4 z-20">
                 <CustomDropdown
                   value={activeCategory}
                   options={categories}
                   onChange={setActiveCategory}
-                  placeholder="Tất Cả Danh Mục"
+                  placeholder="Danh Mục"
                 />
               </div>
-              <div className="relative w-full md:w-2/4">
+              <div className="relative w-full md:w-1/4 z-10">
+                <CustomDropdown
+                  value={activeSort}
+                  options={["Mới nhất", "Cũ nhất"]}
+                  onChange={setActiveSort}
+                  placeholder="Sắp xếp"
+                />
+              </div>
+              <div className="relative w-full md:flex-1">
                 <Search
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-pink-500"
                   size={20}
@@ -268,7 +285,7 @@ const FrameLibraryPage: React.FC = () => {
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {filteredFrames.map((frame, index) => (
+            {sortedFrames.map((frame, index) => (
               <FrameCard
                 key={frame.id}
                 frame={frame}
@@ -284,7 +301,7 @@ const FrameLibraryPage: React.FC = () => {
       </section>
 
       {/* Lightbox Modal */}
-      {selectedIndex !== null && filteredFrames[selectedIndex] && (
+      {selectedIndex !== null && sortedFrames[selectedIndex] && (
         <div
           className="fixed inset-0 z-[100] backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-bg"
           onClick={() => setSelectedIndex(null)}
@@ -312,7 +329,7 @@ const FrameLibraryPage: React.FC = () => {
           >
             <div className="pointer-events-none mt-8 transition-transform duration-500">
               <FrameStrip
-                frame={filteredFrames[selectedIndex]}
+                frame={sortedFrames[selectedIndex]}
                 filled={previewFilled}
                 size="lg"
                 aspectMode="original"

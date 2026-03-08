@@ -25,6 +25,8 @@ import beauty1x4 from "../../../assets/frames/an-endless-immersion-into-beauty_1
 import beauty2x2 from "../../../assets/frames/an-endless-immersion-into-beauty_2x2.webp";
 import starlight1x4 from "../../../assets/frames/hidden-in-starlight_1x4.webp";
 import starlight2x2 from "../../../assets/frames/hidden-in-starlight_2x2.webp";
+import happyAlways1x4 from "../../../assets/frames/happy-always_1x4.webp";
+import happyAlways2x2 from "../../../assets/frames/happy-always_2x2.webp";
 
 
 export const FRAMES: Frame[] = [
@@ -594,6 +596,57 @@ export const FRAMES: Frame[] = [
         { x: 550, y: 160, w: 460, h: 620 },
         { x: 40, y: 840, w: 460, h: 620 },
         { x: 550, y: 840, w: 460, h: 620 },
+      ],
+    },
+  },
+  {
+    id: "happy-always",
+    name: "Happy Always",
+    layout: "1x4",
+    category: "",
+    color: "bg-slate-50",
+    borderColor: "border-slate-400",
+    textColor: "text-slate-600",
+    overlayImage: happyAlways1x4,
+    customMetrics: {
+      w: 568,
+      h: 1690,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      imageSlots: [
+        { x: 45, y: 55, w: 479, h: 348 },
+        { x: 45, y: 429, w: 479, h: 348 },
+        { x: 45, y: 804, w: 479, h: 348 },
+        { x: 45, y: 1179, w: 479, h: 348 },
+      ],
+    },
+  },
+  {
+    id: "happy-always-grid",
+    name: "Happy Always",
+    layout: "2x2",
+    category: "",
+    color: "bg-slate-50",
+    borderColor: "border-slate-400",
+    textColor: "text-slate-600",
+    overlayImage: happyAlways2x2,
+    customMetrics: {
+      w: 1126,
+      h: 1694,
+      pt: 0,
+      pb: 0,
+      pl: 0,
+      pr: 0,
+      rowGap: 0,
+      colGap: 0,
+      imageSlots: [
+        { x: 52, y: 159, w: 486, h: 711 },
+        { x: 590, y: 159, w: 486, h: 711 },
+        { x: 52, y: 918, w: 486, h: 711 },
+        { x: 590, y: 918, w: 486, h: 711 },
       ],
     },
   },
