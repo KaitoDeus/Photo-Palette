@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Sparkles, RefreshCw, Video, X, Download } from "lucide-react";
+import { Sparkles, RefreshCw, Video, X, Download, Layout } from "lucide-react";
 import Button from "../../../components/common/Button";
 import { LayoutType, Frame } from "../types";
 import { FrameStrip } from "./FrameStrip";
 import { exportFinalImage } from "../utils/imageExport";
+import FrameSelectionModal from "./FrameSelectionModal";
 
 interface ResultStepProps {
   photos: string[];
@@ -12,6 +13,7 @@ interface ResultStepProps {
   recapVideoUrl?: string | null;
   onRetake: () => void;
   onBooking: () => void;
+  onSelectFrame: (frame: Frame) => void;
 }
 
 const ResultStep: React.FC<ResultStepProps> = ({
@@ -21,9 +23,11 @@ const ResultStep: React.FC<ResultStepProps> = ({
   recapVideoUrl,
   onRetake,
   onBooking,
+  onSelectFrame,
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [isFrameModalOpen, setIsFrameModalOpen] = useState(false);
 
   const handleDownload = async () => {
     if (isExporting) return;
@@ -78,6 +82,15 @@ const ResultStep: React.FC<ResultStepProps> = ({
             {isExporting ? "Đang xử lý..." : "Tải Ảnh Về"}
           </Button>
 
+          <Button
+            variant="outline"
+            onClick={() => setIsFrameModalOpen(true)}
+            className="border-brand-200 text-brand-600 hover:bg-brand-50 h-12"
+          >
+            <Layout size={18} className="mr-2" />
+            Đổi Khung Ảnh
+          </Button>
+
           <Button 
             onClick={onBooking}
             className="h-12"
@@ -111,6 +124,15 @@ const ResultStep: React.FC<ResultStepProps> = ({
           *Ảnh sẽ không được lưu trên hệ thống để bảo vệ quyền riêng tư.
         </p>
       </div>
+
+      {/* Frame Selection Modal */}
+      <FrameSelectionModal
+        isOpen={isFrameModalOpen}
+        onClose={() => setIsFrameModalOpen(false)}
+        onSelect={onSelectFrame}
+        selectedFrameId={selectedFrame.id}
+        selectedLayoutId={selectedLayout}
+      />
 
       {/* Video Recap Modal */}
       {isVideoOpen && recapVideoUrl && (

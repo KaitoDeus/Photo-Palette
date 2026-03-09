@@ -77,6 +77,7 @@ const PhotoBooth: React.FC = () => {
             recapVideoUrl={state.recapVideoUrl}
             onRetake={actions.handleRetake}
             onBooking={() => alert("Chức năng đặt lịch đang phát triển!")}
+            onSelectFrame={actions.setSelectedFrame}
           />
         );
       default:

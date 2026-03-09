@@ -53,6 +53,8 @@ export const exportFinalImage = async (
         "bg-blue-50": "#eff6ff",
         "bg-red-50": "#fef2f2",
         "bg-purple-50": "#faf5ff",
+        "bg-yellow-50": "#fefce8",
+        "bg-slate-50": "#f8fafc",
         "bg-white": "#ffffff",
       };
       
