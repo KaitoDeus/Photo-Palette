@@ -42,7 +42,7 @@
 +---------------------+       +---------------------+       +---------------------+
 ```text
 
-### Mô Hình Kiến Trúc (Architecture)
+### Architecture Model
 
 ```text
 +-----------------------+           +-----------------------+
@@ -65,7 +65,7 @@
                                     +-----------------------+
 ```
 
-### Luồng Xử Lý Chính (Photobooth Flow)
+### Photobooth Flow
 
 ```text
     [ USER ]                             [ SYSTEM / APP ]
@@ -127,15 +127,11 @@ cd photobooth-palette
 
 ### Step 2: Install dependencies
 
-Chạy lệnh sau để cài đặt các node modules cần thiết:
-
 ```bash
 npm install
 ```
 
 ### Step 3: Run the application
-
-Khởi động môi trường phát triển (Localholst):
 
 ```bash
 npm run dev
