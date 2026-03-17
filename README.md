@@ -112,7 +112,7 @@ _The homepage features a modern design focused on user experience with smooth in
 
 ---
 
-## 5. Hướng Dẫn Cài Đặt và Chạy (Local)
+## 5. Installation (Local)
 
 To run this project locally, you need to install Node.js (version 16 or higher).
 
@@ -145,7 +145,7 @@ Open your browser and go to http://localhost:5173 to use the app.
 
 ---
 
-## 6. Hướng Dẫn Sử Dụng
+## 6. User Guide
 
 1.  **Choose Layout**: Select your preferred layout (Strip 1x4, Grid 2x2, etc.).
 2.  **Select Frame**: Pick a frame style (Cool, Cute, Basic...).
