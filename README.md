@@ -1,24 +1,23 @@
 # Photo Palette
 
-## Mục Lục
+## Table of Contents
 
-1.  [Giới Thiệu](#1-giới-thiệu-đề-tài)
-2.  [Công nghệ Sử Dụng](#2-công-nghệ-sử-dụng)
-3.  [Kiến Trúc Hệ Thống](#3-kiến-trúc-hệ-thống)
-4.  [Giao Diện](#4-giao-diện)
-5.  [Hướng Dẫn Cài Đặt (Local)](#5-hướng-dẫn-cài-đặt-và-chạy-local)
-6.  [Hướng Dẫn Sử Dụng](#6-hướng-dẫn-sử-dụng)
-7.  [Tác Giả & Liên Hệ](#7-tác-giả--liên-hệ)
-
----
-
-## 1. Giới Thiệu Đề Tài
-
-**Photo Palette** là ứng dụng web **Photobooth Online**, mang trải nghiệm chụp ảnh Hàn Quốc lên trình duyệt web. Người dùng có thể chụp, chỉnh sửa khung và tải ảnh về ngay lập tức mà không cần cài đặt phần mềm.
+1.  [Introduction](#1-introduction)
+2.  [Technologies Used](#2-technologies-used)
+3.  [System Architecture](#3-system-architecture)
+4.  [User Interface](#4-user-interface)
+5.  [Installation Guide (Local)](#5-installation-and-local-setup)
+6.  [User Guide](#6-user-guide)
 
 ---
 
-## 2. Công nghệ Sử Dụng
+## 1. Introduction
+
+**Photo Palette** is an online **Photobooth Web Application** that brings the Korean-style photo booth experience directly to the browser. Users can take photos, customize frames, and download images instantly without installing any software.
+
+---
+
+## 2. Technologies Used
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -29,9 +28,9 @@
 
 ---
 
-## 3. Kiến Trúc Hệ Thống
+## 3. System Architecture
 
-### Các Lớp Logic (Logic Layers)
+### Logic Layers
 
 ```text
 +---------------------+       +---------------------+       +---------------------+
@@ -41,24 +40,24 @@
 | - PhotoBooth        |       | - State Management  |       |  Canvas, LocalFile) |
 | - Gallery           |       | - Step Control      |       |                     |
 +---------------------+       +---------------------+       +---------------------+
-```
+```text
 
 ### Mô Hình Kiến Trúc (Architecture)
 
 ```text
 +-----------------------+           +-----------------------+
 |      HomePage         | <-------> |      PhotoBooth       |
-|   (Giao Diện Chính)   |           |  (Tính Năng Chính)    |
+|     (Main UI)         |           |    (Core Feature)     |
 +-----------------------+           +-----------------------+
           |                                     |
-          | Điều hướng                          | Sử dụng Hook
+          | Navigation                          | Uses Hook
           v                                     v
 +-----------------------+           +-----------------------+
 |    React Router       |           |     usePhotoBooth     |
 |     (Navigation)      |           |  (Logic & State Mgr)  |
 +-----------------------+           +-----------------------+
                                                 |
-                                                | Gọi API
+                                                | Call API
                                                 v
                                     +-----------------------+
                                     |    Browser APIs       |
@@ -69,45 +68,45 @@
 ### Luồng Xử Lý Chính (Photobooth Flow)
 
 ```text
-  [ NGƯỜI DÙNG ]                      [ HỆ THỐNG / APP ]
-        |                                     |
-        | (1) Bấm "Chụp Thử Ngay"             |
-        |------------------------------------>|
-        |                                     |
-        |          (2) Chọn Layout & Theme    |
-        |<------------------------------------|
-        |                                     |
-        | (3) Xác nhận & Cấp quyền Cam        |
-        |------------------------------------>|
-        |                                     |---- [ Khởi động Webcam ]
-        |                                     |           |
-        |         (4) Hiển thị Live View      |<----------|
-        |<------------------------------------|
-        |                                     |
-  [ QUÁ TRÌNH CHỤP ]                          |
-        |                                     |
-        | <------ (5) Đếm ngược 3-2-1 --------|
-        |                                     |
-        |           (6) Flash & Capture       |
-        |<------------------------------------|
-        |                                     (Lặp lại theo số lượng ảnh)
-        |                                     |
-  [ XỬ LÝ ẢNH ]                               |
-        |                                     |---- [ Ghép ảnh Canvas ]
-        |                                     |           |
-        |          (7) Hiển thị Kết quả       |<----------|
-        |<------------------------------------|
-        |                                     |
-        | (8) Tải ảnh về / Chụp lại           |
-        |------------------------------------>|
-        |                                     |
+    [ USER ]                             [ SYSTEM / APP ]
+      |                                         |
+      | (1) Click "Try Now"                     |
+      |---------------------------------------->|
+      |                                         |
+      |        (2) Choose Layout & Theme        |
+      |<----------------------------------------|
+      |                                         |
+      | (3) Confirm & Grant Camera Access       |
+      |---------------------------------------->|
+      |                                         |---- [ Start Webcam ]
+      |                                         |           |
+      |        (4) Show Live View               |<----------|
+      |<----------------------------------------|
+      |                                         |
+  [ CAPTURE PROCESS ]                           |
+      |                                         |
+      | <------ (5) Countdown 3-2-1 ------------|
+      |                                         |
+      |        (6) Flash & Capture              |
+      |<----------------------------------------|
+      |                                         (Repeat for number of photos)
+      |                                         |
+  [ IMAGE PROCESSING ]                          |
+      |                                         |---- [ Merge via Canvas ]
+      |                                         |           |
+      |        (7) Display Result               |<----------|
+      |<----------------------------------------|
+      |                                         |
+      | (8) Download / Retake                   |
+      |---------------------------------------->|
+      |                                         |
 ```
 
 ---
 
-## 4. Giao Diện
+## 4. User Interface
 
-_Giao diện trang chủ hiện đại, tập trung vào trải nghiệm người dùng với các hiệu ứng tương tác mượt mà._
+_The homepage features a modern design focused on user experience with smooth interactive effects._
 
 ![Giao diện trang chủ](public/ui.png)
 
@@ -115,18 +114,18 @@ _Giao diện trang chủ hiện đại, tập trung vào trải nghiệm ngườ
 
 ## 5. Hướng Dẫn Cài Đặt và Chạy (Local)
 
-Để chạy dự án này trên máy tính cá nhân, bạn cần cài đặt **Node.js** (phiên bản 16 trở lên).
+To run this project locally, you need to install Node.js (version 16 or higher).
 
-### Bước 1: Clone dự án
+### Step 1: Clone the repository
 
-Mở terminal và chạy lệnh sau để tải mã nguồn về:
+Open your terminal and run:
 
 ```bash
 git clone https://github.com/KaitoDeus/photobooth-palette.git
 cd photobooth-palette
 ```
 
-### Bước 2: Cài đặt thư viện
+### Step 2: Install dependencies
 
 Chạy lệnh sau để cài đặt các node modules cần thiết:
 
@@ -134,7 +133,7 @@ Chạy lệnh sau để cài đặt các node modules cần thiết:
 npm install
 ```
 
-### Bước 3: Chạy ứng dụng
+### Step 3: Run the application
 
 Khởi động môi trường phát triển (Localholst):
 
@@ -142,27 +141,18 @@ Khởi động môi trường phát triển (Localholst):
 npm run dev
 ```
 
-Truy cập địa chỉ `http://localhost:5173` trên trình duyệt để sử dụng.
+Open your browser and go to http://localhost:5173 to use the app.
 
 ---
 
 ## 6. Hướng Dẫn Sử Dụng
 
-1.  **Chọn Layout**: Tại màn hình bắt đầu, chọn bố cục ảnh mong muốn (Strip 1x4, Grid 2x2, v.v.).
-2.  **Chọn Khung Hình**: Lựa chọn các mẫu khung hình có sẵn theo chủ đề (Cool, Cute, Basic...).
-3.  **Chụp Ảnh**:
-    - Cấp quyền truy cập Camera.
-    - Tạo dáng theo nhịp đếm ngược (3 giây/tấm).
-    - Có thể bật tính năng **Recap** (góc trái) để quay lại quá trình chụp.
-4.  **Nhận Kết Quả**:
-    - Xem ảnh đã được ghép vào khung.
-    - Tải ảnh về máy hoặc xem Video Recap nếu đã bật tính năng này.
-
----
-
-## 7. Tác Giả & Liên Hệ
-
-| Thông Tin     | Chi Tiết                                                |
-| :------------ | :------------------------------------------------------ |
-| **Developer** | Võ Anh Khải                                             |
-| **Email**     | [khaivo300605@gmail.com](mailto:khaivo300605@gmail.com) |
+1.  **Choose Layout**: Select your preferred layout (Strip 1x4, Grid 2x2, etc.).
+2.  **Select Frame**: Pick a frame style (Cool, Cute, Basic...).
+3.  **Take Photos**:
+    - Grant camera access.
+    - Pose according to the countdown (3 seconds per shot).
+    - Optionally enable Recap (top-left) to record the session.
+4.  **Get Results**:
+    - View the final merged image.
+    - Download the photo or watch the recap video (if enabled).
