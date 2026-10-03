@@ -119,7 +119,13 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [branches, setBranches] = useState<Branch[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_BRANCHES);
-      return saved ? JSON.parse(saved) : BRANCHES;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= BRANCHES.length) {
+          return parsed;
+        }
+      }
+      return BRANCHES;
     } catch {
       return BRANCHES;
     }

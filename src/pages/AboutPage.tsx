@@ -329,11 +329,15 @@ const AboutPage: React.FC = () => {
                     width="100%"
                     height="100%"
                     id="gmap_canvas"
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                      selectedBranch.address
-                        ? selectedBranch.name + " " + selectedBranch.address
-                        : selectedBranch.city,
-                    )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                    src={`https://maps.google.com/maps?q=${
+                      selectedBranch.lat && selectedBranch.lng
+                        ? `${selectedBranch.lat},${selectedBranch.lng}`
+                        : encodeURIComponent(
+                            selectedBranch.address
+                              ? selectedBranch.name + " " + selectedBranch.address
+                              : selectedBranch.city,
+                          )
+                    }&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                     frameBorder="0"
                     scrolling="no"
                     marginHeight={0}
