@@ -156,9 +156,19 @@ const Footer: React.FC = () => {
                 navigate("/privacy");
                 window.scrollTo(0, 0);
               }}
-              className="text-slate-400 hover:text-brand-500 font-medium transition-colors text-xs md:text-sm"
+              className="text-slate-400 hover:text-brand-500 font-medium transition-colors text-xs md:text-sm cursor-pointer"
             >
               Chính Sách & Pháp Lý
+            </button>
+            <span className="hidden md:block text-slate-300">•</span>
+            <button
+              onClick={() => {
+                navigate("/admin");
+                window.scrollTo(0, 0);
+              }}
+              className="text-brand-500 hover:text-brand-600 font-bold transition-colors text-xs md:text-sm cursor-pointer flex items-center gap-1"
+            >
+              <span>⚙️ Quản Trị CMS</span>
             </button>
           </div>
 

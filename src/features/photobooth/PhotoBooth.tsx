@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { usePhotoBooth } from "./hooks/usePhotoBooth";
 import IntroStep from "./components/IntroStep";
@@ -6,9 +6,11 @@ import LayoutSelectionStep from "./components/LayoutSelectionStep";
 
 import ProcessingStep from "./components/ProcessingStep";
 import ResultStep from "./components/ResultStep";
+import { CustomerBookingModal } from "./components/CustomerBookingModal";
 
 const PhotoBooth: React.FC = () => {
   const { state, refs: { videoRef, canvasRef }, actions } = usePhotoBooth();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   const renderStep = () => {
     switch (state.step) {
@@ -76,7 +78,7 @@ const PhotoBooth: React.FC = () => {
             selectedFrame={state.selectedFrame}
             recapVideoUrl={state.recapVideoUrl}
             onRetake={actions.handleRetake}
-            onBooking={() => alert("Chức năng đặt lịch đang phát triển!")}
+            onBooking={() => setIsBookingOpen(true)}
             onSelectFrame={actions.setSelectedFrame}
           />
         );
@@ -102,6 +104,12 @@ const PhotoBooth: React.FC = () => {
           {renderStep()}
         </div>
       </div>
+
+      {/* Customer Studio Booking Modal */}
+      <CustomerBookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { X, Search, Filter } from "lucide-react";
 import { Frame } from "../types";
-import { FRAMES } from "../data/frames";
+import { useAdmin } from "../../admin/context/AdminContext";
 import { FrameStrip } from "./FrameStrip";
 import CustomDropdown from "./CustomDropdown";
 
@@ -29,11 +29,12 @@ const FrameSelectionModal: React.FC<FrameSelectionModalProps> = ({
   selectedFrameId,
   selectedLayoutId,
 }) => {
+  const { frames } = useAdmin();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredFrames = useMemo(() => {
-    return FRAMES.filter((frame) => {
+    return frames.filter((frame) => {
       // Filter by Layout mapping
       let matchesLayout = false;
       if (selectedLayoutId === "STRIP_1X4" && frame.layout === "1x4")

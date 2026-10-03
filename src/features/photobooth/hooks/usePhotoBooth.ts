@@ -2,11 +2,13 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { BoothStep, LayoutType, CountdownDuration, Frame } from "../types";
 import { LAYOUTS } from "../constants";
 import { FRAMES } from "../data/frames";
+import { useAdmin } from "../../admin/context/AdminContext";
 
 export const usePhotoBooth = () => {
+  const { frames } = useAdmin();
   const [step, setStep] = useState<BoothStep>("INTRO");
   const [selectedLayout, setSelectedLayout] = useState<LayoutType>("STRIP_1X4");
-  const [selectedFrame, setSelectedFrame] = useState<Frame>(FRAMES[0]);
+  const [selectedFrame, setSelectedFrame] = useState<Frame>(() => frames[0] || FRAMES[0]);
   const [photos, setPhotos] = useState<string[]>([]);
   const [countDownDuration, setCountDownDuration] =
     useState<CountdownDuration>(3);
@@ -23,7 +25,7 @@ export const usePhotoBooth = () => {
     else if (layout === "PORTRAIT_1X1") frameLayoutStr = "1x1";
 
     // Find the first frame matching the new layout
-    const matchingFrame = FRAMES.find((f) => f.layout === frameLayoutStr);
+    const matchingFrame = frames.find((f) => f.layout === frameLayoutStr) || FRAMES.find((f) => f.layout === frameLayoutStr);
 
     // If a match is found, update the selected frame
     if (matchingFrame) {
@@ -40,7 +42,7 @@ export const usePhotoBooth = () => {
         textColor: "text-slate-800",
       });
     }
-  }, []);
+  }, [frames]);
 
   const [lastPhoto, setLastPhoto] = useState<string | null>(null);
 

@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from "react";
 
-import { BRANCHES } from "../data/branches";
+import { useAdmin } from "../features/admin/context/AdminContext";
 import { MapPin, Store, Flag, Calendar, Star, ChevronDown } from "lucide-react";
 import storyImage from "../assets/about/story_1.webp";
 
@@ -95,30 +95,38 @@ const AboutPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const { branches } = useAdmin();
   const [selectedCity, setSelectedCity] = React.useState("");
   const [selectedDistrict, setSelectedDistrict] = React.useState("");
-  const [filteredBranches, setFilteredBranches] = React.useState(BRANCHES);
-  const [selectedBranch, setSelectedBranch] = React.useState(BRANCHES[0]);
+  const [filteredBranches, setFilteredBranches] = React.useState(branches);
+  const [selectedBranch, setSelectedBranch] = React.useState(branches[0]);
   const [isMapLoading, setIsMapLoading] = React.useState(true);
+
+  useEffect(() => {
+    setFilteredBranches(branches);
+    if (branches.length > 0) {
+      setSelectedBranch(branches[0]);
+    }
+  }, [branches]);
 
   // Extract unique cities
   const cities = useMemo(() => {
-    return Array.from(new Set(BRANCHES.map((b) => b.city))).sort();
-  }, []);
+    return Array.from(new Set(branches.map((b) => b.city))).sort();
+  }, [branches]);
 
   // Extract districts based on selected city
   const districts = useMemo(() => {
     if (!selectedCity) return [];
     return Array.from(
       new Set(
-        BRANCHES.filter((b) => b.city === selectedCity).map((b) => b.area),
+        branches.filter((b) => b.city === selectedCity).map((b) => b.area),
       ),
     ).sort();
-  }, [selectedCity]);
+  }, [selectedCity, branches]);
 
   // Handle Search
   const handleSearch = () => {
-    let results = BRANCHES;
+    let results = branches;
     if (selectedCity) {
       results = results.filter((b) => b.city === selectedCity);
     }

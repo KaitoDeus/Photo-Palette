@@ -8,8 +8,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { FRAMES } from "../features/photobooth/data/frames";
 import { Frame } from "../features/photobooth/types";
+import { useAdmin } from "../features/admin/context/AdminContext";
 
 import { FrameStrip } from "../features/photobooth/components/FrameStrip";
 
@@ -148,6 +148,7 @@ const FrameCard: React.FC<{
 };
 
 const FrameLibraryPage: React.FC = () => {
+  const { frames } = useAdmin();
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeLayout, setActiveLayout] = useState("All");
   const [activeSort, setActiveSort] = useState("Mới nhất");
@@ -159,7 +160,7 @@ const FrameLibraryPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const filteredFrames = FRAMES.filter((frame) => {
+  const filteredFrames = frames.filter((frame) => {
     const matchesCategory =
       activeCategory === "All" || frame.category === activeCategory;
 
@@ -218,7 +219,11 @@ const FrameLibraryPage: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  const categories = ["All", "LOVE", "VALENTINE", "TET HOLIDAY", "BIRTHDAY", "8/3"];
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    frames.forEach((f) => set.add(f.category));
+    return ["All", ...Array.from(set)];
+  }, [frames]);
   const layouts = ["All", "Nhỏ", "Lớn"];
 
   return (

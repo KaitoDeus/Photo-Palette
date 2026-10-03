@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Home, Info, Image, Grid, Phone, Camera } from "lucide-react";
+import { Home, Info, Image, Grid, Phone, Camera, ShieldCheck } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../common/Button";
 
@@ -53,6 +53,12 @@ const Navbar: React.FC = () => {
       path: "/contact",
       type: "page",
       icon: <Phone size={24} />,
+    },
+    {
+      name: "Quản trị",
+      path: "/admin",
+      type: "page",
+      icon: <ShieldCheck size={24} />,
     },
   ];
 
