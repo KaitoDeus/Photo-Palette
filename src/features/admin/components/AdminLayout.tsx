@@ -17,7 +17,7 @@ import {
 import { useAdmin } from "../context/AdminContext";
 
 export const AdminLayout: React.FC = () => {
-  const { user, logout, stats } = useAdmin();
+  const { user, logout, stats, isServerConnected } = useAdmin();
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -223,10 +223,23 @@ export const AdminLayout: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full text-xs font-semibold border border-emerald-200/60">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              Hệ thống trực tuyến
-            </div>
+            {isServerConnected ? (
+              <div
+                className="hidden md:flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full text-xs font-semibold border border-emerald-200/60"
+                title="Đã kết nối máy chủ Express API & SQLite / Prisma DB"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Full Stack API: Online
+              </div>
+            ) : (
+              <div
+                className="hidden md:flex items-center gap-2 bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-200/60"
+                title="Đang dùng bộ nhớ cục bộ (Local Storage)"
+              >
+                <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                Chế độ Offline (Local)
+              </div>
+            )}
             <Link
               to="/"
               className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 px-3 py-2 rounded-xl border border-slate-200 transition-all"

@@ -1,0 +1,68 @@
+// Prisma Schema for Photo Palette Photobooth Studio Backend
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Branch {
+  id        Int       @id @default(autoincrement())
+  name      String
+  area      String
+  city      String
+  address   String
+  lat       Float?
+  lng       Float?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
+}
+
+model Frame {
+  id            String   @id
+  name          String
+  layout        String
+  category      String
+  color         String
+  borderColor   String
+  textColor     String
+  overlayImage  String?
+  customMetrics String? // JSON stringified for layout metrics
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  customerName  String
+  customerPhone String
+  customerEmail String
+  branchId      Int
+  branchName    String
+  packageType   String   // "SMALL_70K" | "LARGE_100K"
+  bookingDate   String   // YYYY-MM-DD
+  timeSlot      String   // HH:mm - HH:mm
+  status        String   @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED
+  totalAmount   Int
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  branch        Branch?  @relation(fields: [branchId], references: [id])
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  name      String
+  role      String   @default("SUPER_ADMIN")
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
