@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Search,
   ChevronDown,
@@ -160,7 +160,8 @@ const FrameLibraryPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const filteredFrames = frames.filter((frame) => {
+  const filteredFrames = (frames || []).filter((frame) => {
+    if (!frame) return false;
     const matchesCategory =
       activeCategory === "All" || frame.category === activeCategory;
 
@@ -173,7 +174,7 @@ const FrameLibraryPage: React.FC = () => {
       matchesLayout = frame.layout === activeLayout;
     }
 
-    const matchesSearch = frame.name
+    const matchesSearch = (frame.name || "")
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     return matchesCategory && matchesLayout && matchesSearch;
@@ -221,7 +222,9 @@ const FrameLibraryPage: React.FC = () => {
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    frames.forEach((f) => set.add(f.category));
+    (frames || []).forEach((f) => {
+      if (f?.category) set.add(f.category);
+    });
     return ["All", ...Array.from(set)];
   }, [frames]);
   const layouts = ["All", "Nhỏ", "Lớn"];

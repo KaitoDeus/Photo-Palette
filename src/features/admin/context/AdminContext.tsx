@@ -153,7 +153,27 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         connected = true;
       }
       if (frameRes.success && frameRes.data && frameRes.data.length > 0) {
-        setFrames(frameRes.data);
+        // Merge server frames with built-in FRAMES to preserve overlayImage assets and metrics
+        const localFrameMap = new Map<string, Frame>();
+        FRAMES.forEach((f) => localFrameMap.set(f.id, f));
+
+        const mergedFrames: Frame[] = frameRes.data.map((serverFrame) => {
+          const local = localFrameMap.get(serverFrame.id);
+          return {
+            ...serverFrame,
+            overlayImage: serverFrame.overlayImage || local?.overlayImage,
+            customMetrics: serverFrame.customMetrics || local?.customMetrics,
+          };
+        });
+
+        // Append any built-in FRAMES not in server response
+        FRAMES.forEach((local) => {
+          if (!mergedFrames.some((m) => m.id === local.id)) {
+            mergedFrames.push(local);
+          }
+        });
+
+        setFrames(mergedFrames);
         connected = true;
       }
       if (bookingRes.success && bookingRes.data) {
