@@ -285,15 +285,25 @@ export const FrameStrip: React.FC<FrameStripProps> = ({
       </div>
 
       {/* Branded Footer for Fallback Frames */}
-      <div className="pt-4 pb-1 flex items-center justify-between mt-auto px-1 border-t border-slate-100/30">
+      <div
+        className={`mt-auto border-t border-slate-100/30 ${
+          size === "sm"
+            ? "pt-1 pb-0.5 flex flex-col items-center justify-center px-0.5"
+            : "pt-4 pb-1 flex items-center justify-between px-1"
+        }`}
+      >
         <span
-          className={`text-[9px] font-black tracking-tight ${frame.textColor || "text-slate-900"}`}
+          className={`font-black tracking-tight ${
+            size === "sm" ? "text-[7px] truncate max-w-full" : "text-[9px]"
+          } ${frame.textColor || "text-slate-900"}`}
         >
           Photo Palette
         </span>
-        <span className="text-[9px] font-bold text-slate-800 opacity-90">
-          {currentDate}
-        </span>
+        {size !== "sm" && (
+          <span className="text-[9px] font-bold text-slate-800 opacity-90">
+            {currentDate}
+          </span>
+        )}
       </div>
     </div>
   );

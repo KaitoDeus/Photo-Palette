@@ -366,131 +366,365 @@ const INITIAL_BOOKINGS = [
 
 const INITIAL_FRAMES = [
   {
-    id: "love-certificate",
-    name: "Love Certificate",
-    layout: "1x4",
-    category: "VALENTINE",
-    color: "bg-pink-50",
-    borderColor: "border-pink-400",
-    textColor: "text-pink-500",
+    "id": "love-certificate",
+    "name": "Love Certificate",
+    "layout": "1x4",
+    "category": "VALENTINE",
+    "color": "bg-pink-50",
+    "borderColor": "border-pink-400",
+    "textColor": "text-pink-500"
   },
   {
-    id: "love-certificate-grid",
-    name: "Love Certificate (Grid)",
-    layout: "2x2",
-    category: "VALENTINE",
-    color: "bg-pink-50",
-    borderColor: "border-pink-400",
-    textColor: "text-pink-500",
+    "id": "love-certificate-grid",
+    "name": "Love Certificate",
+    "layout": "2x2",
+    "category": "VALENTINE",
+    "color": "bg-pink-50",
+    "borderColor": "border-pink-400",
+    "textColor": "text-pink-500"
   },
   {
-    id: "my-one-and-only",
-    name: "My One and Only",
-    layout: "1x4",
-    category: "LOVE",
-    color: "bg-red-50",
-    borderColor: "border-red-400",
-    textColor: "text-red-500",
+    "id": "my-one-and-only",
+    "name": "My One & Only",
+    "layout": "1x4",
+    "category": "VALENTINE",
+    "color": "bg-blue-50",
+    "borderColor": "border-blue-400",
+    "textColor": "text-blue-600"
   },
   {
-    id: "my-one-and-only-grid",
-    name: "My One and Only (Grid)",
-    layout: "2x2",
-    category: "LOVE",
-    color: "bg-red-50",
-    borderColor: "border-red-400",
-    textColor: "text-red-500",
+    "id": "my-one-and-only-grid",
+    "name": "My One & Only",
+    "layout": "2x2",
+    "category": "VALENTINE",
+    "color": "bg-blue-50",
+    "borderColor": "border-blue-400",
+    "textColor": "text-blue-600"
   },
   {
-    id: "hoa-xuan",
-    name: "Hoa Xuân",
-    layout: "1x4",
-    category: "TET",
-    color: "bg-amber-50",
-    borderColor: "border-amber-400",
-    textColor: "text-amber-600",
+    "id": "hoaxuan",
+    "name": "Hoa Xuân",
+    "layout": "1x4",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "hoa-xuan-grid",
-    name: "Hoa Xuân (Grid)",
-    layout: "2x2",
-    category: "TET",
-    color: "bg-amber-50",
-    borderColor: "border-amber-400",
-    textColor: "text-amber-600",
+    "id": "hoaxuan-grid",
+    "name": "Hoa Xuân",
+    "layout": "2x2",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "happy-birthday",
-    name: "Happy Birthday",
-    layout: "1x4",
-    category: "BIRTHDAY",
-    color: "bg-purple-50",
-    borderColor: "border-purple-400",
-    textColor: "text-purple-600",
+    "id": "love-letter",
+    "name": "Love Letter",
+    "layout": "1x4",
+    "category": "VALENTINE",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "happy-birthday-grid",
-    name: "Happy Birthday (Grid)",
-    layout: "2x2",
-    category: "BIRTHDAY",
-    color: "bg-purple-50",
-    borderColor: "border-purple-400",
-    textColor: "text-purple-600",
+    "id": "love-letter-grid",
+    "name": "Love Letter",
+    "layout": "2x2",
+    "category": "VALENTINE",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "berry-pop",
-    name: "Berry Pop",
-    layout: "1x4",
-    category: "CUTE",
-    color: "bg-rose-50",
-    borderColor: "border-rose-400",
-    textColor: "text-rose-600",
+    "id": "lunar-new-year",
+    "name": "Tết Nguyên Đán",
+    "layout": "1x4",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "berry-pop-grid",
-    name: "Berry Pop (Grid)",
-    layout: "2x2",
-    category: "CUTE",
-    color: "bg-rose-50",
-    borderColor: "border-rose-400",
-    textColor: "text-rose-600",
+    "id": "lunar-new-year-grid",
+    "name": "Tết Nguyên Đán",
+    "layout": "2x2",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "basketball-tournament",
-    name: "Basketball Tournament",
-    layout: "1x4",
-    category: "YOUTH",
-    color: "bg-orange-50",
-    borderColor: "border-orange-400",
-    textColor: "text-orange-600",
+    "id": "sac-xuan",
+    "name": "Sắc Xuân",
+    "layout": "1x4",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "basketball-tournament-grid",
-    name: "Basketball Tournament (Grid)",
-    layout: "2x2",
-    category: "YOUTH",
-    color: "bg-orange-50",
-    borderColor: "border-orange-400",
-    textColor: "text-orange-600",
+    "id": "sac-xuan-grid",
+    "name": "Sắc Xuân",
+    "layout": "2x2",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "starlight-glow",
-    name: "Hidden In Starlight",
-    layout: "1x4",
-    category: "AESTHETIC",
-    color: "bg-indigo-50",
-    borderColor: "border-indigo-400",
-    textColor: "text-indigo-600",
+    "id": "tan-xuan",
+    "name": "Tân Xuân",
+    "layout": "1x4",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
   {
-    id: "starlight-glow-grid",
-    name: "Hidden In Starlight (Grid)",
-    layout: "2x2",
-    category: "AESTHETIC",
-    color: "bg-indigo-50",
-    borderColor: "border-indigo-400",
-    textColor: "text-indigo-600",
+    "id": "tan-xuan-grid",
+    "name": "Tân Xuân",
+    "layout": "2x2",
+    "category": "TET HOLIDAY",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
   },
+  {
+    "id": "happy-birthday",
+    "name": "Happy Birthday",
+    "layout": "1x4",
+    "category": "BIRTHDAY",
+    "color": "bg-yellow-50",
+    "borderColor": "border-yellow-400",
+    "textColor": "text-yellow-600"
+  },
+  {
+    "id": "happy-birthday-grid",
+    "name": "Happy Birthday",
+    "layout": "2x2",
+    "category": "BIRTHDAY",
+    "color": "bg-yellow-50",
+    "borderColor": "border-yellow-400",
+    "textColor": "text-yellow-600"
+  },
+  {
+    "id": "just-a-girl-just-perfect",
+    "name": "Just a Girl, Just Perfect",
+    "layout": "1x4",
+    "category": "8/3",
+    "color": "bg-purple-50",
+    "borderColor": "border-purple-400",
+    "textColor": "text-purple-600"
+  },
+  {
+    "id": "just-a-girl-just-perfect-grid",
+    "name": "Just a Girl, Just Perfect",
+    "layout": "2x2",
+    "category": "8/3",
+    "color": "bg-purple-50",
+    "borderColor": "border-purple-400",
+    "textColor": "text-purple-600"
+  },
+  {
+    "id": "an-endless-immersion-into-beauty",
+    "name": "An Endless Immersion into Beauty",
+    "layout": "1x4",
+    "category": "LOVE",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
+  },
+  {
+    "id": "an-endless-immersion-into-beauty-grid",
+    "name": "An Endless Immersion into Beauty",
+    "layout": "2x2",
+    "category": "LOVE",
+    "color": "bg-red-50",
+    "borderColor": "border-red-400",
+    "textColor": "text-red-500"
+  },
+  {
+    "id": "hidden-in-starlight",
+    "name": "Hidden in Starlight",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-400",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "hidden-in-starlight-grid",
+    "name": "Hidden in Starlight",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-400",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "happy-always",
+    "name": "Happy Always",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-400",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "happy-always-grid",
+    "name": "Happy Always",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-400",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "layered-keepsake-1x4",
+    "name": "Layered Keepsake",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "layered-keepsake-2x2",
+    "name": "Layered Keepsake",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "basketball-tournament",
+    "name": "Basketball Tournament",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "basketball-tournament-grid",
+    "name": "Basketball Tournament",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "berry-pop",
+    "name": "Berry Pop!",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "berry-pop-grid",
+    "name": "Berry Pop!",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "dreamy-sugar-rush",
+    "name": "Dreamy Sugar Rush",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "dreamy-sugar-rush-grid",
+    "name": "Dreamy Sugar Rush",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "guest-check",
+    "name": "Guest Check",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "guest-check-grid",
+    "name": "Guest Check",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "lucky-clovee-manifest",
+    "name": "Lucky Clovee Manifest",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "lucky-clovee-manifest-grid",
+    "name": "Lucky Clovee Manifest",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "special-delivery",
+    "name": "Special Delivery",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "special-delivery-grid",
+    "name": "Special Delivery",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "pink-diary",
+    "name": "PINK DIARY – A LITTLE WORLD OF SWEET MOMENTS",
+    "layout": "1x4",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  },
+  {
+    "id": "pink-diary-grid",
+    "name": "PINK DIARY – A LITTLE WORLD OF SWEET MOMENTS",
+    "layout": "2x2",
+    "category": "GENERAL",
+    "color": "bg-slate-50",
+    "borderColor": "border-slate-200",
+    "textColor": "text-slate-600"
+  }
 ];
 
 export async function seedDatabase() {
@@ -522,6 +756,19 @@ export async function seedDatabase() {
   console.log(`✅ Seeded ${INITIAL_BRANCHES.length} studio branches.`);
 
   // 2. Seed Frames
+  // Purge legacy/broken dummy frames if any
+  await prisma.frame.deleteMany({
+    where: {
+      id: {
+        in: [
+          "starlight-glow",
+          "starlight-glow-grid",
+          "hoa-xuan",
+          "hoa-xuan-grid",
+        ],
+      },
+    },
+  });
   for (const f of INITIAL_FRAMES) {
     await prisma.frame.upsert({
       where: { id: f.id },

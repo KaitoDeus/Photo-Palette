@@ -93,7 +93,51 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [frames, setFrames] = useState<Frame[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_FRAMES);
-      return saved ? JSON.parse(saved) : FRAMES;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const localMap = new Map<string, Frame>();
+          FRAMES.forEach((f) => localMap.set(f.id, f));
+
+          const aliasMap: Record<string, string> = {
+            "starlight-glow": "hidden-in-starlight",
+            "starlight-glow-grid": "hidden-in-starlight-grid",
+            "hoa-xuan": "hoaxuan",
+            "hoa-xuan-grid": "hoaxuan-grid",
+          };
+
+          const sanitized: Frame[] = [];
+          const seen = new Set<string>();
+
+          parsed.forEach((item: Frame) => {
+            const resolvedId = aliasMap[item.id] || item.id;
+            if (seen.has(resolvedId)) return;
+            seen.add(resolvedId);
+
+            const local = localMap.get(resolvedId);
+            const overlay = item.overlayImage || local?.overlayImage;
+            if (overlay || local) {
+              sanitized.push({
+                ...item,
+                id: resolvedId,
+                overlayImage: overlay,
+                customMetrics: item.customMetrics || local?.customMetrics,
+              });
+            }
+          });
+
+          // Ensure all built-in FRAMES are included
+          FRAMES.forEach((local) => {
+            if (!seen.has(local.id)) {
+              seen.add(local.id);
+              sanitized.push(local);
+            }
+          });
+
+          return sanitized.length > 0 ? sanitized : FRAMES;
+        }
+      }
+      return FRAMES;
     } catch {
       return FRAMES;
     }
@@ -157,18 +201,37 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         const localFrameMap = new Map<string, Frame>();
         FRAMES.forEach((f) => localFrameMap.set(f.id, f));
 
-        const mergedFrames: Frame[] = frameRes.data.map((serverFrame) => {
-          const local = localFrameMap.get(serverFrame.id);
-          return {
-            ...serverFrame,
-            overlayImage: serverFrame.overlayImage || local?.overlayImage,
-            customMetrics: serverFrame.customMetrics || local?.customMetrics,
-          };
+        const aliasMap: Record<string, string> = {
+          "starlight-glow": "hidden-in-starlight",
+          "starlight-glow-grid": "hidden-in-starlight-grid",
+          "hoa-xuan": "hoaxuan",
+          "hoa-xuan-grid": "hoaxuan-grid",
+        };
+
+        const mergedFrames: Frame[] = [];
+        const seenIds = new Set<string>();
+
+        frameRes.data.forEach((serverFrame) => {
+          const resolvedId = aliasMap[serverFrame.id] || serverFrame.id;
+          if (seenIds.has(resolvedId)) return;
+          seenIds.add(resolvedId);
+
+          const local = localFrameMap.get(resolvedId);
+          const overlay = serverFrame.overlayImage || local?.overlayImage;
+          if (overlay || local) {
+            mergedFrames.push({
+              ...serverFrame,
+              id: resolvedId,
+              overlayImage: overlay,
+              customMetrics: serverFrame.customMetrics || local?.customMetrics,
+            });
+          }
         });
 
         // Append any built-in FRAMES not in server response
         FRAMES.forEach((local) => {
-          if (!mergedFrames.some((m) => m.id === local.id)) {
+          if (!seenIds.has(local.id)) {
+            seenIds.add(local.id);
             mergedFrames.push(local);
           }
         });
