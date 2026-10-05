@@ -47,7 +47,7 @@ export const usePhotoBooth = () => {
   const [lastPhoto, setLastPhoto] = useState<string | null>(null);
 
   const [isMirrored, setIsMirrored] = useState(true);
-  const [isRecapEnabled, setIsRecapEnabled] = useState(false);
+  const [isRecapEnabled, setIsRecapEnabled] = useState(true);
   const [recapVideoUrl, setRecapVideoUrl] = useState<string | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -276,10 +276,17 @@ export const usePhotoBooth = () => {
         const stream = canvas.captureStream(30);
 
         recordedChunksRef.current = [];
-        // Check if MIME type is supported, fallback if necessary
-        const mimeType = MediaRecorder.isTypeSupported("video/webm;codecs=vp9")
-          ? "video/webm;codecs=vp9"
-          : "video/webm";
+        // Check if MIME type is supported, fallback if necessary (mp4 for Safari)
+        let mimeType = "video/webm";
+        if (typeof MediaRecorder !== "undefined") {
+          if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9")) {
+            mimeType = "video/webm;codecs=vp9";
+          } else if (MediaRecorder.isTypeSupported("video/webm")) {
+            mimeType = "video/webm";
+          } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+            mimeType = "video/mp4";
+          }
+        }
 
         const recorder = new MediaRecorder(stream, { mimeType });
 
@@ -291,7 +298,7 @@ export const usePhotoBooth = () => {
 
         recorder.onstop = () => {
           const blob = new Blob(recordedChunksRef.current, {
-            type: "video/webm",
+            type: mimeType || "video/webm",
           });
           const url = URL.createObjectURL(blob);
           setRecapVideoUrl(url);

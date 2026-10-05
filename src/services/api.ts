@@ -167,4 +167,29 @@ export const api = {
       return request<{ message: string }>("/seed", { method: "POST" });
     },
   },
+
+  // --- SHARES ---
+  shares: {
+    create: async (data: {
+      photoData: string;
+      videoData?: string | null;
+      frameName?: string;
+      layout?: string;
+    }) => {
+      return request<{ shareId: string }>("/share", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+    },
+    get: async (id: string) => {
+      return request<{
+        id: string;
+        photoData: string;
+        videoData?: string | null;
+        frameName?: string;
+        layout?: string;
+        createdAt: string;
+      }>(`/share/${id}`);
+    },
+  },
 };

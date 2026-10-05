@@ -14,6 +14,7 @@ import GalleryPage from "./pages/GalleryPage";
 import FrameLibraryPage from "./pages/FrameLibraryPage";
 import ContactPage from "./pages/ContactPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import SharePage from "./pages/SharePage";
 import DisclaimerModal from "./components/common/DisclaimerModal";
 import Background3D from "./components/layout/Background3D";
 
@@ -56,6 +57,9 @@ const App: React.FC = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
           </Route>
+
+          {/* Standalone Share Page (Mobile QR Scan) */}
+          <Route path="/share/:id" element={<SharePage />} />
 
           {/* Admin Auth Route */}
           <Route path="/admin/login" element={<AdminLoginPage />} />

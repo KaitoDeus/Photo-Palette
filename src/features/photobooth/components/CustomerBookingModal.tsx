@@ -18,11 +18,13 @@ import { useAdmin } from "../../admin/context/AdminContext";
 interface CustomerBookingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultBranchId?: number;
 }
 
 export const CustomerBookingModal: React.FC<CustomerBookingModalProps> = ({
   isOpen,
   onClose,
+  defaultBranchId,
 }) => {
   const { branches, addBooking } = useAdmin();
 
@@ -30,8 +32,14 @@ export const CustomerBookingModal: React.FC<CustomerBookingModalProps> = ({
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [selectedBranchId, setSelectedBranchId] = useState<number>(
-    branches[0]?.id || 1
+    defaultBranchId || branches[0]?.id || 1
   );
+
+  React.useEffect(() => {
+    if (defaultBranchId) {
+      setSelectedBranchId(defaultBranchId);
+    }
+  }, [defaultBranchId]);
   const [packageType, setPackageType] = useState<"SMALL_70K" | "LARGE_100K">(
     "LARGE_100K"
   );

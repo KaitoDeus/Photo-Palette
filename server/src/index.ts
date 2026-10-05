@@ -6,6 +6,7 @@ import { frameRouter } from "./routes/frames.js";
 import { bookingRouter } from "./routes/bookings.js";
 import { statsRouter } from "./routes/stats.js";
 import { seedRouter } from "./routes/seed.js";
+import { shareRouter } from "./routes/shares.js";
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // API Routes
 app.use("/api/branches", branchRouter);
@@ -22,6 +24,7 @@ app.use("/api/frames", frameRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/stats", statsRouter);
 app.use("/api/seed", seedRouter);
+app.use("/api/share", shareRouter);
 
 // Health check endpoint
 app.get("/api/health", (_req, res) => {

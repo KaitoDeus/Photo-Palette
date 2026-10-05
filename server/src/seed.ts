@@ -17,6 +17,8 @@ const INITIAL_BRANCHES = [
     area: "Hoàn Kiếm",
     city: "Hà Nội",
     address: "4 P. Chợ Gạo, Hàng Buồm",
+    lat: 21.036612,
+    lng: 105.852215,
   },
   {
     id: 3,
@@ -33,6 +35,8 @@ const INITIAL_BRANCHES = [
     area: "Tây Hồ",
     city: "Hà Nội",
     address: "TTTM Lotte Mall West Lake, 272 Võ Chí Công, Phú Thượng",
+    lat: 21.074812,
+    lng: 105.811543,
   },
   {
     id: 5,
@@ -58,6 +62,8 @@ const INITIAL_BRANCHES = [
     area: "Đống Đa",
     city: "Hà Nội",
     address: "82 P. Chùa Láng, Láng Thượng",
+    lat: 21.023245,
+    lng: 105.802812,
   },
   {
     id: 8,
@@ -83,6 +89,8 @@ const INITIAL_BRANCHES = [
     area: "Cầu Giấy",
     city: "Hà Nội",
     address: "TTTM The Loop (IPH), 241 Xuân Thủy, Dịch Vọng Hậu",
+    lat: 21.036821,
+    lng: 105.783612,
   },
   {
     id: 11,
@@ -99,6 +107,8 @@ const INITIAL_BRANCHES = [
     area: "Thanh Xuân",
     city: "Hà Nội",
     address: "TTTM Vincom Mega Mall Royal City, 72A Nguyễn Trãi, Thượng Đình",
+    lat: 21.002845,
+    lng: 105.816612,
   },
   {
     id: 13,
@@ -124,6 +134,8 @@ const INITIAL_BRANCHES = [
     area: "Hoàng Mai",
     city: "Hà Nội",
     address: "KĐT Tây Nam Linh Đàm, Hoàng Liệt",
+    lat: 20.965214,
+    lng: 105.823541,
   },
   {
     id: 16,
@@ -131,6 +143,8 @@ const INITIAL_BRANCHES = [
     area: "Ba Đình",
     city: "Hà Nội",
     address: "TTTM Vincom Center Metropolis, 29 Liễu Giai, Ngọc Khánh",
+    lat: 21.032215,
+    lng: 105.814523,
   },
 
   // --- TP. HỒ CHÍ MINH ---
@@ -176,6 +190,8 @@ const INITIAL_BRANCHES = [
     area: "TP. Thủ Đức",
     city: "TP. Hồ Chí Minh",
     address: "Tầng 4 TTTM Gigamall, 240-242 Phạm Văn Đồng, Hiệp Bình Chánh",
+    lat: 10.828145,
+    lng: 106.722214,
   },
   {
     id: 22,
@@ -183,6 +199,8 @@ const INITIAL_BRANCHES = [
     area: "TP. Thủ Đức",
     city: "TP. Hồ Chí Minh",
     address: "Tầng 3 Thiso Mall Sala, 10 Mai Chí Thọ, Thủ Thiêm",
+    lat: 10.770921,
+    lng: 106.721415,
   },
   {
     id: 23,
@@ -217,6 +235,8 @@ const INITIAL_BRANCHES = [
     area: "Quận 7",
     city: "TP. Hồ Chí Minh",
     address: "Tầng 3 SC VivoCity, 1058 Nguyễn Văn Linh, Tân Phong",
+    lat: 10.730312,
+    lng: 106.702715,
   },
   {
     id: 27,
@@ -224,6 +244,8 @@ const INITIAL_BRANCHES = [
     area: "Quận 5",
     city: "TP. Hồ Chí Minh",
     address: "Tầng 4 TTTM Nowzone, 235 Nguyễn Văn Cừ, Phường 4",
+    lat: 10.763421,
+    lng: 106.682614,
   },
   {
     id: 28,
@@ -231,6 +253,8 @@ const INITIAL_BRANCHES = [
     area: "Bình Tân",
     city: "TP. Hồ Chí Minh",
     address: "Tầng 1 AEON Mall Bình Tân, 1 Đường số 17A, Bình Trị Đông B",
+    lat: 10.742814,
+    lng: 106.609412,
   },
   {
     id: 29,
@@ -238,6 +262,8 @@ const INITIAL_BRANCHES = [
     area: "Quận 12",
     city: "TP. Hồ Chí Minh",
     address: "2C/A Nguyễn Ảnh Thủ, Phường Hiệp Thành",
+    lat: 10.865912,
+    lng: 106.634125,
   },
 
   // --- CÁC TỈNH THÀNH KHÁC ---
@@ -274,6 +300,8 @@ const INITIAL_BRANCHES = [
     area: "TP. Dĩ An",
     city: "Bình Dương",
     address: "189 Đ. Lương Định Của, Đông Hòa",
+    lat: 10.875312,
+    lng: 106.797214,
   },
   {
     id: 34,
@@ -281,6 +309,8 @@ const INITIAL_BRANCHES = [
     area: "Lê Chân",
     city: "Hải Phòng",
     address: "8 P. Cầu Đất, Cầu Đất",
+    lat: 20.854912,
+    lng: 106.683614,
   },
   {
     id: 35,
@@ -288,6 +318,8 @@ const INITIAL_BRANCHES = [
     area: "TP. Biên Hòa",
     city: "Đồng Nai",
     address: "208 Đ. Phan Trung, KP2, Tân Mai",
+    lat: 10.957214,
+    lng: 106.843612,
   },
 ];
 
