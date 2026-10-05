@@ -33,7 +33,7 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
   photos,
   recapVideoUrl,
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [shareUrl, setShareUrl] = useState<string>("");
   const [shareId, setShareId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -114,19 +114,19 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
         const fullShareUrl = `${protocol}//${host}/share/${sid}`;
         setShareUrl(fullShareUrl);
 
-        // 5. Render sharp QR code onto canvas
-        if (canvasRef.current) {
-          await QRCode.toCanvas(canvasRef.current, fullShareUrl, {
-            width: 240,
-            margin: 2,
-            color: {
-              dark: "#E11D48", // Brand Rose 600
-              light: "#FFFFFF",
-            },
-            errorCorrectionLevel: "H",
-          });
-        }
+        // 5. Render sharp QR code as Data URL
+        const dataUrl = await QRCode.toDataURL(fullShareUrl, {
+          width: 280,
+          margin: 2,
+          color: {
+            dark: "#E11D48", // Brand Rose 600
+            light: "#FFFFFF",
+          },
+          errorCorrectionLevel: "H",
+        });
 
+        if (!isMounted) return;
+        setQrDataUrl(dataUrl);
         setIsLoading(false);
       } catch (err) {
         console.error("Failed to generate share QR code:", err);
@@ -199,8 +199,8 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
         </div>
 
         {/* QR Code Container */}
-        <div className="relative bg-gradient-to-b from-rose-50 to-pink-50 p-4 rounded-3xl border border-rose-100 shadow-inner flex flex-col items-center justify-center my-2">
-          {isLoading ? (
+        <div className="relative bg-gradient-to-b from-rose-50 to-pink-50 p-4 rounded-3xl border border-rose-100 shadow-inner flex flex-col items-center justify-center my-2 min-h-[290px] w-full">
+          {isLoading || !qrDataUrl ? (
             <div className="w-[240px] h-[240px] flex flex-col items-center justify-center gap-3">
               <Loader2 className="w-10 h-10 text-rose-500 animate-spin" />
               <p className="text-xs font-bold text-slate-600 animate-pulse">
@@ -209,8 +209,12 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
             </div>
           ) : (
             <>
-              <div className="bg-white p-2.5 rounded-2xl shadow-md border border-slate-100">
-                <canvas ref={canvasRef} className="block rounded-lg" />
+              <div className="bg-white p-3 rounded-2xl shadow-md border border-slate-100 flex items-center justify-center">
+                <img
+                  src={qrDataUrl}
+                  alt="Mã QR tải ảnh Photo Palette"
+                  className="w-[210px] h-[210px] block rounded-lg select-none"
+                />
               </div>
               <div className="flex items-center gap-1.5 text-[11px] text-slate-600 font-semibold mt-3">
                 <Smartphone size={14} className="text-rose-500" />
